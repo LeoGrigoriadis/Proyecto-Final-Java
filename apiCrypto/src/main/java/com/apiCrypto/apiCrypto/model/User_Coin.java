@@ -14,7 +14,7 @@ public class User_Coin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int nro_cuenta;
-    
+
     @ManyToOne()
     @JoinColumn(name = "id_coin")
     private Coin id_coin;

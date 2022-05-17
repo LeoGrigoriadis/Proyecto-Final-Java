@@ -25,6 +25,8 @@ public class User {
     private String first_name;
 
     private String last_name;
+    private int overdrawn_turn;
+    private String user_type;
     @NotEmpty(message = "name required")
     private String gmail;
 

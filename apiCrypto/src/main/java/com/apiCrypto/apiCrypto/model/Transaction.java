@@ -16,13 +16,13 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_transaction;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_user")
     private User id_user;
 
     @OneToOne
     @JoinColumn(name = "id_coin")
-    private User id_coin;
+    private Coin id_coin;
 
     private Date dateTime;
 

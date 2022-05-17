@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.apiCrypto.apiCrypto.model.Coin;
 
 @Repository
-public interface ICoinRepository extends JpaRepository <Coin, Long>{
+public interface ICoinRepository extends JpaRepository <Coin, Integer>{
 
 }

@@ -18,7 +18,7 @@ public class Trade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_trade;
+    private long id_trade;
 
     @OneToOne
     @JoinColumn(name = "id_user")

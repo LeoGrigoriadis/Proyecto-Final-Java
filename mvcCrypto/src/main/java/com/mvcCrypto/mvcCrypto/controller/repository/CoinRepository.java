@@ -16,8 +16,8 @@ public class CoinRepository {
 
     public ArrayList<Object> findAll(){
         //String url = "http://rest.coinapi.io/v1/assets/?apikey=CB534D2D-8155-4886-83CC-DBED35CD1950";
-       String url = "http://rest.coinapi.io/v1/assets/BTC?apikey=CB534D2D-8155-4886-83CC-DBED35CD1950";
-
+        String url = "http://rest.coinapi.io/v1/assets/BTC?apikey=CB534D2D-8155-4886-83CC-DBED35CD1950";
+        
         ArrayList<Object> coins = new ArrayList<>();
 
         coins = rt.getForObject(url,ArrayList.class);

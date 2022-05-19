@@ -25,9 +25,16 @@ public class User {
     private String first_name;
 
     private String last_name;
-    private int overdrawn_turn;
-    private String user_type;
+
+    @OneToOne
+    @JoinColumn(name = "account_type")
+   private Account_type account_type;
+
+    private int account_points;
+
     @NotEmpty(message = "name required")
-    private String gmail;
+    @OneToOne
+    @JoinColumn(name = "gmail")
+    private Auth gmail;
 
 }

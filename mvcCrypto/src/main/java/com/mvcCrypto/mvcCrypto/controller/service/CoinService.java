@@ -20,7 +20,11 @@ public class CoinService {
     }
 
 
+<<<<<<< HEAD
     public Object getByName(String name)
+=======
+    public Coin getByName(String name)
+>>>>>>> main
     {
         return cr.getByName(name);
     }

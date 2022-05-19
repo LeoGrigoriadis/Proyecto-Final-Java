@@ -28,7 +28,11 @@ public class CoinRepository {
 
     public Coin getByName(String name){
         String url = "http://rest.coinapi.io/v1/assets/"+name+"?apikey=CB534D2D-8155-4886-83CC-DBED35CD1950";
+<<<<<<< HEAD
 
+=======
+        RestTemplate rt = new RestTemplate();
+>>>>>>> main
         Coin user;
         user = rt.getForObject(url, Coin.class);
         return user;

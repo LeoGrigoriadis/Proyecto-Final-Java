@@ -3,6 +3,7 @@ package com.mvcCrypto.mvcCrypto.controller.service;
 import com.mvcCrypto.mvcCrypto.controller.repository.CoinRepository;
 import com.mvcCrypto.mvcCrypto.model.Coin;
 import com.mvcCrypto.mvcCrypto.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,15 +11,20 @@ import java.util.ArrayList;
 @Service
 public class CoinService {
 
+    @Autowired
     private CoinRepository cr;
 
-    public ArrayList<Coin> getAll()
+    public ArrayList<Object> getAll()
     {
-        return (ArrayList<Coin>) cr.findAll();
+        return (ArrayList<Object>) cr.findAll();
     }
 
 
+<<<<<<< HEAD
+    public Object getByName(String name)
+=======
     public Coin getByName(String name)
+>>>>>>> main
     {
         return cr.getByName(name);
     }

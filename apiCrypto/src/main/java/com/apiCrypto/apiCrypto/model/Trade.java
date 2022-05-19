@@ -20,19 +20,19 @@ public class Trade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_trade;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_user")
     private User id_user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_coin")
     private Coin id_initial_coin;
 
-    private Timestamp dateTime ;
+    private Timestamp date ;
 
     private double balance;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_coin")
     private Coin id_destination_coin;
 

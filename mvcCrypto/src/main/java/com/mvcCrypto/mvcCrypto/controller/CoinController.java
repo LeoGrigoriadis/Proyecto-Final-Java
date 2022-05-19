@@ -18,33 +18,27 @@ public class CoinController {
     private CoinService cs;
 
     @GetMapping("")
-    public String getAll(Model model)
-    {
+    public String getAll(Model model) {
         try {
 
             model.addAttribute("coins", cs.getAll());
 
             return "Index";
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.fillInStackTrace();
         }
-       return "Index";
-    }
-
-<<<<<<< HEAD
-    @GetMapping("/{name}/{name2}")
-    public String findByName(Model model, @PathVariable("name") String name,@PathVariable("name2") String name2)  {
-
-        model.addAttribute("coinName", cs.getByName(name));
-        model.addAttribute("coinName2",cs.getByName(name2));
-=======
-    @GetMapping("/{name}")
-    public String findByName(Model model, @PathVariable("name") String name)  {
-
-        model.addAttribute("coinName", cs.getByName(name));
->>>>>>> main
-
         return "Index";
     }
+
+
+        @GetMapping("/{name}")
+        public String findByName (Model model, @PathVariable("name") String name){
+
+            model.addAttribute("coinName", cs.getByName(name));
+
+
+            return "Index";
+        }
+
 
 }

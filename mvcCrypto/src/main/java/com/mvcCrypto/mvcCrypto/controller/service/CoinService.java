@@ -18,7 +18,7 @@ public class CoinService {
     }
 
 
-    public User getByName(String name)
+    public Coin getByName(String name)
     {
         return cr.getByName(name);
     }

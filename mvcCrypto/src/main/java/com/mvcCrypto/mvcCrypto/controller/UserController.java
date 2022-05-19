@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping()
 public class UserController {
-
+/*
     @Autowired
     UserService uS;
     @GetMapping()
@@ -31,7 +31,7 @@ public class UserController {
     {
         User u = uS.getByEmail(user.toString());
         if(u != null) {
-/*
+
             if (!user.getPassword().equals(u.getPassword()))
             {
                 return "redirect:/";
@@ -45,7 +45,7 @@ public class UserController {
                 }
 
             }
-            */
+
 
         }
         return "redirect:/";
@@ -72,4 +72,6 @@ public class UserController {
         }
 
     }
+      */
+
 }

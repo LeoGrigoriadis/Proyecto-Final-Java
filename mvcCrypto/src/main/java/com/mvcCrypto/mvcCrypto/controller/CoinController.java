@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping()
+@RequestMapping("")
 public class CoinController {
 
     @Autowired
     private CoinService cs;
 
-    @GetMapping("/CoinList")
+    @GetMapping("")
     public String getAll(Model model)
     {
         model.addAttribute("coins", cs.getAll());
         return "Index";
     }
 
-    @GetMapping("Coin/{name}")
+    @GetMapping("/{name}")
     public String findByName(Model model, @PathVariable("name") String name)  {
 
-        model.addAttribute("coin", cs.getByName(name));
+        model.addAttribute("coinName", cs.getByName(name));
 
         return "Index";
     }

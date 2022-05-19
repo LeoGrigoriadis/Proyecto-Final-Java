@@ -13,9 +13,7 @@ import javax.persistence.*;
 public class Auth {
 
     @Id
-    @OneToOne
-    @JoinColumn(name = "gmail")
-    private User gmail;
+    private String gmail;
 
     private String password;
     @OneToOne

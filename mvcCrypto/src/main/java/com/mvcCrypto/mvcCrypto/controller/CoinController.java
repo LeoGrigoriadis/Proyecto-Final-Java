@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("")
 public class CoinController {
@@ -18,14 +20,22 @@ public class CoinController {
     @GetMapping("")
     public String getAll(Model model)
     {
-        model.addAttribute("coins", cs.getAll());
-        return "Index";
+        try {
+
+            model.addAttribute("coins", cs.getAll());
+
+            return "Index";
+        }catch (NullPointerException e){
+            e.fillInStackTrace();
+        }
+       return "Index";
     }
 
-    @GetMapping("/{name}")
-    public String findByName(Model model, @PathVariable("name") String name)  {
+    @GetMapping("/{name}/{name2}")
+    public String findByName(Model model, @PathVariable("name") String name,@PathVariable("name2") String name2)  {
 
         model.addAttribute("coinName", cs.getByName(name));
+        model.addAttribute("coinName2",cs.getByName(name2));
 
         return "Index";
     }

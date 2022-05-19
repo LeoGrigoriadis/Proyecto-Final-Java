@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -20,11 +21,11 @@ public class Transaction {
     @JoinColumn(name = "id_user")
     private User id_user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_coin")
     private Coin id_coin;
 
-    private Date dateTime;
+    private Timestamp date;
 
     private double balance;
 

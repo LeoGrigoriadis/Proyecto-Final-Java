@@ -5,24 +5,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class User_Coin {
+public class Payment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_account;
+    private int id_loan;
 
-    @ManyToOne()
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User id_initial_user;
+
+    @ManyToOne
     @JoinColumn(name = "id_coin")
     private Coin id_coin;
 
+    private Timestamp date;
 
     private double balance;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "id_user")
-    private User id_user;
+    private User id_destination_user;
 }

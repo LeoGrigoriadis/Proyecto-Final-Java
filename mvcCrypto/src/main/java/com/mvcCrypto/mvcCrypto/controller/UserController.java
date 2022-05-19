@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping()
+@RequestMapping("/us")
 public class UserController {
-
+/*
     @Autowired
     UserService uS;
     @GetMapping()
@@ -31,7 +31,7 @@ public class UserController {
     {
         User u = uS.getByEmail(user.toString());
         if(u != null) {
-/*
+
             if (!user.getPassword().equals(u.getPassword()))
             {
                 return "redirect:/";
@@ -45,7 +45,7 @@ public class UserController {
                 }
 
             }
-            */
+
 
         }
         return "redirect:/";
@@ -72,4 +72,6 @@ public class UserController {
         }
 
     }
+      */
+
 }

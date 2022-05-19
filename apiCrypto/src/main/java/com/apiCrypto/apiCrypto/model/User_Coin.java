@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -15,14 +16,14 @@ public class User_Coin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_account;
 
-    @ManyToOne()
+    @OneToMany()
     @JoinColumn(name = "id_coin")
-    private Coin id_coin;
+    private List<Coin> id_coin_userCoin;
 
 
     private double balance;
 
-    @ManyToOne()
+    @OneToMany()
     @JoinColumn(name = "id_user")
-    private User id_user;
+    private List<User> id_user_userCoin;
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,9 +18,9 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_loan;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "id_user")
-    private User id_initial_user;
+    private List<User> id_initial_user;
 
     @ManyToOne
     @JoinColumn(name = "id_coin")
@@ -29,7 +30,7 @@ public class Payment {
 
     private double balance;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "id_user")
-    private User id_destination_user;
+    private List<User> id_destination_user;
 }

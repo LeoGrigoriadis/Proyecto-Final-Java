@@ -1,9 +1,11 @@
 package com.apiCrypto.apiCrypto.repository;
 
 import com.apiCrypto.apiCrypto.model.User_Coin;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface IUserCoinRepository {
     Object findAll();
 

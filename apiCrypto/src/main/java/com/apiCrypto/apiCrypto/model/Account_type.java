@@ -17,7 +17,7 @@ public class Account_type {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_account_type;
+    private long id_account_type;
 
     private  String overdrawn_turn_name;
 

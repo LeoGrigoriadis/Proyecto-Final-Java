@@ -16,7 +16,6 @@ import javax.persistence.Id;
 public class Coin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_coin;
+    private String id_coin;
     private String name;
 }

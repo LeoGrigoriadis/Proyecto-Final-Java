@@ -14,6 +14,7 @@ public class CoinService {
     @Autowired
     private CoinRepository cr;
 
+
     public ArrayList<Object> getAll()
     {
         return (ArrayList<Object>) cr.findAll();

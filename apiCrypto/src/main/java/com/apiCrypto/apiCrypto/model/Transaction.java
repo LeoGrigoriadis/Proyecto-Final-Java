@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,13 +18,13 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_transaction;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "id_user")
-    private User id_user;
+    private List<User> id_user;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "id_coin")
-    private Coin id_coin;
+    private List<Coin> id_coin;
 
     private Timestamp date;
 

@@ -53,14 +53,14 @@ array3.add(ces.getByName("BTC"));
     }
 
 
-        @GetMapping("/{name}")
+       /* @GetMapping("/{name}")
         public String findByName (Model model, @PathVariable("name") String name){
 
             model.addAttribute("coinName", ces.getByName(name));
 
 
             return "Index";
-        }
+        }*/
 
 
 }

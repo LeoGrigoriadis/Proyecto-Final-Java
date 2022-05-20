@@ -37,4 +37,7 @@ public class User {
     @JoinColumn(name = "gmail")
     private Auth gmail;
 
+    public Long getId() {
+        return null;
+    }
 }

@@ -1,6 +1,11 @@
 package com.mvcCrypto.mvcCrypto.controller;
 
-import com.mvcCrypto.mvcCrypto.controller.service.CoinService;
+
+import com.mvcCrypto.mvcCrypto.controller.service.CoinApiService;
+import com.mvcCrypto.mvcCrypto.controller.service.CoinExternoService;
+import com.mvcCrypto.mvcCrypto.model.Coin;
+import com.mvcCrypto.mvcCrypto.model.CoinAdapter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +20,30 @@ import java.util.ArrayList;
 public class CoinController {
 
     @Autowired
-    private CoinService cs;
+    private CoinExternoService ces;
+    private CoinApiService cas;
+
 
     @GetMapping("")
     public String getAll(Model model) {
-        try {
 
-            model.addAttribute("coins", cs.getAll());
+        try {
+/*
+ArrayList<Object> array= new ArrayList<>();
+ArrayList<CoinAdapter> array2= new ArrayList<>();
+ArrayList<Object> array3= new ArrayList<>();
+
+array =ces.getAll();
+array2 = cas.getAll();
+
+
+for(int i=0;i<array2.size();i++){
+    //array3.add(ces.getByName(array2.get(i).getId_coin()));
+}
+//array3.add(ces.getByName(cas.getOne("BTC").getId_coin()));
+array3.add(ces.getByName("BTC"));
+*/
+    model.addAttribute("coins",ces.getAll());
 
             return "Index";
         } catch (NullPointerException e) {
@@ -34,7 +56,7 @@ public class CoinController {
        /* @GetMapping("/{name}")
         public String findByName (Model model, @PathVariable("name") String name){
 
-            model.addAttribute("coinName", cs.getByName(name));
+            model.addAttribute("coinName", ces.getByName(name));
 
 
             return "Index";

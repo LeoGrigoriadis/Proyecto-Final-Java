@@ -21,13 +21,13 @@ public class Trade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_trade;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_user")
-    private List<User> id_user_trade;
+    private User id_user_trade;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_coin")
-    private List<Coin> id_initial_coin;
+    private Coin id_initial_coin;
 
     private Timestamp date ;
 

@@ -16,15 +16,15 @@ import java.util.List;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_transaction;
+    private long id_transaction;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_user")
-    private List<User> id_user;
+    private User id_user;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_coin")
-    private List<Coin> id_coin;
+    private Coin id_coin;
 
     private Timestamp date;
 

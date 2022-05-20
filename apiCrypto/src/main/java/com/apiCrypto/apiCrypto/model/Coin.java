@@ -9,13 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+
 public class Coin {
 
     @Id
     private String id_coin;
+
     private String name;
 }

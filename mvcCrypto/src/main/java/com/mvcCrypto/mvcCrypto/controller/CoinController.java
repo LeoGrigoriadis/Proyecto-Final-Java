@@ -33,7 +33,6 @@ ArrayList<Object> array= new ArrayList<>();
 ArrayList<CoinAdapter> array2= new ArrayList<>();
 ArrayList<Object> array3= new ArrayList<>();
 
-
 array =ces.getAll();
 array2 = cas.getAll();
 

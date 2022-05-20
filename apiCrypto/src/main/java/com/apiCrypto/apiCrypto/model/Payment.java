@@ -31,6 +31,6 @@ public class Payment {
     private double balance;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "id_user_destino")
     private User id_destination_user;
 }

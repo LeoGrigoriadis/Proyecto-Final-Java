@@ -1,18 +1,17 @@
 package com.mvcCrypto.mvcCrypto.controller.service;
 
-import com.mvcCrypto.mvcCrypto.controller.repository.CoinRepository;
+import com.mvcCrypto.mvcCrypto.controller.repository.CoinExternoRepository;
 import com.mvcCrypto.mvcCrypto.model.Coin;
-import com.mvcCrypto.mvcCrypto.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
-public class CoinService {
+public class CoinExternoService {
 
     @Autowired
-    private CoinRepository cr;
+    private CoinExternoRepository cr;
 
 
     public ArrayList<Object> getAll()
@@ -21,7 +20,7 @@ public class CoinService {
     }
 
 
-    public Coin getByName(String name)
+    public Object getByName(String name)
     {
         return cr.getByName(name);
     }

@@ -1,10 +1,12 @@
 package com.mvcCrypto.mvcCrypto.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class User {
 
     private int id_user;

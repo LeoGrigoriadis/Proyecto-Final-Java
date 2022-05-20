@@ -31,5 +31,13 @@ public class User_CoinService {
         ucR.deleteById(id);
     }
 
+    public boolean updateUserCoin(User_Coin uc) {
+        if (!ucR.existsById(uc.getId_account())) {
+            return false;
+        } else {
+            ucR.save(uc);
+            return true;
+        }
+    }
 
 }

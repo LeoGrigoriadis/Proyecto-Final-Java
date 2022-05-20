@@ -1,16 +1,15 @@
 package com.apiCrypto.apiCrypto.repository;
 import com.apiCrypto.apiCrypto.model.User_Coin;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface IUserCoinRepository {
-    Object findAll();
+public interface IUserCoinRepository extends JpaRepository<User_Coin, Integer> {
 
-    List<Object> findById(long id);
+    @Query(value = "Select * from User_Coin where id_user_userCoin = :id", nativeQuery = true)
+   public User_Coin findByUserId(long id);
 
-    User_Coin save(User_Coin game);
-
-    void deleteById(long id);
-}
+   }

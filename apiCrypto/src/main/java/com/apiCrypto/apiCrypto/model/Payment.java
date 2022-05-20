@@ -16,11 +16,11 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_loan;
+    private long id_loan;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_user")
-    private List<User> id_initial_user;
+    private User id_initial_user;
 
     @ManyToOne
     @JoinColumn(name = "id_coin")
@@ -30,7 +30,7 @@ public class Payment {
 
     private double balance;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_user")
-    private List<User> id_destination_user;
+    private User id_destination_user;
 }

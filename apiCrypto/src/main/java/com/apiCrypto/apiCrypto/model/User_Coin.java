@@ -20,7 +20,6 @@ public class User_Coin {
     @JoinColumn(name = "id_coin")
     private List<Coin> id_coin_userCoin;
 
-
     private double balance;
 
     @OneToMany()

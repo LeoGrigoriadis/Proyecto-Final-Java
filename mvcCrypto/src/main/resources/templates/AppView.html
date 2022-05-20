@@ -18,24 +18,48 @@
 
     <section class="col-sm-3 section-top">
       <div class="content">
-        Cotizaciones actuales
+        <h4>Cotizaciones actuales</h4>
 
       </div>
     </section>
+
     <section class="col-sm-6 articles">
       <article>
-        Cartera de Usuarios
+        <h4>Saldo actual: </h4>
       </article>
       <article>
-        Últimos movimientos
+        <div class="top-article">
+          <h4>Últimos movimientos</h4>
+          <a href="#">Ver todos</a>
+        </div>
       </article>
     </section>
+
     <section class="col-sm-3 invis">
       <div class="content">
-        Sección de Tradeos / Transacciones
+        <div class="buttons">
+          <button onclick="trans()" checked>Transaccionar</button>
+          <button onclick="trade()">Tradear</button><br>
+          <label id="trans">
+            trans
+          </label>
+          <label id="trade">
+            trade
+          </label>
+        </div>
+
       </div>
     </section>
   </div>
-
+<script>
+  function trans(){
+  document. getElementById("trans").style.display="block";
+  document. getElementById("trade").style.display="none";
+  }
+  function trade(){
+  document. getElementById("trade").style.display="block";
+  document. getElementById("trans").style.display="none";
+  }
+</script>
 </body>
 </html>

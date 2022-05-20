@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +13,6 @@ import java.io.Serializable;
 public class Coin implements Serializable {
 
     private static final long serialVersionUID = 4676905652686424400L;
-
     private String asset_id;
     private String name;
     //private boolean type_is_crypto;
@@ -31,6 +31,10 @@ public class Coin implements Serializable {
     //private String data_start;
     //private String data_end;
 
-  }
+
+    public String getAsset_id() {
+        return asset_id;
+    }
+}
 
 

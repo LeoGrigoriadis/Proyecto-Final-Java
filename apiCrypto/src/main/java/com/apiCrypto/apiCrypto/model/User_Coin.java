@@ -14,15 +14,15 @@ import java.util.List;
 public class User_Coin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_account;
+    private long id_account;
 
-    @OneToMany()
+    @ManyToOne()
     @JoinColumn(name = "id_coin")
-    private List<Coin> id_coin_userCoin;
+    private Coin id_coin_userCoin;
 
     private double balance;
 
-    @OneToMany()
+    @ManyToOne()
     @JoinColumn(name = "id_user")
-    private List<User> id_user_userCoin;
+    private User id_user_userCoin;
 }

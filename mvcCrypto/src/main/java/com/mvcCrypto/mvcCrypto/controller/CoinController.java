@@ -31,14 +31,14 @@ public class CoinController {
     }
 
 
-        @GetMapping("/{name}")
+       /* @GetMapping("/{name}")
         public String findByName (Model model, @PathVariable("name") String name){
 
             model.addAttribute("coinName", cs.getByName(name));
 
 
             return "Index";
-        }
+        }*/
 
 
 }

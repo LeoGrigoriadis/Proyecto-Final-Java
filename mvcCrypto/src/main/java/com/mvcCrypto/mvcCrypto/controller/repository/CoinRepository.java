@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,19 +17,13 @@ public class CoinRepository {
     @Autowired
     private RestTemplate rt;
 
-    public ArrayList<Object> findAll(){
+    public Coin findCot(String var){
+        String url = "https://criptoya.com/api/bitex/"+var+"/usd/1";
 
-        //String url = "http://rest.coinapi.io/v1/assets/?apikey=CB534D2D-8155-4886-83CC-DBED35CD1950";
-        String url = "http://rest.coinapi.io/v1/assets/BTC?apikey=CB534D2D-8155-4886-83CC-DBED35CD1950";
-
-        ArrayList<Object> coins = new ArrayList<>();
-
-        coins = rt.getForObject(url,ArrayList.class);
-
+        Coin coins = rt.getForObject(url,Coin.class);
+        System.out.println(coins);
 
         return coins;
-
-
     }
 
 

@@ -19,11 +19,11 @@ public class User_CoinService {
         return ucR.findAll();
     }
 
-    public User_Coin getOne(int id){
+    public User_Coin getOne(Long id){
         return ucR.getById(id);
     }
 
-    public User_Coin getOneIdUser(int idUser) {
+    public User_Coin getOneIdUser(Long idUser) {
 
         return ucR.findByUserId(idUser);
     }
@@ -32,8 +32,8 @@ public class User_CoinService {
         return ucR.save(uc);
     }
 
-    public void delete(int id) {
-        ucR.deleteById(id);
+    public void delete(long id) {
+        ucR.existsById(id);
     }
 
     public boolean updateUserCoin(User_Coin uc) {

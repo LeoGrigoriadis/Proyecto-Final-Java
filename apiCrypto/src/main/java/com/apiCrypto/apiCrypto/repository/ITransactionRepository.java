@@ -1,8 +1,8 @@
 package com.apiCrypto.apiCrypto.repository;
 
-import com.apiCrypto.apiCrypto.model.Payment;
+
 import com.apiCrypto.apiCrypto.model.Transaction;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

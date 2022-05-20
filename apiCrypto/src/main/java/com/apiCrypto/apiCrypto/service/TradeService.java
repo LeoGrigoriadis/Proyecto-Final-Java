@@ -45,7 +45,6 @@ public class TradeService {
         else {
             return  null;
         }
-
     }
 
     public boolean delete(long id)

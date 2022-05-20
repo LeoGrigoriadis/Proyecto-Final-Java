@@ -31,13 +31,13 @@ public class CoinController {
     public ResponseEntity<String> update(@RequestBody Coin coin){
         if(coin == null || coin.getId_coin().isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
         service.save(coin);
-        return ResponseEntity.status(200).body("Updated game");
+        return ResponseEntity.status(200).body("Updated coin");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") String id){
         service.delete(id);
-        return ResponseEntity.status(200).body("Deleted game");
+        return ResponseEntity.status(200).body("Deleted coin");
     }
 
     @GetMapping("/{id}")

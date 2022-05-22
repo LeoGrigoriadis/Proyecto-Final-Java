@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ITransactionRepository extends JpaRepository<Transaction, Integer> {
+public interface ITransactionRepository extends JpaRepository<Transaction, Long> {
 
 
     @Query(value = "Select * from transaction t where t.id_user = :id", nativeQuery = true)
@@ -19,9 +19,8 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Integ
 
     List<Transaction> findAll();
 
-    Transaction save(Transaction t);
 
-    void deleteById(long id);
+    
 
     //@Query(value = "", nativeQuery = true)
 

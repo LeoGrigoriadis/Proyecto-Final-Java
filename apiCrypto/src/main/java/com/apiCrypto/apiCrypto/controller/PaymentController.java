@@ -41,4 +41,12 @@ public class PaymentController {
             return ResponseEntity.status(400).body("Incomplete data");
 
     }
+
+    @DeleteMapping ("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+            pS.delete(id);
+            return ResponseEntity.status(200).body("Deleted payment");
+        }
+    
+    
 }

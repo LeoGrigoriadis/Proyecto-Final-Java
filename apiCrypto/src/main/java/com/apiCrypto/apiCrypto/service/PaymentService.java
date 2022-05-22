@@ -25,13 +25,16 @@ public class PaymentService {
         return payR.save(p);
     }
 
-    public List <Payment> getById_loan( long id_loan){
+    public Payment getByIdloan( long id_loan){
 
-        return payR.getbyId_loan(id_loan);
+        return payR.getById(id_loan);
     }
 
     public void delete(long id_loan) {
-        payR.deleteById_loan(id_loan);
+        if (payR.existsById(id_loan)) {
+        payR.deleteById(id_loan);
+        
+        }
     }
 
      public boolean updatePayment(Payment p) {

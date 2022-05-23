@@ -4,6 +4,8 @@ package com.apiCrypto.apiCrypto.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.apiCrypto.apiCrypto.model.Payment;
 import com.apiCrypto.apiCrypto.service.PaymentService;
 
@@ -22,12 +24,14 @@ public class PaymentController {
     public ResponseEntity<List<Payment>> getAll(){
         return ResponseEntity.status(200).body(pS.getAll());
     }
-
+    
     @PostMapping
-    public ResponseEntity<String> save(@RequestBody Payment p){
-        if(p == null) return ResponseEntity.status(400).body("Incomplete data") ;
-        pS.save(p);
-        return ResponseEntity.status(201).body("Saved payment");
+    public ResponseEntity<Object> save(@RequestBody @Valid Payment u) {
+        boolean flag = pS.save(u);
+        if (flag)
+            return ResponseEntity.status(200).body("Success.");
+        else
+            return ResponseEntity.status(400).body("Error.");
     }
 
     @PutMapping
@@ -35,7 +39,7 @@ public class PaymentController {
         boolean pay = pS.updatePayment(p);
         if (pay) {
             pS.save(p);
-            return ResponseEntity.status(200).body("Updated user");
+            return ResponseEntity.status(200).body("Updated payment");
 
         } else
             return ResponseEntity.status(400).body("Incomplete data");

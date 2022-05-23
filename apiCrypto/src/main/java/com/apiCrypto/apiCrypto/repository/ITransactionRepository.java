@@ -32,11 +32,6 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
     List<Transaction> findByIdUser(long id, long id_transaction);
 */
 
-
-
-
-
-
     /*List<Transaction> getbyIdUser(long id);
     *  Transaction makeTransaction();
     * */

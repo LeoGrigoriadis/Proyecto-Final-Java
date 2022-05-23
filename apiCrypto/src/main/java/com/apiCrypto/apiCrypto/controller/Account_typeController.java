@@ -3,6 +3,8 @@ package com.apiCrypto.apiCrypto.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.apiCrypto.apiCrypto.model.Account_type;
 import com.apiCrypto.apiCrypto.service.Account_typeService;
 
@@ -22,11 +24,13 @@ public class Account_typeController {
         return ResponseEntity.status(200).body(accS.getAll());
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody Account_type a){
-        if(a == null) return ResponseEntity.status(400).body("Incomplete data") ;
-        accS.save(a);
-        return ResponseEntity.status(201).body("Saved Account");
+    @PostMapping
+    public ResponseEntity<String> save(@RequestBody @Valid Account_type u) {
+        boolean flag = accS.save(u);
+        if (flag)
+            return ResponseEntity.status(200).body("Success.");
+        else
+            return ResponseEntity.status(400).body("Error.");
     }
 
     @PutMapping("/update")

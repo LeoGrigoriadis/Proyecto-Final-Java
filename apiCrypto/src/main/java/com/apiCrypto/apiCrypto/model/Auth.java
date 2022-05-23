@@ -16,7 +16,8 @@ public class Auth {
     private String gmail;
 
     private String password;
-    @OneToOne
+    
+    @ManyToOne
     @JoinColumn(name = "id_role")
     private Role id_role;
 

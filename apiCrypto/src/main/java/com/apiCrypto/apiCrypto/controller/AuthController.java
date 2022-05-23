@@ -47,7 +47,7 @@ public class AuthController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") String id) {
-        as.deleteUser(id);
+        as.deleteAuth(id);
         return ResponseEntity.status(200).body("Deleted Auth");
     }
 

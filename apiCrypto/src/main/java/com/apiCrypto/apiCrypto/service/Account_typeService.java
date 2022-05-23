@@ -21,9 +21,14 @@ public class Account_typeService {
         return accr.findAll();
     }
 
-    public Account_type save(Account_type account) {
-
-        return accr.save(account);
+    public boolean save(Account_type account) {
+        try {
+            
+            accr.save(account);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Transactional

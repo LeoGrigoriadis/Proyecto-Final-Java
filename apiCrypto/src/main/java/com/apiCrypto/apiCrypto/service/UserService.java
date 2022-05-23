@@ -20,10 +20,8 @@ public class UserService {
 
     public boolean save(User u) {
         try {
-            if (uR.existsById(u.getId())) {
+            
                 uR.save(u);
-
-            }
             return true;
         } catch (Exception e) {
             return false;
@@ -41,7 +39,7 @@ public class UserService {
     }
 
     public boolean updateUser(User u) {
-        if (!uR.existsById(u.getId())) {
+        if (!uR.existsById(u.getId_user())) {
             return false;
         } else {
             uR.save(u);

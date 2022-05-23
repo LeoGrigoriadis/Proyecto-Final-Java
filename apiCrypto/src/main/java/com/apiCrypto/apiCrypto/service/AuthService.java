@@ -20,23 +20,21 @@ public class AuthService {
 
     public boolean save(Auth u) {
         try {
-            if (au.existsById(u.getGmail())) {
                 au.save(u);
-
-            }
-            return true;
+                return true;
+     
         } catch (Exception e) {
             return false;
         }
     }
 
-    public void deleteUser(String id) {
+    public void deleteAuth(String id) {
         if (au.existsById(id)) {
             au.deleteById(id);
         }
     }
 
-    public Auth getUser(String id) {
+    public Auth getAuth(String id) {
         return au.getById(id);
     }
 

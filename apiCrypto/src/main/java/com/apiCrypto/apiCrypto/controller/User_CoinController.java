@@ -24,7 +24,7 @@ public class User_CoinController {
         return ResponseEntity.status(200).body(service.getAll());
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody User_Coin coin){
         if(coin == null) return ResponseEntity.status(400).body("Incomplete data") ;
         service.save(coin);
@@ -38,7 +38,7 @@ public class User_CoinController {
         return ResponseEntity.status(200).body("Updated user_coin");
     }*/
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         service.delete(id);
         return ResponseEntity.status(200).body("Deleted game");

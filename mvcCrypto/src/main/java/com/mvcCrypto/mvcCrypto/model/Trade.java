@@ -11,10 +11,10 @@ import java.sql.Timestamp;
 @Data
 public class Trade {
 
-    private int id_user;
-    private int id_trade;
-    private int id_initial;
+    private long id_user;
+    private long id_trade;
+    private long id_initial;
     private Timestamp dateTime;
     private double balance;
-    private int id_destination_coin;
+    private long id_destination_coin;
 }

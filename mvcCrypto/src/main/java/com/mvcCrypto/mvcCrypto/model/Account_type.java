@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User_Coin {
-    private int num_cuenta;
-    private String id_coin;
-    private double balance;
-    private long id_user;
+public class Account_type {
+
+    private long id_account_type;
+
+    private  String overdrawn_turn_name;
+
+    private int overdrawn_turn_value;
 }

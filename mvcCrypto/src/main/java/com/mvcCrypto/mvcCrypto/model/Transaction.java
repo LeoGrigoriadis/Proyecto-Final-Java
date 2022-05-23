@@ -10,9 +10,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class Transaction {
-    private int id_transaction;
-    private int id_user;
-    private int id_coin;
+    private long id_transaction;
+    private long id_user;
+    private String id_coin;
     private Date dateTime;
     private double balance;
     private boolean type;

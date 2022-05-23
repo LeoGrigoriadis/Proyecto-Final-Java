@@ -32,7 +32,7 @@ public class User {
 
     private int account_points;
 
-    @NotEmpty(message = "name required")
+    //@NotEmpty(message = "name required")
     @OneToOne
     @JoinColumn(name = "gmail")
     private Auth gmail;

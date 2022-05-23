@@ -2,7 +2,7 @@ package com.apiCrypto.apiCrypto.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
+
 
 import com.apiCrypto.apiCrypto.model.User;
 import com.apiCrypto.apiCrypto.service.UserService;
@@ -23,17 +23,14 @@ public class UserController {
         return ResponseEntity.status(200).body(us.getAll());
     }
 
-    @PostMapping
-    public ResponseEntity<Object> save(@RequestBody  User u) {
-        boolean flag = us.save(u);
-              System.out.println(u.toString());
-        if (flag)
-            return ResponseEntity.status(200).body("Success.");
-        else
-            return ResponseEntity.status(400).body("Error.");
+    @PostMapping("/save")
+    public ResponseEntity<String> save(@RequestBody User u){
+        if(u == null) return ResponseEntity.status(400).body("Incomplete data") ;
+        us.save(u);
+        return ResponseEntity.status(201).body("Saved User");
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody User user) {
         boolean users = us.updateUser(user);
         if (users) {
@@ -46,15 +43,18 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         us.deleteUser(id);
         return ResponseEntity.status(200).body("Deleted user");
     }
 
-    @GetMapping("/{id}")
+    /*@GetMapping("/getOne/{id}")
     public ResponseEntity<User> getOne(@PathVariable("id") Long id){
         User user = us.getUser(id);
         return ResponseEntity.status(200).body(user);
-    }
+    }*/
+
+
+
 }

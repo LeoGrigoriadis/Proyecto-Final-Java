@@ -26,9 +26,9 @@ public class User {
 
     private String last_name;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "account_type")
-   private Account_type account_type;
+    private Account_type account_type;
 
     private int account_points;
 
@@ -37,7 +37,5 @@ public class User {
     @JoinColumn(name = "gmail")
     private Auth gmail;
 
-    public Long getId() {
-        return null;
-    }
+   
 }

@@ -24,17 +24,15 @@
             <table class ="table table-hover" >
                 <thead>
                 <tr>
-                    <th class="text-center"> asset_id </th>
-                    <th class="text-center"> name </th>
-                    <th class="text-center"> price_usd </th>
+                    <th class="text-center"> compra </th>
+                    <th class="text-center"> venta </th>
 
                 </tr>
                 </thead>
                 <tbody style="text-align:center">
                 <tr th:each="coin: ${coins}">
-                    <td th:text = ${coin.asset_id}></td>
-                    <td th:text = ${coin.name}></td>
-                    <td th:text = ${coin.price_usd}></td>
+                    <td th:text = ${coin.ask}></td>
+                    <td th:text = ${coin.bid}></td>
 
 
                 </tr>

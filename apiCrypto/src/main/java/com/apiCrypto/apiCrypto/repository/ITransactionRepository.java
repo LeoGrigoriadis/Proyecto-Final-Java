@@ -1,8 +1,8 @@
 package com.apiCrypto.apiCrypto.repository;
 
-import com.apiCrypto.apiCrypto.model.Payment;
+
 import com.apiCrypto.apiCrypto.model.Transaction;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ITransactionRepository extends JpaRepository<Transaction, Integer> {
+public interface ITransactionRepository extends JpaRepository<Transaction, Long> {
 
 
     @Query(value = "Select * from transaction t where t.id_user = :id", nativeQuery = true)
@@ -19,9 +19,8 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Integ
 
     List<Transaction> findAll();
 
-    Transaction save(Transaction t);
 
-    void deleteById(long id);
+    
 
     //@Query(value = "", nativeQuery = true)
 
@@ -32,11 +31,6 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Integ
     @Query(value = "from transaction  where t.id_user = ?1 and s.id = ?2")
     List<Transaction> findByIdUser(long id, long id_transaction);
 */
-
-
-
-
-
 
     /*List<Transaction> getbyIdUser(long id);
     *  Transaction makeTransaction();

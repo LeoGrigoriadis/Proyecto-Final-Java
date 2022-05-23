@@ -1,7 +1,6 @@
 package com.apiCrypto.apiCrypto.service;
 
 import com.apiCrypto.apiCrypto.model.Payment;
-import com.apiCrypto.apiCrypto.model.Transaction;
 import com.apiCrypto.apiCrypto.repository.IPaymentRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,16 @@ public class PaymentService {
         return payR.findAll();
     }
 
-    public Payment save (Payment p){
+    public boolean save(Payment u) {
+        try {
+            if (payR.existsById(u.getId_loan())) {
+                payR.save(u);
 
-        return payR.save(p);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public Payment getByIdloan( long id_loan){

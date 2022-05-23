@@ -18,8 +18,16 @@ public class TransactionService {
         return tR.findAll();
     }
 
-    public Transaction save (Transaction t){
-        return tR.save(t);
+    public boolean save(Transaction u) {
+        try {
+            if (tR.existsById(u.getId_transaction())) {
+                tR.save(u);
+
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public List <Transaction> getByUser( long id){
@@ -30,6 +38,19 @@ public class TransactionService {
         tR.deleteById(id);
     }
 
+
+    public boolean updateTransaction(Transaction p) {
+        if (!tR.existsById(p.getId_transaction())) {
+            return false;
+        } else {
+            tR.save(p);
+            return true;
+        }
+    }
+
+    public Transaction getTransaction(long id) {
+        return tR.getById(id);
+    }
 /*
     public Transaction make(){
         return tR.makeTransaction();

@@ -24,7 +24,7 @@ public class AuthController {
         return ResponseEntity.status(200).body(as.getAll());
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody @Valid Auth u) {
         boolean flag = as.save(u);
         if (flag)
@@ -33,7 +33,7 @@ public class AuthController {
             return ResponseEntity.status(400).body("Error.");
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody Auth user) {
         boolean users = as.updateAuth(user);
         if (users) {
@@ -45,7 +45,7 @@ public class AuthController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") String id) {
         as.deleteUser(id);
         return ResponseEntity.status(200).body("Deleted Auth");

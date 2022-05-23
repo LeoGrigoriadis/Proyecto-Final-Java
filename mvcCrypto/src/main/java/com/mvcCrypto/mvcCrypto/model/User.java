@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class User {
 
-    private int id_user;
+    private long id_user;
     private String first_name;
     private String last_name;
     private int overdrawn_turn;

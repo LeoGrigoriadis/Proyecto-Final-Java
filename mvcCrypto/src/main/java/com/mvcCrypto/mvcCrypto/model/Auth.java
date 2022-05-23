@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User_Coin {
-    private int num_cuenta;
-    private String id_coin;
-    private double balance;
-    private long id_user;
+public class Auth {
+    private String gmail;
+
+    private String password;
+
+    private long id_role;
 }

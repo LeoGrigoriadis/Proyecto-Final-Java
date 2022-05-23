@@ -22,21 +22,21 @@ public class Account_typeController {
         return ResponseEntity.status(200).body(accS.getAll());
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody Account_type a){
         if(a == null) return ResponseEntity.status(400).body("Incomplete data") ;
         accS.save(a);
         return ResponseEntity.status(201).body("Saved Account");
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody Account_type a){
         if(a == null ) return ResponseEntity.status(400).body("Incomplete data") ;
         accS.save(a);
         return ResponseEntity.status(200).body("Updated Account");
     }
 
-    @DeleteMapping ("/{id}")
+    @DeleteMapping ("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
             accS.delete(id);
             return ResponseEntity.status(200).body("Deleted Account");

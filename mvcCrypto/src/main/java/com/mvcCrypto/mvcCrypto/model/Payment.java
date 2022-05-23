@@ -4,12 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User_Coin {
-    private int num_cuenta;
+public class Payment {
+
+    private long id_loan;
+    private long id_initial_user;
     private String id_coin;
+    private Timestamp date;
     private double balance;
-    private long id_user;
+    private long id_destination_user;
 }

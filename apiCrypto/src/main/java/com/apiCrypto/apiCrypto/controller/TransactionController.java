@@ -22,7 +22,7 @@ public class TransactionController {
         return ResponseEntity.status(200).body(ts.getAll());
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody @Valid Transaction u) {
         boolean flag = ts.save(u);
         if (flag)
@@ -31,7 +31,7 @@ public class TransactionController {
             return ResponseEntity.status(400).body("Error.");
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody Transaction t) {
         boolean flag = ts.updateTransaction(t);
         if (flag) {
@@ -43,13 +43,13 @@ public class TransactionController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/dalete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         ts.delete(id);
         return ResponseEntity.status(200).body("Deleted Transaction");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOne/{id}")
     public ResponseEntity<Transaction> getOne(@PathVariable("id") Long id){
         Transaction transaction = ts.getTransaction(id);
         return ResponseEntity.status(200).body(transaction);

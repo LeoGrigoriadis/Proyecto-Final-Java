@@ -2,7 +2,6 @@ package com.mvcCrypto.mvcCrypto.controller.service;
 
 import com.mvcCrypto.mvcCrypto.controller.repository.CoinRepository;
 import com.mvcCrypto.mvcCrypto.model.Coin;
-import com.mvcCrypto.mvcCrypto.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class CoinExternoService {
+public class CoinService {
 
     @Autowired
     private CoinRepository cr;
@@ -32,4 +31,3 @@ public class CoinExternoService {
         return cr.getByName(name);
     }*/
 }
-

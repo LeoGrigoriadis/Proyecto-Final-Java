@@ -13,24 +13,18 @@ public class CoinExternoRepository {
     @Autowired
     private RestTemplate rt;
 
-    public ArrayList<Object> findAll(){
+    public Coin findAll(){
 
        // String url = "http://rest.coinapi.io/v1/assets/?apikey=CB534D2D-8155-4886-83CC-DBED35CD1950";
-        String xx = "BTN";
-        String url = "http://rest.coinapi.io/v1/assets/"+ xx +"?apikey=71E090DE-46AB-4E0A-ACEC-031136EF98A3";
-        String url2 = "http://rest.coinapi.io/v1/assets/USD?apikey=71E090DE-46AB-4E0A-ACEC-031136EF98A3";
-        System.out.println(url);
-       ArrayList<Object> coins = new ArrayList<>();
+        String aux = "btc";
+        //String url = "http://rest.coinapi.io/v1/assets/"+ xx +"?apikey=71E090DE-46AB-4E0A-ACEC-031136EF98A3";
+        String url2 = "https://criptoya.com/api/bitex/btc/ars/0.1";
+        Coin coins;
         //ArrayList<Object> coins2 = new ArrayList<>();
         //Object a= new Object();
 
-       coins = rt.getForObject(url,ArrayList.class);
+       coins = rt.getForObject(url2,Coin.class);
         //coins.add(rt.getForObject(url2,Object.class));
-
-
-
-
-
 
         return coins;
     }

@@ -34,6 +34,8 @@ font-size:20px;
 
 .nav-user{
 float: right;
+background-color: var(--principal);
+border: none;
 }
 
 #clo{

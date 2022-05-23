@@ -10,9 +10,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Coin implements Serializable {
-
-    private static final long serialVersionUID = 4676905652686424400L;
+public class Coin{
 
     private float ask;
     private float totalAsk;

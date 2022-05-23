@@ -20,7 +20,6 @@ public class UserService {
 
     public boolean save(User u) {
         try {
-            
                 uR.save(u);
             return true;
         } catch (Exception e) {

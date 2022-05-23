@@ -24,8 +24,9 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody @Valid User u) {
+    public ResponseEntity<Object> save(@RequestBody  User u) {
         boolean flag = us.save(u);
+              System.out.println(u.toString());
         if (flag)
             return ResponseEntity.status(200).body("Success.");
         else
@@ -37,6 +38,7 @@ public class UserController {
         boolean users = us.updateUser(user);
         if (users) {
             us.save(user);
+      
             return ResponseEntity.status(200).body("Updated user");
 
         } else

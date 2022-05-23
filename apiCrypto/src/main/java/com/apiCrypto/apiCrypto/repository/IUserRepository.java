@@ -8,5 +8,5 @@ import com.apiCrypto.apiCrypto.model.User;
 @Repository
 public interface IUserRepository extends JpaRepository <User, Long>{
   
-    public User getByGmail(String gmail);
+ 
 }

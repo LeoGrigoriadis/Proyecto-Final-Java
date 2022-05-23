@@ -12,8 +12,14 @@
 <body>
   <nav>
     LOGO
-    <div class="nav-user">User</div>
+    <button class="nav-user" id="us" onclick="dropdown()">User</button>
+    <button class="nav-user" id="clo" onclick="close_dropdown()">cerrar</button>
   </nav>
+  <div id="dropdown">
+      <a href="#">Perfil</a>
+      <a href="#">Cerrar sesión</a>
+    </div>
+  </div>
   <div class="contain">
 
     <section class="col-sm-3 section-top">
@@ -38,7 +44,7 @@
     <section class="col-sm-3 invis">
       <div class="content">
         <div class="buttons">
-          <button onclick="trans()" checked>Transaccionar</button>
+          <button onclick="trans()">Transaccionar</button>
           <button onclick="trade()">Tradear</button><br>
           <label id="trans">
             trans
@@ -50,15 +56,31 @@
 
       </div>
     </section>
+
   </div>
+  <footer>
+    <p>
+      footer
+    </p>
+  </footer>
 <script>
   function trans(){
-  document. getElementById("trans").style.display="block";
-  document. getElementById("trade").style.display="none";
+    document. getElementById("trans").style.display="block";
+    document. getElementById("trade").style.display="none";
   }
   function trade(){
-  document. getElementById("trade").style.display="block";
-  document. getElementById("trans").style.display="none";
+    document. getElementById("trade").style.display="block";
+    document. getElementById("trans").style.display="none";
+  }
+  function dropdown(){
+    document. getElementById("dropdown").style.display="block";
+    document. getElementById("clo").style.display="block";
+    document. getElementById("us").style.display="none";
+  }
+  function close_dropdown(){
+    document. getElementById("dropdown").style.display="none";
+    document. getElementById("clo").style.display="none";
+    document. getElementById("us").style.display="block";
   }
 </script>
 </body>

@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="../static/style.css" media="screen">
+  <!--<link rel="stylesheet" type="text/css" href="../static/style.css" media="screen">-->
+  <!--<link th:href="@{../static/style.css}" rel="stylesheet" media="screen"/>-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
   <nav>
-    LOGO
-    <button class="nav-user" id="us" onclick="dropdown()">User</button>
-    <button class="nav-user" id="clo" onclick="close_dropdown()">cerrar</button>
+    <button class="nav-user" id="us" onclick="dropdown()">user</button>
+    <button class="nav-user" id="clo" onclick="close_dropdown()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+      </svg>
+    </button>
   </nav>
   <div id="dropdown">
       <a href="#">Perfil</a>
@@ -25,7 +29,23 @@
     <section class="col-sm-3 section-top">
       <div class="content">
         <h4>Cotizaciones actuales</h4>
+        <table class ="table table-hover" >
+          <thead>
+          <tr>
+            <th class="text-center"> compra </th>
+            <th class="text-center"> venta </th>
 
+          </tr>
+          </thead>
+          <tbody style="text-align:center">
+          <tr th:each="coin: ${coins}">
+            <td th:text = ${coin.ask}></td>
+            <td th:text = ${coin.bid}></td>
+
+
+          </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -38,13 +58,28 @@
           <h4>Últimos movimientos</h4>
           <a href="#">Ver todos</a>
         </div>
+        <table class ="table table-hover" >
+          <thead>
+          <tr>
+            <th class="text-center"> moneda </th>
+            <th class="text-center"> monto </th>
+
+          </tr>
+          </thead>
+          <tbody style="text-align:center">
+          <tr th:each="mov: ${movs}">
+            <td th:text = ${mov.id_coin.name}></td>
+            <td class="dep" th:if = "${mov.type==false}" th:text ="'+'+ ${mov.balance}"></td>
+            <td class="ret" th:if= "${mov.type==true}" th:text ="'-'+ ${mov.balance}"></td>
+          </tr>
+          </tbody>
+        </table>
       </article>
     </section>
-
     <section class="col-sm-3 invis">
       <div class="content">
         <div class="buttons">
-          <button onclick="trans()">Transaccionar</button>
+          <button onclick="trans()">Retirar</button>
           <button onclick="trade()">Tradear</button><br>
           <label id="trans">
             trans
@@ -59,8 +94,9 @@
 
   </div>
   <footer>
+    <p style="margin:2px">©® Equipo Uno</p>
     <p>
-      footer
+      <a href="#">Política de Privacidad</a> - <a href="#">Política de Cookies</a>
     </p>
   </footer>
 <script>
@@ -83,5 +119,250 @@
     document. getElementById("us").style.display="block";
   }
 </script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Shippori+Antique&display=swap');
+:root{
+  --font-Shippori: 'Shippori Antique', sans-serif;
+  --font-Montserrat: 'Montserrat', sans-serif;
+  --principal: #729DF2;
+  --principal-oscuro: #4465A6;
+  --background: #E6EAF2;
+  --footer: #435270;
+  --success: #7fE371;
+  --background-success: #a9e0a2;
+  --danger: #d45959;
+  --background-danger: #db8f8f;
+
+}
+
+*{
+margin:0px;
+padding:0px;
+box-sizing: border-box;
+}
+
+html{
+    background-color: var(--background);
+    font-family: var(--font-Montserrat) !important;
+}
+
+body{
+    background-color: white;
+}
+
+nav{
+background-color: var(--principal) !important;
+color: white;
+height:60px;
+padding: 15px 40px;
+font-size:20px;
+}
+
+.nav-user{
+float: right;
+background-color: var(--principal);
+border: none;
+}
+
+#clo{
+display:none;
+padding: 2px 15px;
+transform: scale(1.2);
+}
+
+#dropdown{
+display:none;
+position: absolute;
+right: 0px;
+z-index: 1;
+background-color: white;
+}
+
+#dropdown a{
+display:block;
+padding: 5px 10px;
+border-bottom: 1px solid var(--background);
+border-left: 1px solid var(--background);
+
+}
+
+.contain{
+width: calc(100% - 40px);
+margin: 0 auto;
+font-family: var(--font-Shippori) !important;
+}
+
+section{
+min-height: 400px !important;
+height: calc(100vh - 120px);
+}
+
+.articles{
+min-height: 385px !important;
+overflow: hidden;
+height: calc(100vh - 135px);
+}
+
+.articles .dep{
+color:white;
+background-color: var(--background-success);
+}
+
+.articles .ret{
+color:white;
+background-color: var(--background-danger);
+}
+
+.articles .top-article{
+vertical-align:middle;
+}
+
+.articles a{
+float: right;
+}
+
+.articles h4{
+display:inline;
+}
+
+.col-sm-3{
+padding:20px 8px !important;
+width: 30% !important;
+}
+.col-sm-6{
+padding:20px 8px !important;
+width: 40% !important;
+}
+
+article{
+background-color: white;
+height:50%;
+padding: 30px 25px;
+margin-bottom: 15px;
+border-radius: 10px;
+}
+
+.content{
+background-color: white;
+height: 100%;
+border-radius: 10px;
+padding: 30px 25px;
+}
+
+.buttons{
+text-align:center;
+}
+
+.buttons button{
+background-color: var(--principal);
+border: none;
+color: white;
+min-width: 180px;
+padding: 8px 5px;
+margin: 0px 2px 8px 2px;
+border-radius: 20px;
+transition-duration: .4s;
+}
+
+.buttons button:hover{
+background-color: var(--principal-oscuro);
+}
+
+#trade{
+display:none;
+}
+
+footer{
+font-size: 10px;
+color: white;
+height: 60px;
+position: absolute;
+padding: 10px;
+bottom:0px;
+width: 100vw;
+vertical-align: middle;
+background-color: var(--footer);
+}
+
+footer p{
+font-family: var(--font-Montserrat) !important;
+text-align:center;
+}
+
+footer a{
+color:white;
+}
+
+footer a:hover{
+color:white;
+}
+
+@Media(max-width: 1200px) {
+    .invis{
+    display: none;
+    }
+
+    .col-sm-3, .col-sm-6{
+    padding: 20px 8px !important;
+    width: 50% !important;
+    }
+
+    section{
+    min-height: 400px !important;
+    height: calc(100vh - 120px);
+    }
+
+    .articles{
+    min-height: 385px !important;
+    overflow: hidden;
+    height: calc(100vh - 135px);
+    }
+
+}
+
+@Media(max-width: 770px){
+    nav{
+    z-index: 2;
+    position:sticky;
+    top: 0px;
+    background-color: white;
+    }
+
+    body{
+    background-color:#E6EAF2 !important;
+    }
+
+    .invis{
+    display: block;
+    }
+
+    section{
+    min-height: 400px !important;
+    height: calc(100vh - 60px);
+    }
+
+    .col-sm-3.section-top{
+    padding-bottom: 0px !important;
+    }
+
+    .articles{
+    min-height: 385px !important;
+    overflow: hidden;
+    height: calc(100vh - 75px);
+    }
+
+    .col-sm-3, .col-sm-6{
+    padding: 20px 8px !important;
+    width: 100% !important;
+    }
+
+    footer{
+    position: static;
+    }
+}
+
+
+</style>
 </body>
 </html>

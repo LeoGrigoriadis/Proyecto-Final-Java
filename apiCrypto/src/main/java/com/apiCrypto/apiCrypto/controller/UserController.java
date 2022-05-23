@@ -23,7 +23,7 @@ public class UserController {
         return ResponseEntity.status(200).body(us.getAll());
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody @Valid User u) {
         boolean flag = us.save(u);
         if (flag)
@@ -32,7 +32,7 @@ public class UserController {
             return ResponseEntity.status(400).body("Error.");
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody User user) {
         boolean users = us.updateUser(user);
         if (users) {
@@ -44,13 +44,13 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/dalete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         us.deleteUser(id);
         return ResponseEntity.status(200).body("Deleted user");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOne/{id}")
     public ResponseEntity<User> getOne(@PathVariable("id") Long id){
         User user = us.getUser(id);
         return ResponseEntity.status(200).body(user);

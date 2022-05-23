@@ -26,7 +26,7 @@ public class TradeController {
         return ResponseEntity.status(200).body(pS.getAll());
     }
     
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody @Valid Trade u) {
         Trade flag = pS.save(u);
         if (flag == null)
@@ -36,7 +36,7 @@ public class TradeController {
         return ResponseEntity.status(200).body("Success.");
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody Trade p) {
         Trade pay = pS.update(p, p.getId_trade());
         if (pay == null) {
@@ -50,7 +50,7 @@ public class TradeController {
         return ResponseEntity.status(200).body("Updated payment");
     }
 
-    @DeleteMapping ("/{id}")
+    @DeleteMapping ("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
             pS.delete(id);
             return ResponseEntity.status(200).body("Deleted payment");

@@ -18,6 +18,11 @@ public class UserService {
         uR.save(user);
     }
 
+    public void update(User user)
+    {
+        uR.update(user);
+    }
+
     //GET ALL
     public ArrayList<User> getAll()
     {
@@ -25,13 +30,15 @@ public class UserService {
     }
 
     //GET BY ID
-    public User getByEmail(String email)
+    public User getById(long id)
     {
-        return uR.getByGmail(email);
+        return uR.getById(id);
     }
 
     //DELETE
     public void delete(long id) {
         uR.delete(id);
     }
+
+
 }

@@ -5,7 +5,11 @@
   --principal: #729DF2;
   --principal-oscuro: #4465A6;
   --background: #E6EAF2;
-  --footer: #4465A6;
+  --footer: #435270;
+  --success: #7fE371;
+  --background-success: #a9e0a2;
+  --danger: #d45959;
+  --background-danger: #db8f8f;
 
 }
 
@@ -32,6 +36,12 @@ padding: 15px 40px;
 font-size:20px;
 }
 
+nav img{
+height: 100px;
+position: relative;
+bottom: 35px;
+}
+
 .nav-user{
 float: right;
 background-color: var(--principal);
@@ -40,6 +50,8 @@ border: none;
 
 #clo{
 display:none;
+padding: 2px 15px;
+transform: scale(1.2);
 }
 
 #dropdown{
@@ -48,6 +60,7 @@ position: absolute;
 right: 0px;
 z-index: 1;
 background-color: white;
+width: 140px;
 }
 
 #dropdown a{
@@ -75,12 +88,26 @@ overflow: hidden;
 height: calc(100vh - 135px);
 }
 
+.articles .dep{
+color:white;
+background-color: var(--success);
+}
+
+.articles .ret{
+color:white;
+background-color: var(--danger);
+}
+
 .articles .top-article{
 vertical-align:middle;
 }
 
 .articles a{
 float: right;
+}
+
+h4{
+margin: 0;
 }
 
 .articles h4{
@@ -109,13 +136,14 @@ background-color: white;
 height: 100%;
 border-radius: 10px;
 padding: 30px 25px;
+overflow: auto;
 }
 
 .buttons{
 text-align:center;
 }
 
-.buttons button{
+.button{
 background-color: var(--principal);
 border: none;
 color: white;
@@ -126,8 +154,62 @@ border-radius: 20px;
 transition-duration: .4s;
 }
 
-.buttons button:hover{
+.button:hover{
 background-color: var(--principal-oscuro);
+color: white;
+}
+
+.button-border{
+border: 3px solid var(--principal);
+background-color: white;
+min-width: 180px;
+padding: 6px 3px;
+margin: 0px 2px 8px 2px;
+border-radius: 20px;
+transition-duration: .4s;
+}
+
+.button-border:hover{
+border-color: var(--principal-oscuro);
+background-color: var(--principal-oscuro);
+color: white;
+}
+
+.button-form-margin{
+margin-top: 20%;
+}
+
+#trans{
+margin-top: 10%;
+display: block;
+}
+
+#trade{
+margin-top: 10%;
+}
+
+#trans h4, #trade h4{
+margin-top:15px;
+display: block;
+}
+
+form{
+font-family: var(--font-Montserrat);
+text-align: center;
+margin:30px 0px 0px 0px;
+}
+
+form label{
+margin: 6px 0px 3px 0px;
+display: block;
+text-align: left;
+}
+
+form input{
+width: 100%;
+border: 2px solid var(--background);
+border-radius: 7px;
+padding: 2px 8px;
 }
 
 #trade{
@@ -135,6 +217,7 @@ display:none;
 }
 
 footer{
+font-size: 10px;
 color: white;
 height: 60px;
 position: absolute;
@@ -148,6 +231,14 @@ background-color: var(--footer);
 footer p{
 font-family: var(--font-Montserrat) !important;
 text-align:center;
+}
+
+footer a{
+color:white;
+}
+
+footer a:hover{
+color:white;
 }
 
 @Media(max-width: 1200px) {

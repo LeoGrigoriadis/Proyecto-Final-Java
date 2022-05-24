@@ -2,10 +2,13 @@ package com.apiCrypto.apiCrypto.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.apiCrypto.apiCrypto.model.Auth;
 import com.apiCrypto.apiCrypto.repository.IAuthRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,22 +31,27 @@ public class AuthService {
         }
     }
 
-    public void deleteAuth(String id) {
-        if (au.existsById(id)) {
+    public boolean deleteAuth(String id) {
+        try {
             au.deleteById(id);
+            return true;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
         }
-    }
 
+    }
+ 
     public Auth getAuth(String id) {
         return au.getById(id);
     }
 
-    public boolean updateAuth(Auth u) {
-        if (!au.existsById(u.getGmail())) {
-            return false;
+    @Transactional
+    public Auth updateAuth(Auth u, String id) {
+        if (au.getById(id )!= null) {
+          u.setGmail(id);
+          return au.save(u);
         } else {
-            au.save(u);
-            return true;
+            return null;
         }
     }
     

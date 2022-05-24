@@ -20,6 +20,8 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
     List<Transaction> findAll();
 
 
+    /*@Query(value="UPDATE user_coin SET user_coin.balance = user_coin.balance + :balance WHERE  user_coin.id_coin= :id_coin AND user_coin.id_user= :id_user", nativeQuery=true)
+    public  updateDeposito*/
     
 
     //@Query(value = "", nativeQuery = true)

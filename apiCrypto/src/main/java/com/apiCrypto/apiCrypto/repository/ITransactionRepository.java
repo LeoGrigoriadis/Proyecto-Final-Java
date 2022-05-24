@@ -49,5 +49,15 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
 
     /*List<Transaction> getbyIdUser(long id);
     *  Transaction makeTransaction();
+    *
+    *
+    *
+    *
+    * aplicacion
+    *
+    *
+    *
+    *
+    *
     * */
 }

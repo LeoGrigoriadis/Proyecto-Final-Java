@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="AllTransactions.css" media="screen">
+    <script src="dropdown.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav >
+    <button class="nav-user" id="us" onclick="dropdown()">user</button>
+    <button class="nav-user" id="clo" onclick="close_dropdown()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+        </svg>
+    </button>
+</nav>
+<div id="dropdown">
+    <a href="#">Perfil</a>
+    <a href="#">Cerrar sesión</a>
+</div>
+
+<div class="contain">
+    <section>
+        <div class="content">
+    <div class="top-article">
+        <h4>Todos tus movimientos</h4>
+    </div>
+    <table class ="table table-hover" >
+        <thead>
+        <tr>
+            <th class="text-center"> moneda </th>
+            <th class="text-center"> monto </th>
+        </tr>
+        </thead>
+        <tbody style="text-align:center">
+        <tr th:each="mov: ${movs}">
+            <td th:text = ${mov.id_coin.name}></td>
+            <td class="dep" th:if = "${mov.type==false}" th:text ="'+'+ ${mov.balance}"></td>
+            <td class="ret" th:if= "${mov.type==true}" th:text ="'-'+ ${mov.balance}"></td>
+        </tr>
+        </tbody>
+    </table>
+        </div>
+    </section>
+</div>
+<footer>
+    <p style="margin:2px">©® Equipo Uno</p>
+    <p>
+        <a href="#">Política de Privacidad</a> - <a href="#">Política de Cookies</a>
+    </p>
+</footer>
+</body>
+</html>

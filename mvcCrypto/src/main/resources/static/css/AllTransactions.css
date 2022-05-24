@@ -1,0 +1,21 @@
+:root{
+  --background: #E6EAF2;
+}
+
+body{
+background-color: var(--background);
+}
+
+section{
+padding:20px 8px !important;
+}
+
+.content{
+margin: 0px 15%;
+}
+
+@Media(max-width: 1200px){
+    .content{
+    margin: 0px;
+    }
+}

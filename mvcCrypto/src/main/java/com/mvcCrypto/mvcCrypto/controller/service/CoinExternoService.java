@@ -26,7 +26,6 @@ public class CoinExternoService {
         }
         return coins;
     */
-
         return cr.findAll();
     }
 

@@ -1,5 +1,6 @@
 package com.mvcCrypto.mvcCrypto.controller.service;
 
+import com.mvcCrypto.mvcCrypto.controller.repository.CoinExternoRepository;
 import com.mvcCrypto.mvcCrypto.controller.repository.CoinRepository;
 import com.mvcCrypto.mvcCrypto.model.Coin;
 import com.mvcCrypto.mvcCrypto.model.User;
@@ -14,17 +15,21 @@ import java.util.List;
 public class CoinExternoService {
 
     @Autowired
-    private CoinRepository cr;
+    private CoinExternoRepository cr;
 
 
-    public ArrayList<Coin> getAll() {
-        List<String> list= Arrays.asList("btc", "xrp", "eth");
+    public Coin getAll() {
+        /*List<String> list= Arrays.asList("btc", "xrp", "eth");
         ArrayList<Coin> coins=new ArrayList<>();
         for (String coin: list){
             coins.add(cr.findCot(coin));
         }
         return coins;
+    */
+
+        return cr.findAll();
     }
+
 
 
    /* public Coin getByName(String name)

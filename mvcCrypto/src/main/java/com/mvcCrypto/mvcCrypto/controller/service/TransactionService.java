@@ -3,6 +3,7 @@ package com.mvcCrypto.mvcCrypto.controller.service;
 import com.mvcCrypto.mvcCrypto.controller.repository.TransactionRepository;
 import com.mvcCrypto.mvcCrypto.model.Transaction;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 @Service
 public class TransactionService {
 
+    @Autowired
     private TransactionRepository tr;
 
 
@@ -18,7 +20,7 @@ public class TransactionService {
         return tr.getOne(id);
     }
 
-    public ArrayList<Transaction> findAll(){
+    public ArrayList<Transaction> getAll(){
         return tr.findAll();
     }
 

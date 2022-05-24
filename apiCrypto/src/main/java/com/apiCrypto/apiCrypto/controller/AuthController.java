@@ -34,15 +34,10 @@ public class AuthController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody Auth user) {
-        boolean users = as.updateAuth(user);
-        if (users) {
-            as.save(user);
-            return ResponseEntity.status(200).body("Updated Auth");
-
-        } else
-            return ResponseEntity.status(400).body("Incomplete data");
-
+    public ResponseEntity<String> update(@RequestBody Auth auth){
+        if(auth == null || auth.getGmail().isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
+        as.save(auth);
+        return ResponseEntity.status(200).body("Updated auth");
     }
 
     @DeleteMapping("/delete/{id}")

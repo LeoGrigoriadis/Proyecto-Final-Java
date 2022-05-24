@@ -33,9 +33,10 @@ public class User_CoinService {
     }
 
     public void delete(long id) {
-        ucR.existsById(id);
+        ucR.deleteById(id);
     }
 
+    @Transactional
     public boolean updateUserCoin(User_Coin uc) {
         if (!ucR.existsById(uc.getId_account())) {
             return false;

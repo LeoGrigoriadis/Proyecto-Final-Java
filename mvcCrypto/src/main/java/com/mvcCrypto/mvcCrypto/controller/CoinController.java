@@ -4,6 +4,7 @@ package com.mvcCrypto.mvcCrypto.controller;
 import com.mvcCrypto.mvcCrypto.controller.service.CoinApiService;
 
 import com.mvcCrypto.mvcCrypto.controller.service.CoinExternoService;
+import com.mvcCrypto.mvcCrypto.controller.service.TransactionService;
 import com.mvcCrypto.mvcCrypto.model.Coin;
 import com.mvcCrypto.mvcCrypto.model.CoinAdapter;
 
@@ -21,8 +22,11 @@ import java.util.ArrayList;
 public class CoinController {
 
     @Autowired
-   private CoinExternoService ces;
+    private CoinExternoService ces;
+    @Autowired
     private CoinApiService cas;
+    @Autowired
+    private TransactionService ts;
 
 
     @GetMapping("")
@@ -45,12 +49,12 @@ for(int i=0;i<array2.size();i++){
 array3.add(ces.getByName("BTC"));
 */
     model.addAttribute("coins",ces.getAll());
-
-            return "Index";
+    model.addAttribute("movs",ts.getAll());
+            return "AppView";
         } catch (NullPointerException e) {
             e.fillInStackTrace();
         }
-        return "Index";
+        return "AppView";
     }
 
 

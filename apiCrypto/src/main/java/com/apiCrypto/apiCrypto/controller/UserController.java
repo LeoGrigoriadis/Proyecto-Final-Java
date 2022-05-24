@@ -2,7 +2,6 @@ package com.apiCrypto.apiCrypto.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
 
 import com.apiCrypto.apiCrypto.model.User;
 import com.apiCrypto.apiCrypto.service.UserService;
@@ -23,13 +22,11 @@ public class UserController {
         return ResponseEntity.status(200).body(us.getAll());
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<Object> save(@RequestBody @Valid User u) {
-        boolean flag = us.save(u);
-        if (flag)
-            return ResponseEntity.status(200).body("Success.");
-        else
-            return ResponseEntity.status(400).body("Error.");
+    @PostMapping
+    public ResponseEntity<String> save(@RequestBody User u){
+        if(u == null) return ResponseEntity.status(400).body("Incomplete data") ;
+        us.save(u);
+        return ResponseEntity.status(201).body("Saved user");
     }
 
     @PutMapping("/update")

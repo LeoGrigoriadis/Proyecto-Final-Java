@@ -34,6 +34,28 @@ font-size:20px;
 
 .nav-user{
 float: right;
+background-color: var(--principal);
+border: none;
+}
+
+#clo{
+display:none;
+}
+
+#dropdown{
+display:none;
+position: absolute;
+right: 0px;
+z-index: 1;
+background-color: white;
+}
+
+#dropdown a{
+display:block;
+padding: 5px 10px;
+border-bottom: 1px solid var(--background);
+border-left: 1px solid var(--background);
+
 }
 
 #clo{

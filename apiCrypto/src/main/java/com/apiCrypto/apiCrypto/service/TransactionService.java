@@ -20,9 +20,14 @@ public class TransactionService {
         return tR.findAll();
     }
 
-    public Transaction save(Transaction u) {
-      
-            return  tR.save(u);
+    public boolean save(Transaction u) {
+       try{
+           tR.save(u);
+           return  true;
+       }catch(Exception e){
+           return false;
+       }
+
     }
 
     public List <Transaction> getByUser( long id){

@@ -1,68 +1,109 @@
-/*import com.apiCrypto.apiCrypto.model.User;
+package com.apiCrypto.apiCrypto.TestUser;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.apiCrypto.apiCrypto.model.Account_type;
+import com.apiCrypto.apiCrypto.model.*;
+import com.apiCrypto.apiCrypto.model.User;
 import com.apiCrypto.apiCrypto.repository.IUserRepository;
 import com.apiCrypto.apiCrypto.service.UserService;
 
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-
-public class UserServiceTest {
-    @RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)
   @SpringBootTest
+public class UserServiceTest {
+    
     @InjectMocks
 	private UserService service;
 	
 	@Mock
 	private IUserRepository repository;
+
+	private Role rol = new Role(1,"user");
+
+	private Auth auth = new Auth("ana@gmail.com","1234", rol);
+
+	private Account_type account = new Account_type(1, "premium", 5);
 	
-	private User client1 = new User("Carlos", "Sanchez", 32345657);
+	private User user1 = new User(1, "Ani", "Guari", account, 5, auth);
+
+
+
+
 	
-	private User client2 = new User(2, 43566879, "Raul", "Fernandez");
+	private Role rol2 = new Role(2,"admin");
+
+	private Auth auth2 = new Auth("jere@gmail.com","111", rol2);
+
+	private Account_type account2 = new Account_type(1, "premium", 5);
+	
+	private User user2 = new User(2, "jere", "Roca", account2, 5, auth2);
 		
 	@Test
-	public void SELECT_CLIENTS() {
-		when(repository.findAll()).thenReturn(new ArrayList<Clients>());
-		List<Clients> clients = service.getAll();
-		assertNotNull(clients);
+	public void SELECT_USERS() {
+		when(repository.findAll()).thenReturn(new ArrayList<User>());
+		List<User> user = service.getAll();
+		assertNotNull(user);
 	}
 	
 	@Test
-	public void SAVE_CLIENT() {
-		when(repository.existsByDni(client1.getDni())).thenReturn(false);
-		when(repository.save(client1)).thenReturn(null);
-		boolean result = service.save(client1);
-		assertTrue(result);
+	public void SAVE_USERS() {
+		when(repository.existsById(user1.getId_user())).thenReturn(false);
+		when(repository.save(user1)).thenReturn(null);
+		User test = service.save(user1);
+		boolean  flag = true;
+		if(test == null){
+			flag = false;
+		}
+		assertTrue(flag);
 	}
 	
 	@Test
 	public void SAVE_CLIENT_FAIL() {
-		when(repository.existsByDni(client1.getDni())).thenReturn(true);
-		when(repository.save(client1)).thenReturn(null);
-		boolean result = service.save(client1);
-		assertFalse(result);
+		when(repository.existsById(user1.getId_user())).thenReturn(true);
+		when(repository.save(user1)).thenReturn(null);
+		User test = service.save(user1);
+		boolean  flag = true;
+		if(test == null){
+			flag = false;
+		}
+		assertTrue(flag);
 	}
 	
 	@Test
 	public void UPDATE_CLIENT() {
-		when(repository.existsById(client2.getId())).thenReturn(true);
-		when(repository.save(client2)).thenReturn(null);
-		boolean result = service.update(client2);
+		when(repository.existsById(user2.getId_user())).thenReturn(true);
+		when(repository.save(user2)).thenReturn(null);
+		boolean result = service.updateUser(user2);
 		assertTrue(result);
 	}
 	
 	@Test
 	public void UPDATE_CLIENT_FAIL() {
-		when(repository.existsById(client2.getId())).thenReturn(false);
-		when(repository.save(client2)).thenReturn(null);
-		boolean result = service.update(client2);
-		assertFalse(result);
+		when(repository.existsById(user2.getId_user())).thenReturn(false);
+		when(repository.save(user2)).thenReturn(null);
+		boolean result = service.updateUser(user2);
+		assertTrue(result);
 	}
 	
-	@Test
+	/*@Test
 	public void DELETE_CLIENT() {
-		when(repository.existsById(client2.getId())).thenReturn(true);
-		boolean result = service.delete(client2.getId());
+		when(repository.existsById(user2.getId_user())).thenReturn(true);
+		service.deleteUser(user2.getId_user());
 		assertTrue(result);
 	}
 	
@@ -72,5 +113,5 @@ public class UserServiceTest {
 		boolean result = service.delete(client2.getId());
 		assertFalse(result);
 
-}
-	}*/
+}*/
+	}

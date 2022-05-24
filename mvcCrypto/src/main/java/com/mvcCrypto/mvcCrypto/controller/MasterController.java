@@ -5,20 +5,23 @@ import com.mvcCrypto.mvcCrypto.controller.service.CoinApiService;
 
 import com.mvcCrypto.mvcCrypto.controller.service.CoinExternoService;
 import com.mvcCrypto.mvcCrypto.controller.service.TransactionService;
-import com.mvcCrypto.mvcCrypto.model.Coin;
-import com.mvcCrypto.mvcCrypto.model.CoinAdapter;
 
+import com.mvcCrypto.mvcCrypto.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("")
-public class CoinController {
+public class MasterController {
 
     @Autowired
     private CoinExternoService ces;
@@ -26,7 +29,6 @@ public class CoinController {
     private CoinApiService cas;
     @Autowired
     private TransactionService ts;
-
 
     @GetMapping("")
     public String getAll(Model model) {
@@ -48,12 +50,33 @@ for(int i=0;i<array2.size();i++){
 array3.add(ces.getByName("BTC"));
 */
     model.addAttribute("coins",ces.getAll());
+    model.addAttribute("transaction", new Transaction());
     model.addAttribute("movs",ts.getAll());
             return "AppView";
         } catch (NullPointerException e) {
             e.fillInStackTrace();
         }
         return "AppView";
+    }
+    @PostMapping("/withdraw")
+    public String withdraw(@RequestBody Transaction tr, RedirectAttributes redirect){
+        System.out.println(tr);
+        try{
+            tr.setType(true);
+            tr.setId_user(1);
+            tr.setDateTime(LocalDateTime.now());
+            tr.setPrice_in_transaction(ces.getAll().getAsk());
+
+            ts.save(tr);
+            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+                    .addFlashAttribute("class", "success");
+            return "redirect:/";
+        }catch (NullPointerException e){
+            e.fillInStackTrace();
+            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+                    .addFlashAttribute("class", "danger");
+            return "redirect:/";
+        }
     }
 
 

@@ -84,16 +84,15 @@
         </div>
           <label id="trans">
             <h4>Realizar un retiro</h4>
-            <!--th:action="@{/user/withdraw}" th:object="${withdraw}" method="post"-->
-            <form>
+            <!---->
+            <form th:action="@{/withdraw}" th:object="${transaction}" method="post">
               <div>
                 <label>Numero de cuenta: </label>
-                <!--th:field="*{coin}"-->
-                <input type="text" name="coin"/><br>
+                <input type="number" name="id_destination_user" th:field="*{id_destination_user}"/><br>
                 <label>Moneda: </label>
-                <input type="text" name="coin"/><br>
+                <input type="text" name="id_coin" th:field="*{id_coin}"/><br>
                 <label>Monto: </label>
-                <input type="number" name="balance"/>
+                <input type="number" step="0.0001" name="balance" th:field="*{balance}"/>
                 <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
               </div>
               <button class="button-border button-form-margin" type="submit">Retirar</button>

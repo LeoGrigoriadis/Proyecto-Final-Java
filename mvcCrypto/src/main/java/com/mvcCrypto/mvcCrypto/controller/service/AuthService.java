@@ -2,7 +2,6 @@ package com.mvcCrypto.mvcCrypto.controller.service;
 
 import com.mvcCrypto.mvcCrypto.controller.repository.AuthRepository;
 import com.mvcCrypto.mvcCrypto.model.Auth;
-import com.mvcCrypto.mvcCrypto.model.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

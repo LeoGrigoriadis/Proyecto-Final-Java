@@ -54,6 +54,7 @@ public class TransactionService {
         return tR.getById(id);
     }
 
+    @Transactional
     public boolean depositar(double balance, String id_coin, long id_user) {
 
       return tR.Deposito(balance, id_coin, id_user);

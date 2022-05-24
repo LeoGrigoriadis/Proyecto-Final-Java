@@ -4,11 +4,14 @@ package com.apiCrypto.apiCrypto.repository;
 import com.apiCrypto.apiCrypto.model.Transaction;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 @Repository
 public interface ITransactionRepository extends JpaRepository<Transaction, Long> {
@@ -19,6 +22,8 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
 
     List<Transaction> findAll();
 
+    @Modifying
+    @Transactional
     @Query(value="UPDATE user_coin SET user_coin.balance = user_coin.balance + :balance WHERE  user_coin.id_coin= :id_coin AND user_coin.id_user= :id_user", nativeQuery=true)
     public boolean Deposito(@Param("balance") double balance,@Param("id_coin") String id_coin, @Param("id_user") long id_user);
 

@@ -57,7 +57,7 @@ public class TransactionController {
     }
 
     @PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
-    public ResponseEntity<String> depositar(@Param("balance") double balance, @Param("id_coin") String id_coin, @Param("id_user") long id_user) {
+    public ResponseEntity<String> depositar(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
         boolean flag = ts.depositar(balance,id_coin,id_user);
         if (flag) {
             return ResponseEntity.status(200).body("Deposito exitoso");
@@ -69,7 +69,7 @@ public class TransactionController {
 
 
     @PutMapping("/CobrarMonto/{balance}/{id_coin}/{id_user}")
-    public ResponseEntity<String> CobrarMonto(@Param("balance") double balance, @Param("id_coin") String id_coin, @Param("id_user") long id_user) {
+    public ResponseEntity<String> CobrarMonto(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
         boolean flag = ts.CobrarMonto(balance,id_coin,id_user);
         if (flag) {
             return ResponseEntity.status(200).body("Retiro exitoso");
@@ -80,7 +80,7 @@ public class TransactionController {
     }
 
     @PutMapping("/CobrarMonto/{id_coin}/{id_user}")
-    public ResponseEntity<String> CobrarMonto(@Param("id_coin") String id_coin, @Param("id_user") long id_user) {
+    public ResponseEntity<String> CobrarMonto(@PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
         boolean flag = ts.CobrarTodo(id_coin,id_user);
         if (flag) {
             return ResponseEntity.status(200).body("Retiro exitoso");

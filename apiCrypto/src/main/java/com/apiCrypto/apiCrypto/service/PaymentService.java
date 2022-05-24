@@ -14,36 +14,28 @@ public class PaymentService {
     @Autowired
     private IPaymentRepository payR;
 
-    public List<Payment> getAll(){
+    public List<Payment> getAll() {
 
         return payR.findAll();
     }
 
-    public boolean save(Payment u) {
-        try {
-            if (payR.existsById(u.getId_loan())) {
-                payR.save(u);
-
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Payment save(Payment u) {
+          return  payR.save(u);
     }
 
-    public Payment getByIdloan( long id_loan){
+    public Payment getByIdloan(long id_loan) {
 
         return payR.getById(id_loan);
     }
 
     public void delete(long id_loan) {
         if (payR.existsById(id_loan)) {
-        payR.deleteById(id_loan);
-        
+            payR.deleteById(id_loan);
+
         }
     }
 
-     public boolean updatePayment(Payment p) {
+    public boolean updatePayment(Payment p) {
         if (!payR.existsById(p.getId_loan())) {
             return false;
         } else {

@@ -58,36 +58,41 @@ public class TransactionController {
 
     @PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
     public ResponseEntity<String> depositar(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
-        boolean flag = ts.depositar(balance,id_coin,id_user);
-        if (flag) {
-            return ResponseEntity.status(200).body("Deposito exitoso");
-
-        } else
-            return ResponseEntity.status(400).body("Deposito fallido");
+    
+        try{
+            ts.depositar(balance, id_coin, id_user);
+            return ResponseEntity.status(200).body("exito");  
+        }catch(Exception e){
+            return ResponseEntity.status(400).body(" fallido");
+        }
+        
 
     }
 
 
-    @PutMapping("/CobrarMonto/{balance}/{id_coin}/{id_user}")
+    @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
     public ResponseEntity<String> CobrarMonto(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
-        boolean flag = ts.CobrarMonto(balance,id_coin,id_user);
-        if (flag) {
+        
+      
+            
+        
+            try{
+                ts.cobrarMonto(balance,id_coin,id_user);
             return ResponseEntity.status(200).body("Retiro exitoso");
-
-        } else
-            return ResponseEntity.status(400).body("Retiro fallido");
+            }catch(Exception e){
+                return ResponseEntity.status(400).body("Retiro fallido");
+            }
 
     }
 
-    @PutMapping("/CobrarMonto/{id_coin}/{id_user}")
-    public ResponseEntity<String> CobrarMonto(@PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
-        boolean flag = ts.CobrarTodo(id_coin,id_user);
-        if (flag) {
+    @PutMapping("/cobrarTodo/{id_coin}/{id_user}")
+    public ResponseEntity<String> CobrarTodo(@PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
+        try{
+            ts.CobrarTodo(id_coin,id_user);
             return ResponseEntity.status(200).body("Retiro exitoso");
-
-        } else
+        }catch(Exception e){
             return ResponseEntity.status(400).body("Retiro fallido");
-
+        }
     }
 
 }

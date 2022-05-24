@@ -55,17 +55,18 @@ public class TransactionService {
     }
 
     @Transactional
-    public boolean depositar(double balance, String id_coin, long id_user) {
+    public void depositar(double balance, String id_coin, long id_user) {
 
-      return tR.Deposito(balance, id_coin, id_user);
+       tR.Deposito(balance, id_coin, id_user);
+    }
+    @Transactional
+    public void cobrarMonto(double balance, String id_coin, long id_user) {
+       tR.CobrarMonto(balance, id_coin, id_user);
     }
 
-    public boolean CobrarMonto(double balance, String id_coin, long id_user) {
-        return  tR.CobrarMonto(balance, id_coin, id_user);
-    }
-
-    public boolean CobrarTodo(String id_coin, long id_user) {
-        return tR.CobrarTodo(id_coin, id_user);
+    @Transactional
+    public void CobrarTodo(String id_coin, long id_user) {
+         tR.CobrarTodo(id_coin, id_user);
     }
 
 /*

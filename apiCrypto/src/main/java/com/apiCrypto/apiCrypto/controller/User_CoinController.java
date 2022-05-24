@@ -41,7 +41,7 @@ public class User_CoinController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         service.delete(id);
-        return ResponseEntity.status(200).body("Deleted game");
+        return ResponseEntity.status(200).body("Deleted user_coin");
     }
 
     @GetMapping("/{id}")

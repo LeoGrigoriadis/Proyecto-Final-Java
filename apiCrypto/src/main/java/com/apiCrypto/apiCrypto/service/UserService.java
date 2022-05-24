@@ -1,3 +1,4 @@
+
 package com.apiCrypto.apiCrypto.service;
 
 import java.util.List;
@@ -18,14 +19,10 @@ public class UserService {
         return uR.findAll();
     }
 
-    public boolean save(User u) {
-        try {
-            
-                uR.save(u);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public User save(User u) {
+
+        return uR.save(u);
+
     }
 
     public void deleteUser(long id) {

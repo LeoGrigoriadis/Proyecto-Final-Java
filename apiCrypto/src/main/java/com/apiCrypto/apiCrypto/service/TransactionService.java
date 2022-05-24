@@ -2,6 +2,8 @@ package com.apiCrypto.apiCrypto.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.apiCrypto.apiCrypto.model.Transaction;
 import com.apiCrypto.apiCrypto.repository.ITransactionRepository;
 
@@ -18,16 +20,9 @@ public class TransactionService {
         return tR.findAll();
     }
 
-    public boolean save(Transaction u) {
-        try {
-            if (tR.existsById(u.getId_transaction())) {
-                tR.save(u);
-
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Transaction save(Transaction u) {
+      
+            return  tR.save(u);
     }
 
     public List <Transaction> getByUser( long id){
@@ -38,7 +33,7 @@ public class TransactionService {
         tR.deleteById(id);
     }
 
-
+    @Transactional
     public boolean updateTransaction(Transaction p) {
         if (!tR.existsById(p.getId_transaction())) {
             return false;

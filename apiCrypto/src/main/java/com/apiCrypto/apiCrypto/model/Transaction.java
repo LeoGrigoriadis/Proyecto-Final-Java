@@ -23,8 +23,14 @@ public class Transaction {
     private User id_user;
 
     @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User id_destination_user;
+
+    @ManyToOne
     @JoinColumn(name = "id_coin")
     private Coin id_coin;
+
+
 
     private Timestamp date;
 

@@ -27,11 +27,12 @@ public class PaymentController {
     
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody @Valid Payment u) {
-        boolean flag = pS.save(u);
-        if (flag)
-            return ResponseEntity.status(200).body("Success.");
+        Payment p = pS.save(u);
+        if (p == null)
+        return ResponseEntity.status(400).body("Error.");
+           
         else
-            return ResponseEntity.status(400).body("Error.");
+        return ResponseEntity.status(200).body("Success.");
     }
 
     @PutMapping("/update")

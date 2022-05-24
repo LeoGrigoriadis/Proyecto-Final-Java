@@ -48,6 +48,6 @@ public class TransactionService {
     public void cobrarTodo(User_Coin us, String id_coin, long id_user){
         tr.cobrarTodo(us,id_coin,id_user);
     }
-    
+
 
 }

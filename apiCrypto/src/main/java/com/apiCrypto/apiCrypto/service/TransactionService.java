@@ -55,30 +55,16 @@ public class TransactionService {
     }
 
     public boolean depositar(double balance, String id_coin, long id_user) {
-        try {
-            tR.Deposito(balance, id_coin, id_user);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+
+      return tR.Deposito(balance, id_coin, id_user);
     }
 
     public boolean CobrarMonto(double balance, String id_coin, long id_user) {
-        try {
-            tR.CobrarMonto(balance, id_coin, id_user);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return  tR.CobrarMonto(balance, id_coin, id_user);
     }
 
     public boolean CobrarTodo(String id_coin, long id_user) {
-        try {
-            tR.CobrarTodo(id_coin, id_user);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return tR.CobrarTodo(id_coin, id_user);
     }
 
 /*

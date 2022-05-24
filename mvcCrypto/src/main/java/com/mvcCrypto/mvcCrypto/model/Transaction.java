@@ -17,7 +17,7 @@ public class Transaction {
     private long id_destination_user;
     private String id_coin;
     private double price_in_transaction;
-    private LocalDateTime dateTime;
+    private Timestamp dateTime;
     private double balance;
     private boolean type;
 }

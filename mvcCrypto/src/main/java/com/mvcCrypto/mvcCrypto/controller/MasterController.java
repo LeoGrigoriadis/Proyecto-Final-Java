@@ -10,10 +10,7 @@ import com.mvcCrypto.mvcCrypto.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
@@ -59,14 +56,14 @@ array3.add(ces.getByName("BTC"));
         return "AppView";
     }
     @PostMapping("/withdraw")
-    public String withdraw(@RequestBody Transaction tr, RedirectAttributes redirect){
-        System.out.println(tr);
+    public String withdraw(@ModelAttribute("transaction") Transaction tr, RedirectAttributes redirect){
         try{
+            System.out.println(tr);
             tr.setType(true);
             tr.setId_user(1);
-            tr.setDateTime(LocalDateTime.now());
+            tr.setDateTime(new Timestamp(System.currentTimeMillis()));
             tr.setPrice_in_transaction(ces.getAll().getAsk());
-
+            System.out.println(tr);
             ts.save(tr);
             redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
                     .addFlashAttribute("class", "success");

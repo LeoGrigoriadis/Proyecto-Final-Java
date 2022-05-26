@@ -1,0 +1,28 @@
+:root{
+    --background: #E6EAF2;
+}
+
+body{
+    background-color: var(--background);
+}
+
+section{
+    border-radius: 10px;
+    margin: 30px 15%;
+    padding: 30px 25px !important;
+    background-color:white;
+    min-height: 400px !important;
+    height: calc(100vh - 180px);
+}
+
+section h4{
+    padding-bottom: 15px;
+}
+
+@Media(max-width: 770px){
+    section{
+       border-radius: 0px;
+       margin: 0px;
+       height: calc(100vh - 120px);
+    }
+}

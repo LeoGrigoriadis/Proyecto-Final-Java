@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Shippori+Antique&display=swap');
+
+:root{
+  --footer: #435270;
+  --font-Montserrat: 'Montserrat', sans-serif;
+}
+
+footer{
+    font-size: 10px;
+    color: white;
+    height: 60px;
+    position: absolute;
+    padding: 10px;
+    bottom:0px;
+    width: 100vw;
+    vertical-align: middle;
+    background-color: var(--footer);
+}
+
+footer p{
+    font-family: var(--font-Montserrat) !important;
+    text-align:center;
+}
+
+footer a{
+    color:white;
+}
+
+footer a:hover{
+    color:white;
+}
+
+@Media(max-width: 767px){
+    footer{
+        position: static;
+    }
+}

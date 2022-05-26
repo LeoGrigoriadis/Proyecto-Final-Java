@@ -4,6 +4,7 @@
 }
 
 nav{
+    font-family: var(--font-Shippori) !important;
     background-color: var(--principal) !important;
     color: white;
     height:60px;
@@ -26,7 +27,7 @@ nav img{
 
 #nav-options{
     position: relative;
-    right: calc(50vw - 220px);
+    right: calc(50vw - 240px);
     float: right;
 }
 
@@ -74,7 +75,7 @@ nav img{
 
 @Media(max-width: 1200px){
     #nav-options{
-        right: calc(50vw - 280px);
+        right: calc(50vw - 300px);
     }
     #n-option{
         display: inline-block;
@@ -96,5 +97,4 @@ nav img{
     #n-option{
         display: none;
     }
-
 }

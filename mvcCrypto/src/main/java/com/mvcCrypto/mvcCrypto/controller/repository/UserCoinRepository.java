@@ -16,15 +16,15 @@ public class UserCoinRepository{
 
     public ArrayList<User_Coin> findAllByIdUser(long id){
 
-        String url = "http://localhost:8090/api/UserCoin/idUser/"+id;
-        ArrayList<User_Coin> user_coins= rt.getForObject(url,ArrayList.class);
+        String url = "http://localhost:8090/api/UserCoin/idUser/{id}";
+        ArrayList<User_Coin> user_coins= rt.getForObject(url,ArrayList.class, id);
         return user_coins;
     }
 
     public User_Coin findById(long id){
 
-        String url = "http://localhost:8090/api/UserCoin/"+id;
-        User_Coin user_coins= rt.getForObject(url,User_Coin.class);
+        String url = "http://localhost:8090/api/UserCoin/{id}";
+        User_Coin user_coins= rt.getForObject(url,User_Coin.class, id);
         return user_coins;
     }
     public ArrayList<User_Coin> findAll(){
@@ -38,9 +38,9 @@ public class UserCoinRepository{
 
 
     public void delete(long id) {
-        String url = "http://localhost:8090/api/UserCoin/delete/" + id;
+        String url = "http://localhost:8090/api/UserCoin/delete/{id}";
         RestTemplate rt = new RestTemplate();
-        rt.delete(url);
+        rt.delete(url, id);
     }
 
     public void save(User_Coin es) {

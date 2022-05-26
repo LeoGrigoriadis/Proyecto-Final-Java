@@ -14,7 +14,7 @@ public interface IUserCoinRepository extends JpaRepository<User_Coin,Long>{
 
     List<Object> findById(long id);
 
-    @Query(value = "Select * from User_Coin where id_user_userCoin = :id", nativeQuery = true)
+    @Query(value = "Select * from User_Coin where id_user = :id", nativeQuery = true)
     public ArrayList<User_Coin> findByUserId(long id);
 
  

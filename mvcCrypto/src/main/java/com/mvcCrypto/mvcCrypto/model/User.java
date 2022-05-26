@@ -12,8 +12,8 @@ public class User {
     private long id_user;
     private String first_name;
     private String last_name;
-    private int overdrawn_turn;
-    private String user_type;
+    private int account_type;
+    private int account_points;
     private String gmail;
 
 }

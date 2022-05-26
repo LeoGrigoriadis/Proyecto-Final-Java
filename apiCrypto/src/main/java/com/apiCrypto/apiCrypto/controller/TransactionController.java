@@ -74,7 +74,7 @@ public class TransactionController {
     public ResponseEntity<String> Depositar(@RequestBody User_Coin uc) {
 
         try{
-            ts.depositar(uc.getBalance(), uc.getId_coin_userCoin().getId_coin(), uc.getId_user_userCoin().getId_user());
+            ts.depositar(uc.getBalance(), uc.getId_coin().getId_coin(), uc.getId_user().getId_user());
             return ResponseEntity.status(200).body("exito");
         }catch(Exception e){
             return ResponseEntity.status(400).body(" fallido");

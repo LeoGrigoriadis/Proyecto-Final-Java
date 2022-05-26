@@ -40,4 +40,6 @@ public class AuthServiceTest {
 		List<Auth> auth = service.getAll();
 		assertNotNull(auth);
 	}
+
+	
 }

@@ -54,15 +54,16 @@ public class UserController {
 
     @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody User user) {
-        boolean users = us.updateUser(user);
+        boolean users = us.update(user, user.getId_user());
         if (users == false) return ResponseEntity.status(400).body("Incomplete data");
             us.save(user);
             return ResponseEntity.status(200).body("Updated user");
     }
 
-    @DeleteMapping("/dalete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        us.deleteUser(id);
+       boolean flag = us.deleteUser(id);
+       if(flag ==false)return ResponseEntity.status(400).body("Usuario no encontrado");
         return ResponseEntity.status(200).body("Deleted user");
     }
 

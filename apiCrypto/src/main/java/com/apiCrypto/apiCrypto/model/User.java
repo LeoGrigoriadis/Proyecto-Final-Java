@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 
@@ -25,6 +27,8 @@ public class User {
     private String first_name;
 
     private String last_name;
+
+    private Date birthday;
 
     @ManyToOne
     @JoinColumn(name = "account_type")

@@ -40,6 +40,22 @@ nav img{
     padding: 0px 5px;
 }
 
+#start{
+    font-size: 16px;
+    float: right;
+    color: white;
+    background-color: var(--principal-oscuro);
+    border-radius: 5px;
+    padding: 4px 8px;
+    transition-duration: .4s;
+}
+
+#start:hover{
+    background-color: white;
+    color: var(--principal);
+    text-decoration:none;
+}
+
 #clo{
     display:none;
     padding: 2px 15px;

@@ -44,8 +44,8 @@
           </thead>
           <tbody style="text-align:center">
           <tr th:each="us: ${wallet}">
-            <td th:text = ${us.id_coin.name}></td>
-            <td th:text = ${us.balance}></td>
+            <td th:text = "${us.id_coin.name}"></td>
+            <td th:text = "${us.balance+' ('+us.id_coin.id_coin+')'}"></td>
           </tr>
           </tbody>
         </table>

@@ -6,7 +6,9 @@ import com.mvcCrypto.mvcCrypto.controller.service.CoinApiService;
 import com.mvcCrypto.mvcCrypto.controller.service.CoinExternoService;
 import com.mvcCrypto.mvcCrypto.controller.service.TransactionService;
 
+import com.mvcCrypto.mvcCrypto.controller.service.UserCoinService;
 import com.mvcCrypto.mvcCrypto.model.Transaction;
+import com.mvcCrypto.mvcCrypto.model.User_Coin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,9 @@ public class MasterController {
     private CoinApiService cas;
     @Autowired
     private TransactionService ts;
+
+    @Autowired
+    private UserCoinService ucs;
 
     @GetMapping("")
     public String getAll(Model model) {
@@ -65,6 +70,34 @@ array3.add(ces.getByName("BTC"));
             tr.setPrice_in_transaction(ces.getAll().getAsk());
             System.out.println(tr);
             ts.save(tr);
+            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+                    .addFlashAttribute("class", "success");
+            return "redirect:/";
+        }catch (NullPointerException e){
+            e.fillInStackTrace();
+            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+                    .addFlashAttribute("class", "danger");
+            return "redirect:/";
+        }
+    }
+
+    @PostMapping("/withdraw")
+    public String withdraw2(@ModelAttribute("balance") double balance,@ModelAttribute("id_coin") String id_coin,@ModelAttribute("id_user") long id_user, RedirectAttributes redirect){
+        try{
+         User_Coin uc = new User_Coin();
+         Transaction tra=new Transaction();
+            uc.setBalance(balance);
+            uc.setId_user(id_user);
+            uc.setId_coin(id_coin);
+            tra.setType(true);
+            tra.setDateTime(new Timestamp(System.currentTimeMillis()));
+            tra.setBalance(balance);
+            tra.setId_user(id_user);
+            tra.setId_coin(id_coin);
+            tra.setId_destination_user(id_user);
+
+            ts.save(tra);
+            ts.depositar(uc);
             redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
                     .addFlashAttribute("class", "success");
             return "redirect:/";

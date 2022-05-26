@@ -1,6 +1,7 @@
 package com.mvcCrypto.mvcCrypto.controller.service;
 
 import com.mvcCrypto.mvcCrypto.controller.repository.UserCoinRepository;
+import com.mvcCrypto.mvcCrypto.model.Transaction;
 import com.mvcCrypto.mvcCrypto.model.User;
 import com.mvcCrypto.mvcCrypto.model.User_Coin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class UserCoinService {
     @Autowired
     UserCoinRepository ur;
 
-    public User_Coin findByIdUser(long id){ return ur.findByIdUser(id); }
+    public ArrayList<User_Coin> findAllByIdUser(long id){ return ur.findAllByIdUser(id); }
 
     public User_Coin findById (long id){
         return ur.findById(id);
@@ -32,6 +33,7 @@ public class UserCoinService {
     public void save(User_Coin user){
         ur.save(user);
     }
+
 
 /*
     public double getTotalBalance(int id){

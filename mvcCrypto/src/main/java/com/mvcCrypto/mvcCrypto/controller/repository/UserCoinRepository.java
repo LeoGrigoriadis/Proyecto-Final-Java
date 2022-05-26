@@ -14,10 +14,10 @@ public class UserCoinRepository{
     @Autowired
     private RestTemplate rt;
 
-    public User_Coin findByIdUser(long id){
+    public ArrayList<User_Coin> findAllByIdUser(long id){
 
         String url = "http://localhost:8090/api/UserCoin/idUser/"+id;
-        User_Coin user_coins= rt.getForObject(url,User_Coin.class);
+        ArrayList<User_Coin> user_coins= rt.getForObject(url,ArrayList.class);
         return user_coins;
     }
 

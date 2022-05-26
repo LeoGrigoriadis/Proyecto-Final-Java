@@ -2,8 +2,10 @@ package com.mvcCrypto.mvcCrypto.controller.repository;
 
 import com.mvcCrypto.mvcCrypto.model.Transaction;
 import com.mvcCrypto.mvcCrypto.model.User;
+import com.mvcCrypto.mvcCrypto.model.User_Coin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -42,6 +44,12 @@ public class TransactionRepository {
     public void update(Transaction es) {
         String url = "http://localhost:8090/api/Transaction/update";
         rt.put(url, es, Transaction.class);
+    }
+
+    public void depositar(User_Coin es) {
+       // @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
+        String url = "http://localhost:8090/api/cobrarMonto/update";
+        rt.put(url, es, User_Coin.class);
     }
 
 }

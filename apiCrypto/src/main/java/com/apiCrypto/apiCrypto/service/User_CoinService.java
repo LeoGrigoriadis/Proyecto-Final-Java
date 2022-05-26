@@ -6,6 +6,7 @@ import com.apiCrypto.apiCrypto.repository.IUserCoinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -25,7 +26,7 @@ public class User_CoinService {
         return ucR.getById(id);
     }
 
-    public User_Coin getOneIdUser(Long idUser) {
+    public ArrayList<User_Coin> getAllByIdUser(Long idUser) {
 
         return ucR.findByUserId(idUser);
     }

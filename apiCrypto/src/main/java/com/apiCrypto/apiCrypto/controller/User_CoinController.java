@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -51,8 +52,8 @@ public class User_CoinController {
     }
 
     @GetMapping("/idUser/{id}")
-    public ResponseEntity<User_Coin> getOneIdUser(@PathVariable("id") long id){
-        User_Coin coin = service.getOneIdUser(id);
+    public ResponseEntity<ArrayList<User_Coin>> getAllByIdUser(@PathVariable("id") long id){
+        ArrayList<User_Coin> coin = service.getAllByIdUser(id);
         return ResponseEntity.status(200).body(coin);
     }
 

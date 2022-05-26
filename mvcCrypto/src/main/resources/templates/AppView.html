@@ -23,7 +23,7 @@
           </thead>
           <tbody style="text-align:center">
           <tr th:each="coin: ${coins}">
-            <td>BTC</td>
+            <td th:text = ${coin.name}></td>
             <td th:text = ${coin.ask}></td>
           </tr>
           </tbody>

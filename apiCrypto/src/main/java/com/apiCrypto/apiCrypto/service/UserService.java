@@ -3,6 +3,8 @@ package com.apiCrypto.apiCrypto.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.apiCrypto.apiCrypto.model.User;
 import com.apiCrypto.apiCrypto.repository.IUserRepository;
 
@@ -30,22 +32,27 @@ public class UserService {
     }
 
 
-    public void deleteUser(long id) {
+    public boolean deleteUser(long id) {
         if (uR.existsById(id)) {
             uR.deleteById(id);
+            return true;
         }
+        return false;
     }
 
     public User getUser(long id) {
         return uR.getById(id);
     }
 
-    public boolean updateUser(User u) {
-        if (!uR.existsById(u.getId_user())) {
-            return false;
-        } else {
-            uR.save(u);
+    @Transactional
+    public boolean update(User c, long id) {
+        if (uR.getById(id) != null) {
+            c.setId_user(id);
+            uR.save(c);
             return true;
+        } else {
+            return false;
         }
+
     }
 }

@@ -45,7 +45,7 @@ public class TransactionController {
 
     }
 
-    @DeleteMapping("/dalete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         ts.delete(id);
         return ResponseEntity.status(200).body("Deleted Transaction");
@@ -71,7 +71,7 @@ public class TransactionController {
     }
 */
     @PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
-    public ResponseEntity<String> depositar(@RequestBody User_Coin uc) {
+    public ResponseEntity<String> Depositar(@RequestBody User_Coin uc) {
 
         try{
             ts.depositar(uc.getBalance(), uc.getId_coin_userCoin().getId_coin(), uc.getId_user_userCoin().getId_user());

@@ -46,12 +46,13 @@ public class AuthService {
     }
 
     @Transactional
-    public Auth updateAuth(Auth u, String id) {
+    public boolean updateAuth(Auth u, String id) {
         if (au.getById(id )!= null) {
           u.setGmail(id);
-          return au.save(u);
+          au.save(u);
+          return true;
         } else {
-            return null;
+            return false;
         }
     }
     

@@ -33,12 +33,15 @@ public class AuthController {
             return ResponseEntity.status(400).body("Error.");
     }
 
+
     @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody Auth auth){
-        if(auth == null || auth.getGmail().isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
+        boolean flag = as.updateAuth(auth, auth.getGmail());
+        if(flag == false || auth.getGmail().isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
         as.save(auth);
         return ResponseEntity.status(200).body("Updated auth");
     }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") String id) {

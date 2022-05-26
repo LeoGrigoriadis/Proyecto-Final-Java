@@ -19,11 +19,16 @@ public class UserService {
         return uR.findAll();
     }
 
-    public User save(User u) {
+    public boolean save(User u) {
+    
+        uR.save(u); 
 
-        return uR.save(u);
-
+        if(u==null){
+            return false;
+        }
+        return true;    
     }
+
 
     public void deleteUser(long id) {
         if (uR.existsById(id)) {

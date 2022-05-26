@@ -18,15 +18,13 @@ public class CoinExternoService {
     private CoinExternoRepository cr;
 
 
-    public Coin getAll() {
-        /*List<String> list= Arrays.asList("btc", "xrp", "eth");
-        ArrayList<Coin> coins=new ArrayList<>();
-        for (String coin: list){
-            coins.add(cr.findCot(coin));
-        }
+    public ArrayList<Coin> getAll() {
+        ArrayList<Coin> coins= new ArrayList<>();
+        coins.add(cr.findBtc());
+        coins.add(cr.findXrp());
+        coins.add(cr.findUsdt());
+        coins.add(cr.findUsdc());
         return coins;
-    */
-        return cr.findAll();
     }
 
 

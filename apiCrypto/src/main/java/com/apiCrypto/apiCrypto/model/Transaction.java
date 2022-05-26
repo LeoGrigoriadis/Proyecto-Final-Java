@@ -20,16 +20,16 @@ public class Transaction {
 
     @ManyToOne
     private User id_user;
-
+/*
     @ManyToOne
 
     private User id_destination_user;
-
+*/
     @ManyToOne
    
     private Coin id_coin;
 
-
+    private double price_in_transaction;
 
     private Timestamp date;
 

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.apiCrypto.apiCrypto.model.Transaction;
+import com.apiCrypto.apiCrypto.model.User_Coin;
 import com.apiCrypto.apiCrypto.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -55,7 +56,7 @@ public class TransactionController {
         Transaction transaction = ts.getTransaction(id);
         return ResponseEntity.status(200).body(transaction);
     }
-
+/*
     @PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
     public ResponseEntity<String> depositar(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
     
@@ -66,6 +67,19 @@ public class TransactionController {
             return ResponseEntity.status(400).body(" fallido");
         }
         
+
+    }
+*/
+    @PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
+    public ResponseEntity<String> depositar(@RequestBody User_Coin uc) {
+
+        try{
+            ts.depositar(uc.getBalance(), uc.getId_coin_userCoin().getId_coin(), uc.getId_user_userCoin().getId_user());
+            return ResponseEntity.status(200).body("exito");
+        }catch(Exception e){
+            return ResponseEntity.status(400).body(" fallido");
+        }
+
 
     }
 

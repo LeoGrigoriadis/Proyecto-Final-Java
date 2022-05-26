@@ -1,5 +1,6 @@
 package com.mvcCrypto.mvcCrypto.controller.repository;
 
+import com.mvcCrypto.mvcCrypto.model.Coin;
 import com.mvcCrypto.mvcCrypto.model.Transaction;
 import com.mvcCrypto.mvcCrypto.model.User;
 import com.mvcCrypto.mvcCrypto.model.User_Coin;
@@ -48,8 +49,21 @@ public class TransactionRepository {
 
     public void depositar(User_Coin es) {
        // @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
-        String url = "http://localhost:8090/api/cobrarMonto/update";
-        rt.put(url, es, User_Coin.class);
+        String url = "http://localhost:8090/api/cobrarMonto/{var}/{var}/{var}";
+        rt.put(url, es, User_Coin.class,es.getBalance(),es.getId_coin(),es.getId_user());
     }
 
+    public Coin fidndAll(){
+
+
+        String url = "https://criptoya.com/api/bitex/{var}/usd/0.1";
+        Coin coins;
+        //ArrayList<Object> coins2 = new ArrayList<>();
+        //Object a= new Object();
+
+        coins = rt.getForObject(url,Coin.class, "btc");
+        //coins.add(rt.getForObject(url2,Object.class));
+
+        return coins;
+    }
 }

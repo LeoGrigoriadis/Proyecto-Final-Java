@@ -82,22 +82,23 @@ array3.add(ces.getByName("BTC"));
     }
 
     @PostMapping("/withdraw")
-    public String withdraw2(@ModelAttribute("balance") double balance,@ModelAttribute("id_coin") String id_coin,@ModelAttribute("id_user") long id_user, RedirectAttributes redirect){
+    public  String withdraw2(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
          User_Coin uc = new User_Coin();
          Transaction tra=new Transaction();
-            uc.setBalance(balance);
-            uc.setId_user(id_user);
-            uc.setId_coin(id_coin);
+            uc.setBalance(user_coin.getBalance());
+            uc.setId_user(user_coin.getId_user());
+            uc.setId_coin(user_coin.getId_coin());
             tra.setType(true);
             tra.setDateTime(new Timestamp(System.currentTimeMillis()));
-            tra.setBalance(balance);
-            tra.setId_user(id_user);
-            tra.setId_coin(id_coin);
-            tra.setId_destination_user(id_user);
+            tra.setBalance(user_coin.getBalance());
+            tra.setId_user(user_coin.getId_user());
+            tra.setId_coin(user_coin.getId_coin());
+            tra.setId_destination_user(user_coin.getId_user());
 
             ts.save(tra);
             ts.depositar(uc);
+
             redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
                     .addFlashAttribute("class", "success");
             return "redirect:/";

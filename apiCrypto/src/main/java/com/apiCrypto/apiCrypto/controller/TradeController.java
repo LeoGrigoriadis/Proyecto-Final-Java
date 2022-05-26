@@ -28,8 +28,8 @@ public class TradeController {
     
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody @Valid Trade u) {
-        Trade flag = pS.save(u);
-        if (flag == null)
+        Boolean flag = pS.save(u);
+        if (flag == false)
             return ResponseEntity.status(400).body("Error.");
            
         else

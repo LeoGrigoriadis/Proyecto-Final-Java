@@ -77,23 +77,7 @@ public class UserServiceTest {
 		boolean  flag  = service.save(user1);
 		assertTrue(flag);
 	}
-	/*
-	@Test
-	public void UPDATE_CLIENT() {
-		when(repository.existsById(user2.getId_user())).thenReturn(true);
-		when(repository.save(user2)).thenReturn(null);
-		boolean result = service.update(user2, user2.getId_user());
-		assertTrue(result);
-	}
 	
-	@Test
-	public void UPDATE_CLIENT_FAIL() {
-		when(repository.existsById(user2.getId_user())).thenReturn(false);
-		when(repository.save(user2)).thenReturn(null);
-		boolean result = service.update(user2, user2.getId_user());
-		assertTrue(result);
-	}
-	*/
 	@Test
 	public void DELETE_CLIENT() {
 		when(repository.existsById(user2.getId_user())).thenReturn(true);
@@ -101,11 +85,5 @@ public class UserServiceTest {
 		assertTrue(result);
 	}
 	
-/*
-	@Test
-	public void DELETE_CLIENT_FAIL() {
-		when(repository.existsById(user2.getId_user())).thenReturn(false);
-		boolean result = service.deleteUser(user2.getId_user());
-		assertTrue(result);
-	}*/
+
 	}

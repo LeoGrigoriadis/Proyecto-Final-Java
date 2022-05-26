@@ -20,8 +20,9 @@ public class TradeService {
 
     public Trade save(Trade c)
     {
-        if(tr.getById(c.getId_trade()) == null)
-        {
+        try{
+            
+        }
             return  tr.save(c);
         }
         else

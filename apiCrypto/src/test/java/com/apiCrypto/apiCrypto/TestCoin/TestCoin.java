@@ -1,10 +1,10 @@
-package com.apiCrypto.apiCrypto.TestUser;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+package com.apiCrypto.apiCrypto.TestCoin;
+
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -16,33 +16,30 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.apiCrypto.apiCrypto.model.User;
+import com.apiCrypto.apiCrypto.model.Coin;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserTest {
-	
-	
-	@Autowired
+public class TestCoin {
+   
+    @Autowired
 	private WebApplicationContext aplicationContext;
 	
 	private MockMvc mock;
 	
 	@Test
-	public void SELECT_USERS() throws Exception {
+	public void SELECT_COIN() throws Exception {
 		mock = MockMvcBuilders.webAppContextSetup(aplicationContext).build();
 		String JsonResponse = mock.perform(
-					get("/api/Users")
+					get("/api/Coin")
 						.contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON))
 					.andExpect(status().isOk())
 					.andReturn()
 					.getResponse()
 					.getContentAsString();
-		User[] user = new ObjectMapper().readValue(JsonResponse, User[].class);
+		Coin[] coin = new ObjectMapper().readValue(JsonResponse, Coin[].class);
 	}	
 
-	
 }

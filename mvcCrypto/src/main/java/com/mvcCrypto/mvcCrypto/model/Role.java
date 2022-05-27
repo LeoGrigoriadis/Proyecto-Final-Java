@@ -1,5 +1,6 @@
 package com.mvcCrypto.mvcCrypto.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,10 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CoinAdapter {
-    private String id_coin;
+public class Role {
+    private long id_role;
+
     private String name;
-
-
 }
-

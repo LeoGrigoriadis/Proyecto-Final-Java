@@ -12,12 +12,16 @@ import java.time.LocalDateTime;
 @Data
 public class Trade {
 
-    private long id_user;
+    private User id_user_trade;
     private long id_trade;
-    private long id_initial;
-    private double price_initial_coin;
-    private LocalDateTime dateTime;
+    private Coin id_initial_coin;
+    private LocalDateTime date;
     private double balance;
-    private long id_destination_coin;
+    private Coin id_destination_coin;
+
+
+    private double price_initial_coin;
     private double price_destination_coin;
 }
+
+

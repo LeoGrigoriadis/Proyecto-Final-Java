@@ -20,21 +20,23 @@ public class CoinController {
         return ResponseEntity.status(200).body(service.getAll());
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody Coin coin){
-        if(coin == null) return ResponseEntity.status(400).body("Incomplete data") ;
+        boolean flag = service.save(coin);
+        if(flag == false) return ResponseEntity.status(400).body("Incomplete data") ;
         service.save(coin);
         return ResponseEntity.status(201).body("Saved coin");
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody Coin coin){
+        
         if(coin == null || coin.getId_coin().isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
         service.save(coin);
         return ResponseEntity.status(200).body("Updated coin");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") String id){
         service.delete(id);
         return ResponseEntity.status(200).body("Deleted coin");

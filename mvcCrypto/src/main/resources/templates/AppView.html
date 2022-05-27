@@ -23,7 +23,7 @@
           </thead>
           <tbody style="text-align:center">
           <tr th:each="coin: ${coins}">
-            <td>BTC</td>
+            <td th:text = ${coin.name}></td>
             <td th:text = ${coin.ask}></td>
           </tr>
           </tbody>
@@ -33,7 +33,22 @@
 
     <section class="col-sm-6 articles">
       <article>
-        <h4>Saldo actual</h4>
+        <h4>Mi Cartera</h4>
+        <table class ="table table-hover" >
+          <thead>
+          <tr>
+            <th class="text-center"> moneda </th>
+            <th class="text-center"> monto </th>
+
+          </tr>
+          </thead>
+          <tbody style="text-align:center">
+          <tr th:each="us: ${wallet}">
+            <td th:text = "${us.id_coin.name}"></td>
+            <td th:text = "${us.balance+' ('+us.id_coin.id_coin+')'}"></td>
+          </tr>
+          </tbody>
+        </table>
       </article>
       <article>
         <div class="top-article">

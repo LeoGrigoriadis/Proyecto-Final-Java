@@ -1,9 +1,11 @@
 :root{
   --principal: #729DF2;
   --background: #E6EAF2;
+  --principal-oscuro: #4465A6;
 }
 
 nav{
+    font-family: var(--font-Shippori) !important;
     background-color: var(--principal) !important;
     color: white;
     height:60px;
@@ -26,7 +28,7 @@ nav img{
 
 #nav-options{
     position: relative;
-    right: calc(50vw - 220px);
+    right: calc(50vw - 240px);
     float: right;
 }
 
@@ -37,6 +39,22 @@ nav img{
     background-color: var(--principal);
     border: none;
     padding: 0px 5px;
+}
+
+#start{
+    font-size: 16px;
+    float: right;
+    color: white;
+    background-color: var(--principal-oscuro);
+    border-radius: 5px;
+    padding: 4px 8px;
+    transition-duration: .4s;
+}
+
+#start:hover{
+    background-color: white;
+    color: var(--principal);
+    text-decoration:none;
 }
 
 #clo{
@@ -74,7 +92,7 @@ nav img{
 
 @Media(max-width: 1200px){
     #nav-options{
-        right: calc(50vw - 280px);
+        right: calc(50vw - 300px);
     }
     #n-option{
         display: inline-block;
@@ -96,5 +114,4 @@ nav img{
     #n-option{
         display: none;
     }
-
 }

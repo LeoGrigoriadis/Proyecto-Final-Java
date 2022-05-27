@@ -15,5 +15,8 @@ public class User {
     private Account_type account_type;
     private int account_points;
     private Auth gmail;
+    private int account_type;
+    private int account_points;
+    private String gmail;
 
 }

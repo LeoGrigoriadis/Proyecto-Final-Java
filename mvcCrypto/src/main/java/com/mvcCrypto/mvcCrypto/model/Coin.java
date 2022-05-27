@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 @Data
 public class Coin{
 
+    private String name;
     private float ask;
     private float totalAsk;
     private float bid;

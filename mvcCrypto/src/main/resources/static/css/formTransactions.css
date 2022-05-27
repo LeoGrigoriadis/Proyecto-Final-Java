@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Shippori+Antique&display=swap');
 
 :root{
+  --font-Shippori: 'Shippori Antique', sans-serif;
   --font-Montserrat: 'Montserrat', sans-serif;
   --principal: #729DF2;
   --principal-oscuro: #4465A6;
   --background: #E6EAF2;
+  --success: #7fE371;
+  --background-success: #a9e0a2;
+  --danger: #d45959;
+  --background-danger: #db8f8f;
 }
 
 *{
@@ -13,27 +18,36 @@
     box-sizing: border-box;
 }
 
-body{
+html{
     background-color: var(--background);
     font-family: var(--font-Montserrat) !important;
 }
 
-.contain{
-    width: 60%;
-    margin: 30px auto;
-    font-family: var(--font-Shippori) !important;
+body{
+    background-color: white;
 }
 
 section{
-    text-align:center;
-    border-radius: 10px;
-    padding: 30px 25px !important;
-    background-color:white;
-    height: calc(100vh - 180px);
+    min-height: 250px !important;
+    height: calc(100vh - 120px);
 }
 
-section h4{
-    padding-bottom: 15px;
+.contain{
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    font-family: var(--font-Shippori) !important;
+}
+
+.col-sm-4{
+    padding:20px 8px !important;
+}
+
+.content{
+    background-color: white;
+    height: 100%;
+    border-radius: 10px;
+    padding: 30px 25px;
+    overflow: auto;
 }
 
 .button-border{
@@ -59,7 +73,7 @@ section h4{
 form{
     font-family: var(--font-Montserrat);
     text-align: center;
-    margin-top: 60px;
+    margin-top: 20%;
 }
 
 form label{
@@ -75,17 +89,42 @@ form input{
     padding: 2px 8px;
 }
 
+@Media(max-width: 1200px) {
+
+    .col-sm-4{
+        width: 50% !important;
+    }
+
+    section{
+        min-height: 250px !important;
+        height: calc(100vh - 120px);
+    }
+    .article{
+        padding-bottom: 0px !important;
+        height: calc(50vh - 70px) !important;
+    }
+
+    .article form{
+        margin-top: 0px;
+    }
+
+    .article .button-form-margin{
+        margin-top: 20px;
+    }
+
+}
+
 @Media(max-width: 767px){
     body{
         background-color:#E6EAF2 !important;
     }
+
     section{
-       border-radius: 0px;
-       margin: 0px;
-       height: calc(100vh - 120px);
+        min-height: 400px !important;
+        height: calc(100vh - 60px);
     }
-    .contain{
-        width: 100%;
-        margin: 0px;
+
+    .col-sm-4{
+        width: 100% !important;
     }
 }

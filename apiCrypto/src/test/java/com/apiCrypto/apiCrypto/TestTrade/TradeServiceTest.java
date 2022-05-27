@@ -65,10 +65,10 @@ public class TradeServiceTest {
     Coin coin2 = new Coin("b", "dolar"); 
    
 
-    Trade trade1 = new Trade(1, user1, coin1, fecha , 20.0, 40.0, coin2, 80.0);
+    Trade trade1 = new Trade(1, user1, coin1, fecha , 20.0, 40.0);
 
 
-    Trade trade2 = new Trade(2, user2, coin2, fecha2, 30.0,50.0,coin1,40.0);
+    Trade trade2 = new Trade(2, user2, coin2, fecha2, 30.0,50.0);
 
     @Test
 	public void SELECT_TRADE() {

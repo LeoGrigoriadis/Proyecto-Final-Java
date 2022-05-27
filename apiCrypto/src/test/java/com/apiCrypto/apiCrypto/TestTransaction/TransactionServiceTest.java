@@ -63,8 +63,8 @@ public class TransactionServiceTest {
 
     Timestamp fecha = new Timestamp(26/10/21);
 
-    Transaction t= new Transaction(1,user1, user2, coin1,20.0,fecha,40.0,true);
-    Transaction t2= new Transaction(1,user2, user1, coin2,20.0,fecha,40.0,true);
+    Transaction t= new Transaction(1,user1, coin1,20.0,fecha,40.0,true);
+    Transaction t2= new Transaction(1,user2, coin2,20.0,fecha,40.0,true);
 
     @Test
 	public void SELECT_TRANSACTION() {

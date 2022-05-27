@@ -14,8 +14,8 @@ import java.util.Date;
 public class Transaction {
     private long id_transaction;
     private User id_user;
-  //  private User id_destination_user;
-    private Coin id_coin;
+    private User id_destination_user;
+    private CoinAdapter id_coin;
     private double price_in_transaction;
     private Timestamp date;
     private double balance;

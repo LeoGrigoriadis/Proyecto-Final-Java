@@ -50,7 +50,7 @@ public class TransactionRepository {
     public void depositar(User_Coin es) {
        // @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
         String url = "http://localhost:8090/api/cobrarMonto/{var}/{var}/{var}";
-        rt.put(url, es, User_Coin.class,es.getBalance(),es.getId_coin(),es.getId_user());
+        rt.put(url, es, User_Coin.class,es.getBalance(),es.getId_coin_userCoin().getId_coin(),es.getId_user_userCoin().getId_user());
     }
 
     public Coin fidndAll(){

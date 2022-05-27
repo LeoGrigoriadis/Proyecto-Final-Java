@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>App view</title>
+    <link rel="icon" href="img/logo.png">
+    <div th:insert="../static/layout::header"></div>
+    <link rel="stylesheet" type="text/css" href="css/allTransactions.css" media="screen">
+</head>
+<body>
+<div th:insert="../static/layout::navbar"></div>
+<div class="contain">
+    <section class="col-sm-4">
+        <h4>Todos tus movimientos</h4>
+        <table class ="table table-hover">
+            <thead>
+            <tr>
+                <th class="text-center"> moneda </th>
+                <th class="text-center"> monto </th>
+            </tr>
+            </thead>
+            <tbody style="text-align:center">
+            <tr th:each="mov: ${movs}">
+                <td th:text = ${mov.id_coin.name}></td>
+                <td class="dep" th:if = "${mov.type==false}" th:text ="'+'+ ${mov.balance}"></td>
+                <td class="ret" th:if= "${mov.type==true}" th:text ="'-'+ ${mov.balance}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+<div th:insert="../static/layout::footer"></div>
+</body>
+</html>
+

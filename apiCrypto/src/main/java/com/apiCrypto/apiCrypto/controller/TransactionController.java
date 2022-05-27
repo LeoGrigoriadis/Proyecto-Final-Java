@@ -6,8 +6,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.apiCrypto.apiCrypto.model.Transaction;
+import com.apiCrypto.apiCrypto.model.User_Coin;
 import com.apiCrypto.apiCrypto.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +45,7 @@ public class TransactionController {
 
     }
 
-    @DeleteMapping("/dalete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         ts.delete(id);
         return ResponseEntity.status(200).body("Deleted Transaction");
@@ -54,5 +56,57 @@ public class TransactionController {
         Transaction transaction = ts.getTransaction(id);
         return ResponseEntity.status(200).body(transaction);
     }
-   
+/*
+    @PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
+    public ResponseEntity<String> depositar(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
+    
+        try{
+            ts.depositar(balance, id_coin, id_user);
+            return ResponseEntity.status(200).body("exito");  
+        }catch(Exception e){
+            return ResponseEntity.status(400).body(" fallido");
+        }
+        
+
+    }
+*/
+    @PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
+    public ResponseEntity<String> Depositar(@RequestBody User_Coin uc) {
+
+        try{
+            ts.depositar(uc.getBalance(), uc.getId_coin().getId_coin(), uc.getId_user().getId_user());
+            return ResponseEntity.status(200).body("exito");
+        }catch(Exception e){
+            return ResponseEntity.status(400).body(" fallido");
+        }
+
+
+    }
+
+
+    @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
+    public ResponseEntity<String> CobrarMonto(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
+        
+      
+            
+        
+            try{
+                ts.cobrarMonto(balance,id_coin,id_user);
+            return ResponseEntity.status(200).body("Retiro exitoso");
+            }catch(Exception e){
+                return ResponseEntity.status(400).body("Retiro fallido");
+            }
+
+    }
+
+    @PutMapping("/cobrarTodo/{id_coin}/{id_user}")
+    public ResponseEntity<String> CobrarTodo(@PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
+        try{
+            ts.CobrarTodo(id_coin,id_user);
+            return ResponseEntity.status(200).body("Retiro exitoso");
+        }catch(Exception e){
+            return ResponseEntity.status(400).body("Retiro fallido");
+        }
+    }
+
 }

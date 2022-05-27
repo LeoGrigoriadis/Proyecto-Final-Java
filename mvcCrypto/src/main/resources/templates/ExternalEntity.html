@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>External Entity</title>
+  <link rel="icon" href="img/logo.png">
+  <div th:insert="../static/layout::header"></div>
+  <link rel="stylesheet" type="text/css" href="css/formStyle.css" media="screen">
+</head>
+<body>
+<div th:insert="../static/layout::navbar"></div>
+<div class="contain">
+  <section class="col-sm-4">
+    <h4>Entidad Externa</h4>
+    <form>
+      <div>
+        <label>Destinatario: </label>
+        <input type="text" name="coin"/><br>
+        <label>Moneda: </label>
+        <input type="text" name="coin"/>
+        <label>Monto: </label>
+        <input type="number" name="balance"/><br>
+        <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
+      </div>
+      <button class="button-border button-form-margin" type="submit">Transferir</button>
+    </form>
+  </section>
+</div>
+<div th:insert="../static/layout::footer"></div>
+</body>
+</html>

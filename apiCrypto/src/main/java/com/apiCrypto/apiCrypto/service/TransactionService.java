@@ -8,6 +8,8 @@ import com.apiCrypto.apiCrypto.model.Transaction;
 import com.apiCrypto.apiCrypto.repository.ITransactionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,21 +18,21 @@ public class TransactionService {
     @Autowired
     private ITransactionRepository tR;
 
-    public List<Transaction> getAll(){
+    public List<Transaction> getAll() {
         return tR.findAll();
     }
 
     public boolean save(Transaction u) {
-       try{
-           tR.save(u);
-           return  true;
-       }catch(Exception e){
-           return false;
-       }
+        try {
+            tR.save(u);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
     }
 
-    public List <Transaction> getByUser( long id){
+    public List<Transaction> getByUser(long id) {
         return tR.getbyIdUser(id);
     }
 
@@ -51,11 +53,26 @@ public class TransactionService {
     public Transaction getTransaction(long id) {
         return tR.getById(id);
     }
+
+    @Transactional
+    public void depositar(double balance, String id_coin, long id_user) {
+
+       tR.Deposito(balance, id_coin, id_user);
+    }
+    @Transactional
+    public void cobrarMonto(double balance, String id_coin, long id_user) {
+       tR.CobrarMonto(balance, id_coin, id_user);
+    }
+
+    @Transactional
+    public void CobrarTodo(String id_coin, long id_user) {
+         tR.CobrarTodo(id_coin, id_user);
+    }
+
 /*
     public Transaction make(){
         return tR.makeTransaction();
    }
    */
-
 
 }

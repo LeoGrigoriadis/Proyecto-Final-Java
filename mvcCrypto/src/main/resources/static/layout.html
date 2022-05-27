@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:fragment="header">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="js/dropdown.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/navbar.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="css/footer.css" media="screen">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </div>
+</head>
+<body>
+    <div th:fragment="navbar">
+        <nav>
+            <a href="#"><img src="img/logotipo.png"></a>
+            <button class="nav-user" id="us" onclick="dropdown()">user</button>
+            <button class="nav-user" id="clo" onclick="close_dropdown()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                </svg>
+            </button>
+            <div id="nav-options">
+            <a href="#" class="nav-options disable">Panel Principal</a>
+            <a href="#" class="nav-options disable">Entidad Externa</a>
+            <a href="#" id="n-option" class="nav-options disable">Transaccionar</a>
+            </div>
+        </nav>
+        <div id="dropdown">
+            <a href="#">Perfil</a>
+            <a href="#" class="enable">Panel Principal</a>
+            <a href="#" class="enable">Entidad Externa</a>
+            <a href="#">Cerrar sesión</a>
+        </div>
+    </div>
+
+    <div th:fragment="navbar-anonymous">
+        <nav>
+            <a href="#"><img src="img/logotipo.png"></a>
+            <a href="#" id="start">Comenzar</a>
+        </nav>
+    </div>
+
+    <div th:fragment="footer">
+        <footer>
+            <p style="margin:2px">©® Equipo Uno</p>
+            <p>
+                <a href="#">Política de Privacidad</a> - <a href="#">Política de Cookies</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

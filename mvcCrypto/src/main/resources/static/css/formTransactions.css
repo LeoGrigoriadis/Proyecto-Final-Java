@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Shippori+Antique&display=swap');
+
+:root{
+  --font-Shippori: 'Shippori Antique', sans-serif;
+  --font-Montserrat: 'Montserrat', sans-serif;
+  --principal: #729DF2;
+  --principal-oscuro: #4465A6;
+  --background: #E6EAF2;
+  --success: #7fE371;
+  --background-success: #a9e0a2;
+  --danger: #d45959;
+  --background-danger: #db8f8f;
+}
+
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+
+html{
+    background-color: var(--background);
+    font-family: var(--font-Montserrat) !important;
+}
+
+body{
+    background-color: white;
+}
+
+section{
+    min-height: 250px !important;
+    height: calc(100vh - 120px);
+}
+
+.contain{
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    font-family: var(--font-Shippori) !important;
+}
+
+.col-sm-4{
+    padding:20px 8px !important;
+}
+
+.content{
+    background-color: white;
+    height: 100%;
+    border-radius: 10px;
+    padding: 30px 25px;
+    overflow: auto;
+}
+
+.button-border{
+    border: 3px solid var(--principal);
+    background-color: white;
+    min-width: 180px;
+    padding: 6px 3px;
+    margin: 0px 2px 8px 2px;
+    border-radius: 20px;
+    transition-duration: .4s;
+}
+
+.button-border:hover{
+    border-color: var(--principal-oscuro);
+    background-color: var(--principal-oscuro);
+    color: white;
+}
+
+.button-form-margin{
+    margin-top: 50px;
+}
+
+form{
+    font-family: var(--font-Montserrat);
+    text-align: center;
+    margin-top: 20%;
+}
+
+form label{
+    margin: 6px 0px 3px 0px;
+    display: block;
+    text-align: left;
+}
+
+form input{
+    width: 100%;
+    border: 2px solid var(--background);
+    border-radius: 7px;
+    padding: 2px 8px;
+}
+
+@Media(max-width: 1200px) {
+
+    .col-sm-4{
+        width: 50% !important;
+    }
+
+    section{
+        min-height: 250px !important;
+        height: calc(100vh - 120px);
+    }
+    .article{
+        padding-bottom: 0px !important;
+        height: calc(50vh - 70px) !important;
+    }
+
+    .article form{
+        margin-top: 0px;
+    }
+
+    .article .button-form-margin{
+        margin-top: 20px;
+    }
+
+}
+
+@Media(max-width: 767px){
+    body{
+        background-color:#E6EAF2 !important;
+    }
+
+    section{
+        min-height: 400px !important;
+        height: calc(100vh - 60px);
+    }
+
+    .col-sm-4{
+        width: 100% !important;
+    }
+}

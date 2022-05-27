@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Repository
 public class AuthRepository {
@@ -36,5 +37,15 @@ public class AuthRepository {
     public void update(Auth es) {
         String url = "http://localhost:8090/api/Auth/update";
         rt.put(url, es, Auth.class);
+    }
+
+    public Optional<Auth> findByGmail(String gmail) {
+        String url = "http://localhost:8090/api/Auth/find-by-gmail/{gmail}";
+        return rt.getForObject(url, Optional.class, gmail);
+    }
+
+    public String getRole(String gmail) {
+        String url = "http://localhost:8090/api/Auth/find-by-role/{gmail}";
+        return rt.getForObject(url, String.class, gmail);
     }
 }

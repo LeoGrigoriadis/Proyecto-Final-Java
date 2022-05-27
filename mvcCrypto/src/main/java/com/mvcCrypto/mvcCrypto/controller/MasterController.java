@@ -57,6 +57,7 @@ array3.add(ces.getByName("BTC"));
 */
     model.addAttribute("coins",ces.getAll());
     model.addAttribute("transaction", new Transaction());
+    model.addAttribute("user_coin", new User_Coin());
     model.addAttribute("movs",ts.getAll());
             return "AppView";
         } catch (NullPointerException e) {
@@ -87,7 +88,7 @@ array3.add(ces.getByName("BTC"));
     }
 */
     @PostMapping("/withdraw")
-    public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
+    public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin){
         try{
          User_Coin uc = new User_Coin();
          Transaction tra=new Transaction();
@@ -108,17 +109,16 @@ array3.add(ces.getByName("BTC"));
 
 
 
-
             ts.save(tra);
             ts.depositar(uc);
 
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-                    .addFlashAttribute("class", "success");
+            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            //       .addFlashAttribute("class", "success");
             return "redirect:/";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-                    .addFlashAttribute("class", "danger");
+            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            //        .addFlashAttribute("class", "danger");
             return "redirect:/";
         }
     }
@@ -132,6 +132,5 @@ array3.add(ces.getByName("BTC"));
 
             return "Index";
         }*/
-
 
 }

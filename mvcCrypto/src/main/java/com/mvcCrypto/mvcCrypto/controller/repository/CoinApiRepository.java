@@ -37,7 +37,7 @@ public class CoinApiRepository {
     }
 
     public void save(CoinAdapter es) {
-        String url = "http://localhost:8080//api/Coin";
+        String url = "http://localhost:8080/api/Coin";
 
         rt.postForObject(url, es, Coin.class);
     }

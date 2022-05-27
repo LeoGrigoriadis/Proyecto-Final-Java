@@ -35,7 +35,6 @@ public class Transaction {
     private double balance;
 
     private boolean type;
-
 }
 
 

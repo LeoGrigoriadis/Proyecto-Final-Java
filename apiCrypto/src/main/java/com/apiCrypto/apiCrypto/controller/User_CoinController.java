@@ -25,6 +25,14 @@ public class User_CoinController {
         return ResponseEntity.status(200).body(service.getAll());
     }
 
+    @PostMapping
+    public ResponseEntity<String> save(@RequestBody User_Coin u){
+        boolean flag = service.save(u);
+        if(flag ==false) return ResponseEntity.status(400).body("Incomplete data") ;
+        service.save(u);
+        return ResponseEntity.status(201).body("Saved user");
+    }
+/*
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody User_Coin coin){
         if(coin == null) return ResponseEntity.status(400).body("Incomplete data") ;
@@ -32,7 +40,7 @@ public class User_CoinController {
         return ResponseEntity.status(201).body("Saved user_coin");
     }
 
-    /*@PutMapping
+    @PutMapping
     public ResponseEntity<String> update(@RequestBody User_Coin coin){
         if(coin == null || coin.getId_coin_userCoin().isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
         service.save(coin);

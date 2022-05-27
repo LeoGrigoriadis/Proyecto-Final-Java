@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -20,6 +18,9 @@ public class Transaction {
 
     @ManyToOne
     private User id_user;
+//puede tirar error
+    @ManyToOne
+    @JoinColumn(name = "id_user_destination")
 
     @ManyToOne
 

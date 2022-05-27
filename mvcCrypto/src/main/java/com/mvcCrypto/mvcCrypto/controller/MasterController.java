@@ -7,7 +7,9 @@ import com.mvcCrypto.mvcCrypto.controller.service.CoinExternoService;
 import com.mvcCrypto.mvcCrypto.controller.service.TransactionService;
 
 import com.mvcCrypto.mvcCrypto.controller.service.UserCoinService;
+import com.mvcCrypto.mvcCrypto.model.CoinAdapter;
 import com.mvcCrypto.mvcCrypto.model.Transaction;
+import com.mvcCrypto.mvcCrypto.model.User;
 import com.mvcCrypto.mvcCrypto.model.User_Coin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,8 @@ public class MasterController {
 
     @Autowired
     private UserCoinService ucs;
+
+
 
     @GetMapping("")
     public String getAll(Model model) {
@@ -60,12 +64,13 @@ array3.add(ces.getByName("BTC"));
         }
         return "AppView";
     }
+    /*
     @PostMapping("/withdraw")
     public String withdraw(@ModelAttribute("transaction") Transaction tr, RedirectAttributes redirect){
         try{
             System.out.println(tr);
             tr.setType(true);
-            tr.setId_user(1);
+            tr.setId_user();
             tr.setDateTime(new Timestamp(System.currentTimeMillis()));
             tr.setPrice_in_transaction(ces.getAll().getAsk());
             System.out.println(tr);
@@ -80,21 +85,29 @@ array3.add(ces.getByName("BTC"));
             return "redirect:/";
         }
     }
-
+*/
     @PostMapping("/withdraw")
-    public  String withdraw2(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
+    public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
          User_Coin uc = new User_Coin();
          Transaction tra=new Transaction();
+
+
             uc.setBalance(user_coin.getBalance());
-            uc.setId_user(user_coin.getId_user());
-            uc.setId_coin(user_coin.getId_coin());
+            uc.setId_user_userCoin(user_coin.getId_user_userCoin());
+            uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
+
+
             tra.setType(true);
-            tra.setDateTime(new Timestamp(System.currentTimeMillis()));
+            tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
-            tra.setId_user(user_coin.getId_user());
-            tra.setId_coin(user_coin.getId_coin());
-            tra.setId_destination_user(user_coin.getId_user());
+            tra.setId_user(user_coin.getId_user_userCoin());
+            tra.setId_coin(user_coin.getId_coin_userCoin());
+            tra.setId_destination_user(user_coin.getId_user_userCoin());
+            tra.setPrice_in_transaction(20.5); //llamar api externa
+
+
+
 
             ts.save(tra);
             ts.depositar(uc);

@@ -42,9 +42,6 @@ public class TradeController {
         if (pay == null) {
             
             return ResponseEntity.status(400).body("Incomplete data");
-
-           
-
         } else
         pS.save(p);
         return ResponseEntity.status(200).body("Updated payment");

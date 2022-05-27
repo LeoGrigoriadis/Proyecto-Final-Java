@@ -14,10 +14,10 @@ public class Trade {
 
     private User id_user_trade;
     private long id_trade;
-    private Coin id_initial_coin;
+    private CoinAdapter id_initial_coin;
     private LocalDateTime date;
     private double balance;
-    private Coin id_destination_coin;
+    private CoinAdapter id_destination_coin;
 
 
     private double price_initial_coin;

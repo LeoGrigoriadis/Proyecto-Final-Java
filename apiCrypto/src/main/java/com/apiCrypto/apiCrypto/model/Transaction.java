@@ -20,6 +20,9 @@ public class Transaction {
 
     @ManyToOne
     private User id_user;
+//puede tirar error
+    @ManyToOne
+    @JoinColumn(name = "id_user_destination")
 
     @ManyToOne
 

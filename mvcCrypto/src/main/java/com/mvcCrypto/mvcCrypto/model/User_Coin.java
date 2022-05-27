@@ -10,7 +10,10 @@ import lombok.NoArgsConstructor;
 public class User_Coin {
     
     private long id_account;
-    private String id_coin;
+    private Coin id_coin_userCoin;
     private double balance;
-    private long id_user;
+    private User id_user_userCoin;
 }
+
+
+  

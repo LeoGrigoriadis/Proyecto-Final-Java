@@ -30,10 +30,10 @@ public class Trade {
     private Timestamp date ;
 
     private double balance;
-/*
-    @ManyToOne
-    @JoinColumn(name = "id_coin")
-    private Coin id_destination_coin;
 
-*/
+    @ManyToOne
+    @JoinColumn(name = "id_coin_destination")
+    private Coin id_destination_coin;
+//puede tirar error
+
 }

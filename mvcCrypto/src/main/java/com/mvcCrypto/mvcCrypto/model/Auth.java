@@ -12,5 +12,6 @@ public class Auth {
 
     private String password;
 
-    private long id_role;
+    private Role id_role;
 }
+

@@ -17,17 +17,15 @@ public class Transaction {
     private long id_transaction;
 
     @ManyToOne
+    @JoinColumn(name = "id_user")
     private User id_user;
-//puede tirar error
+    //puede tirar error
     @ManyToOne
     @JoinColumn(name = "id_user_destination")
-
-    @ManyToOne
-
     private User id_destination_user;
 
     @ManyToOne
-   
+    @JoinColumn(name = "id_coin")
     private Coin id_coin;
 
     private double price_in_transaction;

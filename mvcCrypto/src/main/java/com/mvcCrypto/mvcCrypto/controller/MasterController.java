@@ -108,7 +108,6 @@ array3.add(ces.getByName("BTC"));
             tra.setBalance(user_coin.getBalance());
             tra.setId_user(user_coin.getId_user_userCoin());
             tra.setId_coin(user_coin.getId_coin_userCoin());
-            tra.setId_destination_user(user_coin.getId_user_userCoin());
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
 
             ts.save(tra);

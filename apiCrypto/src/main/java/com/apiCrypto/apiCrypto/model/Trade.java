@@ -24,7 +24,7 @@ public class Trade {
     private User id_user_trade;
 
     @ManyToOne
-    @JoinColumn(name = "id_coin")
+    @JoinColumn(name = "id_initial_coin")
     private Coin id_initial_coin;
 
     private Timestamp date ;
@@ -34,7 +34,7 @@ public class Trade {
     private double price_initial_coin;
 
     @ManyToOne
-    @JoinColumn(name = "id_coin")
+    @JoinColumn(name = "id_destination_coin")
     private Coin id_destination_coin;
 
     private double price_destination_coin;

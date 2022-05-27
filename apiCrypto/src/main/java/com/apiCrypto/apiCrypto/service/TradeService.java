@@ -2,6 +2,8 @@ package com.apiCrypto.apiCrypto.service;
 
 import com.apiCrypto.apiCrypto.model.Trade;
 import com.apiCrypto.apiCrypto.repository.ITradeRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +14,21 @@ import java.util.Optional;
 @Service
 public class TradeService {
 
+    @Autowired
     private ITradeRepository tr;
 
     public List<Trade> getAll(){
         return tr.findAll();
     }
 
-    public Trade save(Trade c)
+    public Boolean save(Trade c)
     {
         try{
-            
+            tr.save(c);
+            return true;
+        }catch(Exception e){
+            return false;
         }
-            return  tr.save(c);
-        }
-        else
-            return null;
 
     }
 

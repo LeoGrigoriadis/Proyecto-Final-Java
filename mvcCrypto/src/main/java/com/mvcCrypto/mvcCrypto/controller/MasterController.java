@@ -1,6 +1,7 @@
 package com.mvcCrypto.mvcCrypto.controller;
 
 
+import com.mvcCrypto.mvcCrypto.controller.repository.CoinExternoRepository;
 import com.mvcCrypto.mvcCrypto.controller.service.CoinApiService;
 
 import com.mvcCrypto.mvcCrypto.controller.service.CoinExternoService;
@@ -34,9 +35,12 @@ public class MasterController {
     @Autowired
     private UserCoinService ucs;
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        return "Login";
+    }
 
-
-    @GetMapping("")
+        @GetMapping("")
     public String getAll(Model model) {
 
         try {
@@ -105,9 +109,7 @@ array3.add(ces.getByName("BTC"));
             tra.setId_user(user_coin.getId_user_userCoin());
             tra.setId_coin(user_coin.getId_coin_userCoin());
             tra.setId_destination_user(user_coin.getId_user_userCoin());
-            tra.setPrice_in_transaction(20.5); //llamar api externa
-
-
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
 
             ts.save(tra);
             ts.depositar(uc);

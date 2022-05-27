@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +16,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AuthenticationEntryPoint authEntryPoint;
+    private AuthEntryPoint authEntryPoint;
     @Autowired
     private AuthService as;
     @Autowired
@@ -26,13 +27,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .authorizeRequests()
-               // .antMatchers("/", "a").permitAll()
+            .antMatchers("/","/register").permitAll()
             .anyRequest()
+            .authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/login")
+            .permitAll()
+            .and()
+            .logout()
             .permitAll()
             .and()
             .httpBasic()
             .authenticationEntryPoint(authEntryPoint);
-
     }
 
     @Override
@@ -40,5 +47,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(as).passwordEncoder(pe);
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/static/**");
+    }
 
 }

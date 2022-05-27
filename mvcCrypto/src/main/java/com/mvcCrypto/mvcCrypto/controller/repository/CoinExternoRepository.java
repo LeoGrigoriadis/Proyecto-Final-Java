@@ -25,4 +25,8 @@ public class CoinExternoRepository {
     public Coin findUsdc() { Coin coin=rt.getForObject("https://criptoya.com/api/bitex/usdc/usd/0.1", Coin.class);
         coin.setName("USD Coin (USDC)");
         return coin;  }
+
+    public double findById(String name) {
+        Coin coin=rt.getForObject("https://criptoya.com/api/bitex/{name}/usd/0.1", Coin.class, name);
+        return coin.getAsk();  }
 }

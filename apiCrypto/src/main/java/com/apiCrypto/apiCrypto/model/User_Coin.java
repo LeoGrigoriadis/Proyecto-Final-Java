@@ -18,11 +18,11 @@ public class User_Coin {
 
     @ManyToOne()
     @JoinColumn(name = "id_coin")
-    private Coin id_coin_userCoin;
+    private Coin id_coin;
 
     private double balance;
 
     @ManyToOne()
     @JoinColumn(name = "id_user")
-    private User id_user_userCoin;
+    private User id_user;
 }

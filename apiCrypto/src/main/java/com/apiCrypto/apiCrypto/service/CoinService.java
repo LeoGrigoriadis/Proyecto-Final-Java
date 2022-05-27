@@ -19,9 +19,14 @@ public class CoinService {
         return cr.findAll();
     }
 
-    public Coin save(Coin c) {
-
-        return cr.save(c);
+    public Boolean save(Coin c) {
+        try{
+            cr.save(c);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+       
 
     }
 

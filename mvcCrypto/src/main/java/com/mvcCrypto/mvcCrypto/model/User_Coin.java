@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class User_Coin {
+    
     private long id_account;
     private CoinAdapter id_coin_userCoin;
     private double balance;

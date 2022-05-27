@@ -22,28 +22,27 @@ public class UserController {
         return ResponseEntity.status(200).body(us.getAll());
     }
 
-    @PostMapping
+
+     @PostMapping
     public ResponseEntity<String> save(@RequestBody User u){
-        if(u == null) return ResponseEntity.status(400).body("Incomplete data") ;
+        boolean flag = us.save(u);
+        if(flag ==false) return ResponseEntity.status(400).body("Incomplete data") ;
         us.save(u);
         return ResponseEntity.status(201).body("Saved user");
     }
 
     @PutMapping("/update")
     public ResponseEntity<String> update(@RequestBody User user) {
-        boolean users = us.updateUser(user);
-        if (users) {
+        boolean users = us.update(user, user.getId_user());
+        if (users == false) return ResponseEntity.status(400).body("Incomplete data");
             us.save(user);
             return ResponseEntity.status(200).body("Updated user");
-
-        } else
-            return ResponseEntity.status(400).body("Incomplete data");
-
     }
 
-    @DeleteMapping("/dalete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        us.deleteUser(id);
+       boolean flag = us.deleteUser(id);
+       if(flag ==false)return ResponseEntity.status(400).body("Usuario no encontrado");
         return ResponseEntity.status(200).body("Deleted user");
     }
 

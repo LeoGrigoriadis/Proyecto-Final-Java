@@ -8,8 +8,6 @@ import com.apiCrypto.apiCrypto.model.Transaction;
 import com.apiCrypto.apiCrypto.repository.ITransactionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 @Service

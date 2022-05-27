@@ -31,9 +31,11 @@ public class Trade {
 
     private double balance;
 
-    @ManyToOne
-    @JoinColumn(name = "id_coin_destination")
-    private Coin id_destination_coin;
-//puede tirar error
+    private double price_initial_coin;
 
+    @ManyToOne
+    @JoinColumn(name = "id_coin")
+    private Coin id_destination_coin;
+
+    private double price_destination_coin;
 }

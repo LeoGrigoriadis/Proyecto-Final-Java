@@ -31,8 +31,14 @@ public class User_CoinService {
         return ucR.findByUserId(idUser);
     }
 
-    public User_Coin save(User_Coin uc) {
-        return ucR.save(uc);
+    public Boolean save(User_Coin uc) {
+        try{
+            ucR.save(uc);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+        
     }
 
     public void delete(long id) {

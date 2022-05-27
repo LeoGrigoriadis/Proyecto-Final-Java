@@ -2,6 +2,7 @@ package com.apiCrypto.apiCrypto.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -49,5 +50,13 @@ public class AuthController {
         return ResponseEntity.status(200).body("Deleted Auth");
     }
 
+    @GetMapping("/find-by-role/{gmail}")
+    public ResponseEntity<String> getRole(@PathVariable("gmail") String gmail) {
+        return ResponseEntity.status(200).body(as.getRoleu(gmail));
+    }
+    @GetMapping("/find-by-gmail/{gmail}")
+    public ResponseEntity<Optional<Auth>> getGmail(@PathVariable("gmail") String gmail) {
+        return ResponseEntity.status(200).body(as.getAuth(gmail));
+    }
     
 }

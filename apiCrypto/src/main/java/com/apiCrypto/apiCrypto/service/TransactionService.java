@@ -1,5 +1,6 @@
 package com.apiCrypto.apiCrypto.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,8 +9,6 @@ import com.apiCrypto.apiCrypto.model.Transaction;
 import com.apiCrypto.apiCrypto.repository.ITransactionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,11 +28,10 @@ public class TransactionService {
         } catch (Exception e) {
             return false;
         }
-
     }
 
     public List<Transaction> getByUser(long id) {
-        return tR.getbyIdUser(id);
+        return tR.getByIdUser(id);
     }
 
     public void delete(long id) {
@@ -69,10 +67,6 @@ public class TransactionService {
          tR.CobrarTodo(id_coin, id_user);
     }
 
-/*
-    public Transaction make(){
-        return tR.makeTransaction();
-   }
-   */
+
 
 }

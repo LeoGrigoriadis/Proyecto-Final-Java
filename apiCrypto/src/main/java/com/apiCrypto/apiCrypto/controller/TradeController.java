@@ -22,7 +22,7 @@ public class TradeController {
     private TradeService pS;
 
     @GetMapping
-    public ResponseEntity<List<Trade>> getAll(){
+    public ResponseEntity<Object> getAll(){
         return ResponseEntity.status(200).body(pS.getAll());
     }
     
@@ -37,21 +37,18 @@ public class TradeController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody Trade p) {
+    public ResponseEntity<Object> update(@RequestBody Trade p) {
         Trade pay = pS.update(p, p.getId_trade());
         if (pay == null) {
             
             return ResponseEntity.status(400).body("Incomplete data");
-
-           
-
         } else
         pS.save(p);
         return ResponseEntity.status(200).body("Updated payment");
     }
 
     @DeleteMapping ("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+    public ResponseEntity<Object> delete(@PathVariable("id") Long id){
             pS.delete(id);
             return ResponseEntity.status(200).body("Deleted payment");
         }

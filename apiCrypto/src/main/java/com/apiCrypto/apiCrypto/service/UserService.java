@@ -2,6 +2,7 @@
 package com.apiCrypto.apiCrypto.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -54,5 +55,9 @@ public class UserService {
             return false;
         }
 
+    }
+
+    public Optional<User> getUserXgmail(String gmail){
+        return uR.getByGmail(gmail);
     }
 }

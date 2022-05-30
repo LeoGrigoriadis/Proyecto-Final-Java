@@ -16,12 +16,12 @@ public class CoinController {
     private CoinService service;
 
     @GetMapping
-    public ResponseEntity<List<Coin>> getAll(){
+    public ResponseEntity<Object> getAll(){
         return ResponseEntity.status(200).body(service.getAll());
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody Coin coin){
+    public ResponseEntity<Object> save(@RequestBody Coin coin){
         boolean flag = service.save(coin);
         if(flag == false) return ResponseEntity.status(400).body("Incomplete data") ;
         service.save(coin);
@@ -29,7 +29,7 @@ public class CoinController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody Coin coin){
+    public ResponseEntity<Object> update(@RequestBody Coin coin){
         
         if(coin == null || coin.getId_coin().isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
         service.save(coin);
@@ -37,13 +37,13 @@ public class CoinController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") String id){
+    public ResponseEntity<Object> delete(@PathVariable("id") String id){
         service.delete(id);
         return ResponseEntity.status(200).body("Deleted coin");
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Coin> getOne(@PathVariable("id") String id){
+    public ResponseEntity<Object> getOne(@PathVariable("id") String id){
         Coin coin = service.getByIdCoin(id);
         return ResponseEntity.status(200).body(coin);
     }

@@ -12,7 +12,7 @@ import java.util.List;
 public interface IUserCoinRepository extends JpaRepository<User_Coin,Long>{
     
 
-    List<Object> findById(long id);
+    List<User_Coin> findById(long id);
 
     @Query(value = "Select * from User_Coin where id_user = :id", nativeQuery = true)
     public ArrayList<User_Coin> findByUserId(long id);

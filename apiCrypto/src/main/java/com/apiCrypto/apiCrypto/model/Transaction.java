@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,14 +17,15 @@ public class Transaction {
     private long id_transaction;
 
     @ManyToOne
+    @JoinColumn(name = "id_user")
     private User id_user;
 
+   /* @ManyToOne
+    @JoinColumn(name = "id_user_destination")
+    private User id_user_destination;
+*/
     @ManyToOne
-
-    private User id_destination_user;
-
-    @ManyToOne
-   
+    @JoinColumn(name = "id_coin")
     private Coin id_coin;
 
     private double price_in_transaction;
@@ -36,7 +35,6 @@ public class Transaction {
     private double balance;
 
     private boolean type;
-
 }
 
 

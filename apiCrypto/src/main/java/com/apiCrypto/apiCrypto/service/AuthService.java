@@ -1,6 +1,7 @@
 package com.apiCrypto.apiCrypto.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -41,9 +42,12 @@ public class AuthService {
 
     }
  
-    public Auth getAuth(String id) {
-        return au.getById(id);
+    public Optional<Auth> getAuth(String id) {
+       
+        return  au.findById(id);
     }
+
+
 
     @Transactional
     public boolean updateAuth(Auth u, String id) {
@@ -54,6 +58,12 @@ public class AuthService {
         } else {
             return false;
         }
+    }
+
+    public String  getRoleu (String gmail){
+     
+            return  au.getRole(gmail);
+      
     }
     
 }

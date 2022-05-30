@@ -21,10 +21,18 @@ public class User_CoinController {
     private User_CoinService service;
 
     @GetMapping
-    public ResponseEntity<List<User_Coin>> getAll(){
+    public ResponseEntity<Object> getAll(){
         return ResponseEntity.status(200).body(service.getAll());
     }
 
+    @PostMapping
+    public ResponseEntity<Object> save(@RequestBody User_Coin u){
+        boolean flag = service.save(u);
+        if(flag ==false) return ResponseEntity.status(400).body("Incomplete data") ;
+        service.save(u);
+        return ResponseEntity.status(201).body("Saved user");
+    }
+/*
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody User_Coin coin){
         if(coin == null) return ResponseEntity.status(400).body("Incomplete data") ;
@@ -32,7 +40,7 @@ public class User_CoinController {
         return ResponseEntity.status(201).body("Saved user_coin");
     }
 
-    /*@PutMapping
+    @PutMapping
     public ResponseEntity<String> update(@RequestBody User_Coin coin){
         if(coin == null || coin.getId_coin_userCoin().isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
         service.save(coin);
@@ -40,19 +48,19 @@ public class User_CoinController {
     }*/
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+    public ResponseEntity<Object> delete(@PathVariable("id") Long id){
         service.delete(id);
         return ResponseEntity.status(200).body("Deleted user_coin");
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User_Coin> getOne(@PathVariable("id") Long id){
+    public ResponseEntity<Object> getOne(@PathVariable("id") Long id){
         User_Coin coin = service.getOne(id);
         return ResponseEntity.status(200).body(coin);
     }
 
     @GetMapping("/idUser/{id}")
-    public ResponseEntity<ArrayList<User_Coin>> getAllByIdUser(@PathVariable("id") long id){
+    public ResponseEntity<Object> getAllByIdUser(@PathVariable("id") long id){
         ArrayList<User_Coin> coin = service.getAllByIdUser(id);
         return ResponseEntity.status(200).body(coin);
     }

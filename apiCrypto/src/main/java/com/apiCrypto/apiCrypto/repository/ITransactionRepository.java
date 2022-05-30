@@ -3,6 +3,7 @@ package com.apiCrypto.apiCrypto.repository;
 
 import com.apiCrypto.apiCrypto.model.Transaction;
 
+import com.apiCrypto.apiCrypto.model.User_Coin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,7 +31,7 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
     @Modifying
     @Transactional
     @Query(value ="UPDATE user_coin SET user_coin.balance = user_coin.balance - :balance WHERE  user_coin.id_coin= :id_coin AND user_coin.id_user= :id_user", nativeQuery=true)
-    public void CobrarMonto(@Param("balance") double balance,@Param("id_coin") String id_coin, @Param("id_user") long id_user);
+    public void CobrarMonto(@Param("balance") double balance, @Param("id_coin") String id_coin, @Param("id_user") long id_user);
 
     @Modifying
     @Transactional

@@ -92,23 +92,30 @@ public class MasterController {
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
             //User user =us.getById(user_coin.getId_user_userCoin().getId_user());
+            System.out.println("1");
             User user = us.getById(1);
+            System.out.println("2");
             tra.setId_user(user);
+            System.out.println("3");
             CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
+            System.out.println("4");
             tra.setId_coin(coin);
+            System.out.println("5");
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
-
+            System.out.println("6");
             ts.save(tra);
+            System.out.println("7");
             ts.depositar(uc);
+            System.out.println("8");
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
             //       .addFlashAttribute("class", "success");
-            return "redirect:/AppView";
+            return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
             //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
             //        .addFlashAttribute("class", "danger");
-            return "redirect:/AppView";
+            return "redirect:/app-view";
         }
     }
 

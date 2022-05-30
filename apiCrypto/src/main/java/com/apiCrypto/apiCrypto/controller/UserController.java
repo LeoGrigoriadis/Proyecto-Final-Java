@@ -1,7 +1,7 @@
 package com.apiCrypto.apiCrypto.controller;
 
 import java.util.List;
-import java.util.Optional;
+
 
 
 import com.apiCrypto.apiCrypto.model.User;
@@ -53,5 +53,10 @@ public class UserController {
 
         return ResponseEntity.status(200).body(us.getUser(id));
 
+    }
+
+    @GetMapping("/find-by-gmail/{gmail}")
+    public ResponseEntity<Optional<User>>  getByGmail(@PathVariable("gmail") String gmail){
+        return ResponseEntity.status(200).body(us.getUserXgmail(gmail));
     }
 }

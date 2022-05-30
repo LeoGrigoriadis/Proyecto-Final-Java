@@ -56,4 +56,8 @@ public class UserService {
         }
 
     }
+
+    public Optional<User> getUserXgmail(String gmail){
+        return uR.getByGmail(gmail);
+    }
 }

@@ -2,6 +2,7 @@
 package com.apiCrypto.apiCrypto.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -40,8 +41,8 @@ public class UserService {
         return false;
     }
 
-    public User getUser(long id) {
-        return uR.getById(id);
+    public Optional<User> getUser(long id) {
+        return uR.findById(id);
     }
 
     @Transactional

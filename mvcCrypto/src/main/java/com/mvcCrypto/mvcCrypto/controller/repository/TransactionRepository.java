@@ -17,24 +17,24 @@ public class TransactionRepository {
     @Autowired
     private RestTemplate rt;
 
-    public ArrayList<Transaction> findAll(){
-        String url = "http://localhost:8090/api/Transaction";
+    public ArrayList<Transaction> findAll(long id){
+        String url = "http://localhost:8090/api/Transaction/{id}";
         ArrayList<Transaction> transaction = new ArrayList<>();
-        transaction = rt.getForObject(url, ArrayList.class);
+        return transaction = rt.getForObject(url, ArrayList.class, id);
 
-        return transaction;
+
     }
 
     public Transaction getOne(long id){
-        String url = "http://localhost:8090/api/Transaction/getOne/"+id;
+        String url = "http://localhost:8090/api/Transaction/getOne/{id}";
         Transaction transaction;
-        transaction = rt.getForObject(url, Transaction.class);
+        transaction = rt.getForObject(url, Transaction.class, id);
         return transaction;
     }
 
     public void delete(long id) {
-        String url = "http://localhost:8090/api/Transaction/delete/" + id;
-        rt.delete(url);
+        String url = "http://localhost:8090/api/Transaction/delete/{id}";
+        rt.delete(url, id);
     }
 
     public void save(Transaction es) {

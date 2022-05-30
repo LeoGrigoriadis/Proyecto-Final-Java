@@ -57,10 +57,17 @@ nav img{
     text-decoration:none;
 }
 
-#clo{
-    display:none;
+.icon{
     padding: 2px 15px;
     transform: scale(1.2);
+}
+
+#clo{
+    display:none;
+}
+
+#us{
+    transform: scale(1.7);
 }
 
 #n-option{

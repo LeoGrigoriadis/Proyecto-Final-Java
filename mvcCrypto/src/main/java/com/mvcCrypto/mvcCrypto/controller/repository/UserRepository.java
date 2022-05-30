@@ -21,15 +21,15 @@ public class UserRepository {
     }
 
     public User getById(long id){
-        String url = "http://localhost:8090/api/Users/getOne/"+id;
+        String url = "http://localhost:8090/api/Users/getOne/{id}";
         User user;
-        user = rt.getForObject(url, User.class);
+        user = rt.getForObject(url, User.class, id);
         return user;
     }
 
     public void delete(long id) {
-        String url = "http://localhost:8090/api/Users/delete/"+id ;
-        rt.delete(url);
+        String url = "http://localhost:8090/api/Users/delete/{id}";
+        rt.delete(url, id);
     }
 
     public void save(User es) {
@@ -42,4 +42,8 @@ public class UserRepository {
         rt.put(url, es, User.class);
     }
 
+    public User getByGmail(String gmailActualSesion) {
+        String url = "http://localhost:8090/api/Users/find-by-gmail/{gmail}";
+        return rt.getForObject(url, User.class, gmailActualSesion);
+    }
 }

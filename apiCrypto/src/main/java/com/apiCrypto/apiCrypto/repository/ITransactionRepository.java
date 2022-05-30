@@ -18,7 +18,7 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
 
 
     @Query(value = "Select * from transaction t where t.id_user = :id", nativeQuery = true)
-    public List<Transaction> getbyIdUser(@Param("id") long id);
+    public List<Transaction> getByIdUser(@Param("id") long id);
 
     List<Transaction> findAll();
 

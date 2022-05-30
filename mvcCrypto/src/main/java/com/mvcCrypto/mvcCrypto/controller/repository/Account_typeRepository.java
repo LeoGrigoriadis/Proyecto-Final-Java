@@ -24,8 +24,8 @@ public class Account_typeRepository {
 
 
     public void delete(long id) {
-        String url = "http://localhost:8090/api/Account/delete/" + id;
-        rt.delete(url);
+        String url = "http://localhost:8090/api/Account/delete/{var1}";
+        rt.delete(url,id);
     }
 
     public void save(Account_type es) {

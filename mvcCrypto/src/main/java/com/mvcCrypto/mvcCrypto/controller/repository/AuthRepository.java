@@ -25,8 +25,8 @@ public class AuthRepository {
 
 
     public void delete(long id) {
-        String url = "http://localhost:8090/api/Auth/delete/" + id;
-        rt.delete(url);
+        String url = "http://localhost:8090/api/Auth/delete/{var1}";
+        rt.delete(url,id);
     }
 
     public void save(Auth es) {

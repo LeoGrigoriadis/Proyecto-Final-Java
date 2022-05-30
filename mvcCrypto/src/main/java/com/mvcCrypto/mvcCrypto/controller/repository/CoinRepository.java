@@ -18,9 +18,9 @@ public class CoinRepository {
     private RestTemplate rt;
 
     public Coin findCot(String var){
-        String url = "https://criptoya.com/api/bitex/"+var+"/usd/1";
+        String url = "https://criptoya.com/api/bitex/{var1}/usd/1";
 
-        Coin coins = rt.getForObject(url,Coin.class);
+        Coin coins = rt.getForObject(url,Coin.class,var);
         System.out.println(coins);
 
         return coins;
@@ -29,12 +29,12 @@ public class CoinRepository {
 
 
     public Coin getByName(String name){
-        String url = "http://rest.coinapi.io/v1/assets/"+name+"?apikey=CB534D2D-8155-4886-83CC-DBED35CD1950";
+        String url = "http://rest.coinapi.io/v1/assets/{var1}?apikey=CB534D2D-8155-4886-83CC-DBED35CD1950";
 
         RestTemplate rt = new RestTemplate();
 
         Coin user;
-        user = rt.getForObject(url, Coin.class);
+        user = rt.getForObject(url, Coin.class,name);
         return user;
     }
 

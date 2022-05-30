@@ -31,9 +31,9 @@ public class TransactionController {
 
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody Transaction u) {
-        boolean flag = ts.save(u);
-        if (flag)
-            return ResponseEntity.status(200).body("Success.");
+        Transaction flag = ts.save(u);
+        if (flag!=null)
+            return ResponseEntity.status(200).body(flag);
         else
             return ResponseEntity.status(400).body("Error.");
     }
@@ -91,13 +91,11 @@ public class TransactionController {
 
     @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
     public ResponseEntity<Object> CobrarMonto(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
-        
-      
-            
-        
+
             try{
-                ts.cobrarMonto(balance,id_coin,id_user);
-            return ResponseEntity.status(200).body("Retiro exitoso");
+               ts.cobrarMonto(balance,id_coin,id_user);
+
+            return ResponseEntity.status(200).body(true);
             }catch(Exception e){
                 return ResponseEntity.status(400).body("Retiro fallido");
             }

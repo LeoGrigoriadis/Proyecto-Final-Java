@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.apiCrypto.apiCrypto.model.Transaction;
+import com.apiCrypto.apiCrypto.model.User_Coin;
 import com.apiCrypto.apiCrypto.repository.ITransactionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ public class TransactionService {
         return tR.findAll();
     }
 
-    public boolean save(Transaction u) {
+    public Transaction save(Transaction u) {
         try {
-            tR.save(u);
-            return true;
+            Transaction tt =tR.save(u);
+            return tt;
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 
@@ -57,6 +58,7 @@ public class TransactionService {
 
        tR.Deposito(balance, id_coin, id_user);
     }
+
     @Transactional
     public void cobrarMonto(double balance, String id_coin, long id_user) {
        tR.CobrarMonto(balance, id_coin, id_user);

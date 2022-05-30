@@ -50,4 +50,8 @@ public class UserService {
         }
         return gmail;
     }
+
+    public User getOne(String gmailActualSesion) {
+        return uR.getByGmail(gmailActualSesion);
+    }
 }

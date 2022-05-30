@@ -38,14 +38,16 @@ public class MasterController {
         return "Login";
     }
 
-        @GetMapping("")
+    @GetMapping("/app-view")
     public String getAll(Model model) {
         try {
-            String gmail=us.getGmailActualSesion();
-            model.addAttribute("coins",ces.getAll());
-            model.addAttribute("transaction", new Transaction());
-            model.addAttribute("user_coin", new User_Coin());
-            model.addAttribute("movs",ts.getAll());
+            User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
+            model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
+            model.addAttribute("coins",ces.getAll()); //criptos de api externa
+            model.addAttribute("transaction", new Transaction()); //objeto para crear nueva transacción
+            model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
+            model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de ultimos movimientos de la sesión actual
+            model.addAttribute("wallet",ucs.findAllByIdUser(user.getId_user())); //wallet de la sesión actual
             return "AppView";
         } catch (NullPointerException e) {
             e.fillInStackTrace();

@@ -1,5 +1,6 @@
 package com.apiCrypto.apiCrypto.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -27,11 +28,10 @@ public class TransactionService {
         } catch (Exception e) {
             return false;
         }
-
     }
 
     public List<Transaction> getByUser(long id) {
-        return tR.getbyIdUser(id);
+        return tR.getByIdUser(id);
     }
 
     public void delete(long id) {

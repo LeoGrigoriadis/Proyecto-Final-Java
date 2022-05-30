@@ -14,14 +14,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/Transaction")
+@RequestMapping("/api/Transaction")
 public class TransactionController {
 
   @Autowired TransactionService ts;
 
-  @GetMapping
-    public ResponseEntity<Object> getAll() {
-        return ResponseEntity.status(200).body(ts.getAll());
+  @GetMapping("/{id}")
+    public ResponseEntity<List<Transaction>> getAll(@PathVariable long id) {
+        return ResponseEntity.status(200).body(ts.getByUser(id));
     }
 
     @PostMapping("/save")

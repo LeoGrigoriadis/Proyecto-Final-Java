@@ -18,7 +18,7 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
 
 
     @Query(value = "Select * from transaction t where t.id_user = :id", nativeQuery = true)
-    public List<Transaction> getbyIdUser(@Param("id") long id);
+    public List<Transaction> getByIdUser(@Param("id") long id);
 
     List<Transaction> findAll();
 
@@ -36,6 +36,7 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
     @Transactional
     @Query(value="UPDATE user_coin SET user_coin.balance = user_coin.balance - user_coin.balance WHERE  user_coin.id_coin= :id_coin AND user_coin.id_user= :id_user", nativeQuery=true)
     public void CobrarTodo(@Param("id_coin") String id_coin, @Param("id_user") long id_user);
+
 
     /*@Query(value="UPDATE user_coin SET user_coin.balance = user_coin.balance + :balance WHERE  user_coin.id_coin= :id_coin AND user_coin.id_user= :id_user", nativeQuery=true)
     public  updateDeposito*/

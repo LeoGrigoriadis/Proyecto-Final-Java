@@ -21,7 +21,7 @@ public class UserRepository {
     }
 
     public User getById(long id){
-        String url = "http://localhost:8090/api/users/getOne"+id;
+        String url = "http://localhost:8090/api/users/getOne/"+id;
         User user;
         user = rt.getForObject(url, User.class);
         return user;

@@ -26,7 +26,7 @@ public class TransactionRepository {
     }
 
     public Transaction getOne(long id){
-        String url = "http://localhost:8090/api/Transaction/getOne"+id;
+        String url = "http://localhost:8090/api/Transaction/getOne/"+id;
         Transaction transaction;
         transaction = rt.getForObject(url, Transaction.class);
         return transaction;

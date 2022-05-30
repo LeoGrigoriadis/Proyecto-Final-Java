@@ -22,8 +22,8 @@ public class UserCoinService {
         return ur.findById(id);
     }
 
-    public ArrayList<User_Coin> findAll(){
-        return ur.findAll();
+    public ArrayList<User_Coin> getAll(long id_user){
+        return ur.findAll(id_user);
     }
 
     public  void delete(long id){
@@ -33,7 +33,6 @@ public class UserCoinService {
     public void save(User_Coin user){
         ur.save(user);
     }
-
 
 /*
     public double getTotalBalance(int id){

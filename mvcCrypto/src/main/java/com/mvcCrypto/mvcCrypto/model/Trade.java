@@ -17,11 +17,8 @@ public class Trade {
     private CoinAdapter id_initial_coin;
     private LocalDateTime date;
     private double balance;
-    private CoinAdapter id_destination_coin;
-
-
     private double price_initial_coin;
-    private double price_destination_coin;
+
 }
 
 

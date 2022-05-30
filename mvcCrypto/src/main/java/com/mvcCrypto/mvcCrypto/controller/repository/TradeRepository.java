@@ -24,7 +24,7 @@ public class TradeRepository {
 
 
     public void delete(long id) {
-        String url = "http://localhost:8090/api/Trade/delete/" + id;
+        String url = "http://localhost:8090/api/Trade/delete/"+id ;
         rt.delete(url);
     }
 

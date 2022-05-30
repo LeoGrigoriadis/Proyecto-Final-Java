@@ -32,6 +32,26 @@ section{
     height: calc(100vh - 120px);
 }
 
+.col-sm-3.section-top h4{
+    display: inline-block;
+}
+
+#btn-refresh{
+    float:right;
+    background-color:white;
+    border:none;
+    padding: 5px 0px;
+    transition-duration: 1s;
+}
+
+#btn-refresh:hover{
+transform: rotate(360deg);
+}
+
+#btn-refresh svg{
+    transform: scale(1.2);
+}
+
 .contain{
     width: calc(100% - 40px);
     margin: 0 auto;
@@ -80,6 +100,7 @@ h4{
 }
 
 article{
+    overflow: auto;
     background-color: white;
     height:50%;
     padding: 30px 25px;

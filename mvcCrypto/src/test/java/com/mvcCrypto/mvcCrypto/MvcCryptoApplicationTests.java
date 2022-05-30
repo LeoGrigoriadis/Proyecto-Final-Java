@@ -37,10 +37,11 @@ class MvcCryptoApplicationTests {
 		role.setId_role(1);
 		role.setName("user");
 		user.setId_role(role);
+		System.out.println("contra iniciada: "+user.getPassword());
 
-		uA.save(user);
+
 		UserDetails r = uA.loadUserByUsername(user.getGmail());
-		Assert.assertTrue(r.getPassword().equalsIgnoreCase(user.getPassword()));
+		Assert.assertEquals(r.getPassword(),user.getPassword());
 
 	}
 

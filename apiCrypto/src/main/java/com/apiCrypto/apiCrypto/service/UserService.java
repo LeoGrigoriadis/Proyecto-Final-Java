@@ -41,8 +41,8 @@ public class UserService {
         return false;
     }
 
-    public Optional<User> getUser(long id) {
-        return uR.findById(id);
+    public User getUser(long id) {
+        return uR.getById(id);
     }
 
     @Transactional

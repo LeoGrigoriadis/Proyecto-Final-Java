@@ -40,11 +40,10 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String gmail) throws UsernameNotFoundException {
-        Optional<Auth> optional = ar.findByGmail(gmail);
-        if (optional.isEmpty()) {
+        Auth u = ar.findByGmail(gmail);
+        if (u==null) {
             throw new UsernameNotFoundException(gmail);
         }
-        Auth u = optional.get();
         Set<GrantedAuthority> set = new HashSet<>();
         set.add(new SimpleGrantedAuthority(ar.getRole(gmail)));
         User user = new User(u.getGmail(), u.getPassword(), set);

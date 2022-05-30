@@ -1,5 +1,6 @@
 package com.mvcCrypto.mvcCrypto.controller.repository;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mvcCrypto.mvcCrypto.model.Auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,9 @@ public class AuthRepository {
         rt.put(url, es, Auth.class);
     }
 
-    public Optional<Auth> findByGmail(String gmail) {
+    public Auth findByGmail(String gmail) {
         String url = "http://localhost:8090/api/Auth/find-by-gmail/{gmail}";
-        return rt.getForObject(url, Optional.class, gmail);
+        return rt.getForObject(url, Auth.class, gmail);
     }
 
     public String getRole(String gmail) {

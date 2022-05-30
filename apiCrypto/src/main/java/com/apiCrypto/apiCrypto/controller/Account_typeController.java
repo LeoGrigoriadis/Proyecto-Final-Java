@@ -20,12 +20,12 @@ public class Account_typeController {
     private Account_typeService accS;
 
     @GetMapping
-    public ResponseEntity<List<Account_type>> getAll(){
+    public ResponseEntity<Object> getAll(){
         return ResponseEntity.status(200).body(accS.getAll());
     }
 
     @PostMapping
-    public ResponseEntity<String> save(@RequestBody @Valid Account_type u) {
+    public ResponseEntity<Object> save(@RequestBody @Valid Account_type u) {
         boolean flag = accS.save(u);
         if (flag)
             return ResponseEntity.status(200).body("Success.");
@@ -34,14 +34,14 @@ public class Account_typeController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody Account_type a){
+    public ResponseEntity<Object> update(@RequestBody Account_type a){
         if(a == null ) return ResponseEntity.status(400).body("Incomplete data") ;
         accS.save(a);
         return ResponseEntity.status(200).body("Updated Account");
     }
 
     @DeleteMapping ("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+    public ResponseEntity<Object> delete(@PathVariable("id") Long id){
             accS.delete(id);
             return ResponseEntity.status(200).body("Deleted Account");
         }

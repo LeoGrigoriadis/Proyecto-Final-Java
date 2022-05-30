@@ -2,16 +2,9 @@ package com.mvcCrypto.mvcCrypto.controller;
 
 
 import com.mvcCrypto.mvcCrypto.controller.repository.CoinExternoRepository;
-import com.mvcCrypto.mvcCrypto.controller.service.CoinApiService;
+import com.mvcCrypto.mvcCrypto.controller.service.*;
 
-import com.mvcCrypto.mvcCrypto.controller.service.CoinExternoService;
-import com.mvcCrypto.mvcCrypto.controller.service.TransactionService;
-
-import com.mvcCrypto.mvcCrypto.controller.service.UserCoinService;
-import com.mvcCrypto.mvcCrypto.model.CoinAdapter;
-import com.mvcCrypto.mvcCrypto.model.Transaction;
-import com.mvcCrypto.mvcCrypto.model.User;
-import com.mvcCrypto.mvcCrypto.model.User_Coin;
+import com.mvcCrypto.mvcCrypto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +27,9 @@ public class MasterController {
 
     @Autowired
     private UserCoinService ucs;
+
+    @Autowired
+    private UserService us;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -106,8 +102,10 @@ array3.add(ces.getByName("BTC"));
             tra.setType(true);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
-            tra.setId_user(user_coin.getId_user_userCoin());
-            tra.setId_coin(user_coin.getId_coin_userCoin());
+            User user =us.getById(user_coin.getId_user_userCoin().getId_user());
+            tra.setId_user(user);
+            CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
+            tra.setId_coin(coin);
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
 
             ts.save(tra);

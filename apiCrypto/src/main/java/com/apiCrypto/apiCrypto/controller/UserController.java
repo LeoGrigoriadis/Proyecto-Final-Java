@@ -51,4 +51,9 @@ public class UserController {
         User user = us.getUser(id);
         return ResponseEntity.status(200).body(user);
     }
+
+    @GetMapping("/find-by-gmail/{gmail}")
+    public ResponseEntity<Optional<User>>  getByGmail(@PathVariable("gmail") String gmail){
+        return ResponseEntity.status(200).body(us.getUserXgmail(gmail));
+    }
 }

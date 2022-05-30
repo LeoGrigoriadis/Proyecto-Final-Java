@@ -13,7 +13,7 @@ public class UserRepository {
     @Autowired
     private RestTemplate rt;
     public ArrayList<User> findAll(){
-        String url = "http://localhost:8090/api/users";
+        String url = "http://localhost:8090/api/Users";
              ArrayList<User> user = new ArrayList<>();
         user = rt.getForObject(url, ArrayList.class);
 
@@ -21,24 +21,24 @@ public class UserRepository {
     }
 
     public User getById(long id){
-        String url = "http://localhost:8090/api/users/getOne/"+id;
+        String url = "http://localhost:8090/api/Users/getOne/{var1}";
         User user;
-        user = rt.getForObject(url, User.class);
+        user = rt.getForObject(url, User.class,id);
         return user;
     }
 
     public void delete(long id) {
-        String url = "http://localhost:8090/api/users/delete/" + id;
-        rt.delete(url);
+        String url = "http://localhost:8090/api/Users/delete/{var1}" ;
+        rt.delete(url,id);
     }
 
     public void save(User es) {
-        String url = "http://localhost:8090/api/users/save";
+        String url = "http://localhost:8090/api/Users/save";
         rt.postForObject(url, es, User.class);
     }
 
     public void update(User es) {
-        String url = "http://localhost:8090/api/users/update";
+        String url = "http://localhost:8090/api/Users/update";
         rt.put(url, es, User.class);
     }
 

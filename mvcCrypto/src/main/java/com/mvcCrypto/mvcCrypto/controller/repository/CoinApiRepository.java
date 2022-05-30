@@ -23,17 +23,17 @@ public class CoinApiRepository {
     }
 
     public CoinAdapter getOne(String id){
-        String url = "http://localhost:8090/api/Coin/"+id;
+        String url = "http://localhost:8090/api/Coin/{var1}";
 
         CoinAdapter user;
-        user = rt.getForObject(url, CoinAdapter.class);
+        user = rt.getForObject(url, CoinAdapter.class,id);
         return user;
     }
 
     public void delete(String id) {
-        String url = "http://localhost:8080/api/Coin/" + id;
+        String url = "http://localhost:8080/api/Coin/{var1}" ;
 
-        rt.delete(url);
+        rt.delete(url,id);
     }
 
     public void save(CoinAdapter es) {

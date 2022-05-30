@@ -26,7 +26,7 @@ public class TransactionRepository {
     }
 
     public Transaction getOne(long id){
-        String url = "http://localhost:8090/api/Transaction/getOne"+id;
+        String url = "http://localhost:8090/api/Transaction/getOne/"+id;
         Transaction transaction;
         transaction = rt.getForObject(url, Transaction.class);
         return transaction;
@@ -49,21 +49,7 @@ public class TransactionRepository {
 
     public void depositar(User_Coin es) {
        // @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
-        String url = "http://localhost:8090/api/cobrarMonto/{var}/{var}/{var}";
+        String url = "http://localhost:8090/api/cobrarMonto/{var1}/{var2}/{var3}";
         rt.put(url, es, User_Coin.class,es.getBalance(),es.getId_coin_userCoin().getId_coin(),es.getId_user_userCoin().getId_user());
-    }
-
-    public Coin fidndAll(){
-
-
-        String url = "https://criptoya.com/api/bitex/{var}/usd/0.1";
-        Coin coins;
-        //ArrayList<Object> coins2 = new ArrayList<>();
-        //Object a= new Object();
-
-        coins = rt.getForObject(url,Coin.class, "btc");
-        //coins.add(rt.getForObject(url2,Object.class));
-
-        return coins;
     }
 }

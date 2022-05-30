@@ -27,7 +27,9 @@ public class CoinExternoService {
         return coins;
     }
 
-
+    public double getOne(String coin){
+        return cr.findById(coin);
+    }
 
    /* public Coin getByName(String name)
     {

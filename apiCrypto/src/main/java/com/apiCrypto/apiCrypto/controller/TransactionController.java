@@ -25,12 +25,12 @@ public class TransactionController {
   @Autowired TransactionService ts;
 
   @GetMapping
-    public ResponseEntity<List<Transaction>> getAll() {
+    public ResponseEntity<Object> getAll() {
         return ResponseEntity.status(200).body(ts.getAll());
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Object> save(@RequestBody @Valid Transaction u) {
+    public ResponseEntity<Object> save(@RequestBody Transaction u) {
         boolean flag = ts.save(u);
         if (flag)
             return ResponseEntity.status(200).body("Success.");
@@ -39,7 +39,7 @@ public class TransactionController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody Transaction t) {
+    public ResponseEntity<Object> update(@RequestBody Transaction t) {
         boolean flag = ts.updateTransaction(t);
         if (flag) {
             ts.save(t);
@@ -51,13 +51,13 @@ public class TransactionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
         ts.delete(id);
         return ResponseEntity.status(200).body("Deleted Transaction");
     }
 
     @GetMapping("/getOne/{id}")
-    public ResponseEntity<Transaction> getOne(@PathVariable("id") Long id){
+    public ResponseEntity<Object> getOne(@PathVariable("id") Long id){
         Transaction transaction = ts.getTransaction(id);
         return ResponseEntity.status(200).body(transaction);
     }
@@ -76,7 +76,7 @@ public class TransactionController {
     }
 */
     @PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
-    public ResponseEntity<String> Depositar(@RequestBody User_Coin uc) {
+    public ResponseEntity<Object> Depositar(@RequestBody User_Coin uc) {
 
         try{
             ts.depositar(uc.getBalance(), uc.getId_coin().getId_coin(), uc.getId_user().getId_user());
@@ -90,7 +90,7 @@ public class TransactionController {
 
 
     @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
-    public ResponseEntity<String> CobrarMonto(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
+    public ResponseEntity<Object> CobrarMonto(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
         
       
             
@@ -105,7 +105,7 @@ public class TransactionController {
     }
 
     @PutMapping("/cobrarTodo/{id_coin}/{id_user}")
-    public ResponseEntity<String> CobrarTodo(@PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
+    public ResponseEntity<Object> CobrarTodo(@PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
         try{
             ts.CobrarTodo(id_coin,id_user);
             return ResponseEntity.status(200).body("Retiro exitoso");

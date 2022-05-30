@@ -3,6 +3,8 @@ package com.mvcCrypto.mvcCrypto.controller.service;
 import com.mvcCrypto.mvcCrypto.controller.repository.UserRepository;
 import com.mvcCrypto.mvcCrypto.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,5 +42,12 @@ public class UserService {
         uR.delete(id);
     }
 
-
+    public String getGmailActualSesion(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String gmail = "";
+        if (principal instanceof UserDetails) {
+            gmail =  ((UserDetails) principal).getUsername();
+        }
+        return gmail;
+    }
 }

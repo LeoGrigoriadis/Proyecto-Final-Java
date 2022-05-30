@@ -21,7 +21,7 @@ public class AuthController {
     private AuthService as;
  
     @GetMapping
-    public ResponseEntity<List<Auth>> getAll() {
+    public ResponseEntity<Object> getAll() {
         return ResponseEntity.status(200).body(as.getAll());
     }
 
@@ -36,7 +36,7 @@ public class AuthController {
 
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody Auth auth){
+    public ResponseEntity<Object> update(@RequestBody Auth auth){
         boolean flag = as.updateAuth(auth, auth.getGmail());
         if(flag == false || auth.getGmail().isEmpty()) return ResponseEntity.status(400).body("Incomplete data") ;
         as.save(auth);
@@ -45,13 +45,13 @@ public class AuthController {
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") String id) {
+    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
         as.deleteAuth(id);
         return ResponseEntity.status(200).body("Deleted Auth");
     }
 
     @GetMapping("/find-by-role/{gmail}")
-    public ResponseEntity<String> getRole(@PathVariable("gmail") String gmail) {
+    public ResponseEntity<Object> getRole(@PathVariable("gmail") String gmail) {
         return ResponseEntity.status(200).body(as.getRoleu(gmail));
     }
     @GetMapping("/find-by-gmail/{gmail}")

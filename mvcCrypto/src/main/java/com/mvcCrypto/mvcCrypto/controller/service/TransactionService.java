@@ -37,7 +37,15 @@ public class TransactionService {
         tr.update(transaction);
     }
 
+    public void cobrar(User_Coin uc){
+    tr.cobrar(uc);
+    }
+
+    public void cobrarTodo(User_Coin uc){
+        tr.cobraTodo(uc);
+    }
+
     public void depositar(User_Coin uc){
-    tr.depositar(uc);
+        tr.depositar(uc);
     }
 }

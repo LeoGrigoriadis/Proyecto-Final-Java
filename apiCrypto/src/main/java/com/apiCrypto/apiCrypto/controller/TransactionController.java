@@ -76,10 +76,10 @@ public class TransactionController {
     }
 */
     @PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
-    public ResponseEntity<Object> Depositar(@RequestBody User_Coin uc) {
+    public ResponseEntity<Object> Depositar(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
 
         try{
-            ts.depositar(uc.getBalance(), uc.getId_coin().getId_coin(), uc.getId_user().getId_user());
+            ts.depositar(balance,id_coin,id_user);
             return ResponseEntity.status(200).body("exito");
         }catch(Exception e){
             return ResponseEntity.status(400).body(" fallido");

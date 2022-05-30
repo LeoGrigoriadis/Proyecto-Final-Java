@@ -91,22 +91,85 @@ public class MasterController {
             tra.setType(true);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
-            //User user =us.getById(user_coin.getId_user_userCoin().getId_user());
-            System.out.println("1");
-            User user = us.getById(1);
-            System.out.println("2");
+            User user =us.getById(user_coin.getId_user_userCoin().getId_user());
+            //User user = us.getById(1);
             tra.setId_user(user);
-            System.out.println("3");
             CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
-            System.out.println("4");
             tra.setId_coin(coin);
-            System.out.println("5");
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
-            System.out.println("6");
             ts.save(tra);
-            System.out.println("7");
+            ts.cobrar(uc);
+
+            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            //       .addFlashAttribute("class", "success");
+            return "redirect:/app-view";
+        }catch (NullPointerException e){
+            e.fillInStackTrace();
+            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            //        .addFlashAttribute("class", "danger");
+            return "redirect:/app-view";
+        }
+    }
+
+
+    @PostMapping("/withdrawAll")
+    public  String withdrawAll(@ModelAttribute("user_coin") User_Coin user_coin){
+        try{
+            User_Coin uc = new User_Coin();
+            Transaction tra=new Transaction();
+
+
+            uc.setBalance(user_coin.getBalance());
+            uc.setId_user_userCoin(user_coin.getId_user_userCoin());
+            uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
+
+
+            tra.setType(true);
+            tra.setDate(new Timestamp(System.currentTimeMillis()));
+            tra.setBalance(user_coin.getBalance());
+            User user =us.getById(user_coin.getId_user_userCoin().getId_user());
+            //User user = us.getById(1);
+            tra.setId_user(user);
+            CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
+            tra.setId_coin(coin);
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
+            ts.save(tra);
             ts.depositar(uc);
-            System.out.println("8");
+
+            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            //       .addFlashAttribute("class", "success");
+            return "redirect:/app-view";
+        }catch (NullPointerException e){
+            e.fillInStackTrace();
+            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            //        .addFlashAttribute("class", "danger");
+            return "redirect:/app-view";
+        }
+    }
+
+    @PostMapping("/deposit")
+    public  String deposit(@ModelAttribute("user_coin") User_Coin user_coin){
+        try{
+            User_Coin uc = new User_Coin();
+            Transaction tra=new Transaction();
+
+
+            uc.setBalance(user_coin.getBalance());
+            uc.setId_user_userCoin(user_coin.getId_user_userCoin());
+            uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
+
+
+            tra.setType(true);
+            tra.setDate(new Timestamp(System.currentTimeMillis()));
+            tra.setBalance(user_coin.getBalance());
+            User user =us.getById(user_coin.getId_user_userCoin().getId_user());
+            //User user = us.getById(1);
+            tra.setId_user(user);
+            CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
+            tra.setId_coin(coin);
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
+            ts.save(tra);
+            ts.depositar(uc);
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
             //       .addFlashAttribute("class", "success");

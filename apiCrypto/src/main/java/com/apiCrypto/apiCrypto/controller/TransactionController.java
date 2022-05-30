@@ -25,7 +25,7 @@ public class TransactionController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Object> save(@RequestBody @Valid Transaction u) {
+    public ResponseEntity<Object> save(@RequestBody Transaction u) {
         boolean flag = ts.save(u);
         if (flag)
             return ResponseEntity.status(200).body("Success.");

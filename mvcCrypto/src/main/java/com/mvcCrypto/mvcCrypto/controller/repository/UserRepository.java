@@ -21,15 +21,15 @@ public class UserRepository {
     }
 
     public User getById(long id){
-        String url = "http://localhost:8090/api/Users/getOne/{var1}";
+        String url = "http://localhost:8090/api/Users/getOne/"+id;
         User user;
-        user = rt.getForObject(url, User.class,id);
+        user = rt.getForObject(url, User.class);
         return user;
     }
 
     public void delete(long id) {
-        String url = "http://localhost:8090/api/Users/delete/{var1}" ;
-        rt.delete(url,id);
+        String url = "http://localhost:8090/api/Users/delete/"+id ;
+        rt.delete(url);
     }
 
     public void save(User es) {

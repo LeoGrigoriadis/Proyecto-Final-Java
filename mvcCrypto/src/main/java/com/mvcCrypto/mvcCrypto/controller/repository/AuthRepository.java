@@ -26,8 +26,8 @@ public class AuthRepository {
 
 
     public void delete(long id) {
-        String url = "http://localhost:8090/api/Auth/delete/{var1}";
-        rt.delete(url,id);
+        String url = "http://localhost:8090/api/Auth/delete/"+id;
+        rt.delete(url);
     }
 
     public void save(Auth es) {
@@ -41,12 +41,12 @@ public class AuthRepository {
     }
 
     public Auth findByGmail(String gmail) {
-        String url = "http://localhost:8090/api/Auth/find-by-gmail/{gmail}";
-        return rt.getForObject(url, Auth.class, gmail);
+        String url = "http://localhost:8090/api/Auth/find-by-gmail/"+gmail;
+        return rt.getForObject(url, Auth.class);
     }
 
     public String getRole(String gmail) {
-        String url = "http://localhost:8090/api/Auth/find-by-role/{gmail}";
-        return rt.getForObject(url, String.class, gmail);
+        String url = "http://localhost:8090/api/Auth/find-by-role/"+gmail;
+        return rt.getForObject(url, String.class);
     }
 }

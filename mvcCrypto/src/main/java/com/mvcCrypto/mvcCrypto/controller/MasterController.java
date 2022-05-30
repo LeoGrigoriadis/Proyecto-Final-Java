@@ -6,6 +6,8 @@ import com.mvcCrypto.mvcCrypto.controller.service.*;
 
 import com.mvcCrypto.mvcCrypto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +40,6 @@ public class MasterController {
 
         @GetMapping("")
     public String getAll(Model model) {
-
         try {
 /*
 ArrayList<Object> array= new ArrayList<>();
@@ -55,6 +56,13 @@ for(int i=0;i<array2.size();i++){
 //array3.add(ces.getByName(cas.getOne("BTC").getId_coin()));
 array3.add(ces.getByName("BTC"));
 */
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String userAccount = "";
+    if (principal instanceof UserDetails) {
+        userAccount =  ((UserDetails) principal).getUsername();
+
+    }
+
     model.addAttribute("coins",ces.getAll());
     model.addAttribute("transaction", new Transaction());
     model.addAttribute("user_coin", new User_Coin());

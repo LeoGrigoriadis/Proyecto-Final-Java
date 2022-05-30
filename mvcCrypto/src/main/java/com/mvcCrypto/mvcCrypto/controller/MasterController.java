@@ -114,12 +114,12 @@ array3.add(ces.getByName("BTC"));
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
             //       .addFlashAttribute("class", "success");
-            return "redirect:/";
+            return "redirect:/AppView";
         }catch (NullPointerException e){
             e.fillInStackTrace();
             //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
             //        .addFlashAttribute("class", "danger");
-            return "redirect:/";
+            return "redirect:/AppView";
         }
     }
 

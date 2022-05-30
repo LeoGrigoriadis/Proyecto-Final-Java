@@ -1,7 +1,7 @@
 package com.apiCrypto.apiCrypto.controller;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 import com.apiCrypto.apiCrypto.model.User;
@@ -49,8 +49,7 @@ public class UserController {
 
     @GetMapping("/getOne/{id}")
     public ResponseEntity<Object> getOne(@PathVariable("id") Long id){
-            User user = us.getUser(id);
-
+        User user = us.getUser(id);
         return ResponseEntity.status(200).body(us.getUser(id));
 
     }

@@ -67,10 +67,6 @@ public class TransactionService {
          tR.CobrarTodo(id_coin, id_user);
     }
 
-/*
-    public Transaction make(){
-        return tR.makeTransaction();
-   }
-   */
+
 
 }

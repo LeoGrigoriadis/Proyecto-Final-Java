@@ -1,13 +1,18 @@
 package com.apiCrypto.apiCrypto.controller;
 
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.apiCrypto.apiCrypto.model.Transaction;
 import com.apiCrypto.apiCrypto.model.User_Coin;
+import com.apiCrypto.apiCrypto.reportes.TransactionPdfReport;
 import com.apiCrypto.apiCrypto.service.TransactionService;
+import com.lowagie.text.DocumentException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
@@ -109,4 +114,16 @@ public class TransactionController {
         }
     }
 
+    @GetMapping("/find-All-by-idUser/{id_user}")
+    public ResponseEntity<List<Transaction>> getByUserTransaction(@PathVariable("id_user") Long id){
+        return ResponseEntity.status(200).body(ts.getByUser(id));
+    }
+
+    @GetMapping("/TransactionReport/pdf/{id_user}")
+	public void reporteTransactionPDFbyUser(HttpServletResponse response, @PathVariable("id_user") long id) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition","attachment;filename=Transaction-ListPDF.pdf");
+		TransactionPdfReport pdf = new TransactionPdfReport(ts.getByUser(id));
+		pdf.export(response);
+	}
 }

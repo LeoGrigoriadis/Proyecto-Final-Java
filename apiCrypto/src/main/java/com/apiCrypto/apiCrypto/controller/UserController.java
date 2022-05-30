@@ -3,7 +3,6 @@ package com.apiCrypto.apiCrypto.controller;
 import java.util.List;
 import java.util.Optional;
 
-
 import com.apiCrypto.apiCrypto.model.User;
 import com.apiCrypto.apiCrypto.service.UserService;
  
@@ -22,7 +21,6 @@ public class UserController {
     public ResponseEntity<Object> getAll() {
         return ResponseEntity.status(200).body(us.getAll());
     }
-
 
      @PostMapping
     public ResponseEntity<Object> save(@RequestBody User u){
@@ -48,10 +46,8 @@ public class UserController {
     }
 
     @GetMapping("/getOne/{id}")
-    public ResponseEntity<Object> getOne(@PathVariable("id") Long id){
-        User user = us.getUser(id);
+    public ResponseEntity<Optional<User>> getOne(@PathVariable("id") Long id){
         return ResponseEntity.status(200).body(us.getUser(id));
-
     }
 
     @GetMapping("/find-by-gmail/{gmail}")

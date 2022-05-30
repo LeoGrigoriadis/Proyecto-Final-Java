@@ -47,9 +47,6 @@ public class UserController {
     }
 
     @GetMapping("/getOne/{id}")
-    public ResponseEntity<Object> getOne(@PathVariable("id") Long id){
-        User user = us.getUser(id);
-        return ResponseEntity.status(200).body(user);
     public ResponseEntity<Optional<User>> getOne(@PathVariable("id") Long id){
         return ResponseEntity.status(200).body(us.getUser(id));
     }

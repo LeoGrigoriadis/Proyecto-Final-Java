@@ -1,5 +1,6 @@
 package com.mvcCrypto.mvcCrypto.controller;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.mvcCrypto.mvcCrypto.controller.service.AuthService;
 import com.mvcCrypto.mvcCrypto.controller.service.UserService;
 import com.mvcCrypto.mvcCrypto.model.Auth;
@@ -8,6 +9,7 @@ import com.mvcCrypto.mvcCrypto.model.User;
 import com.mvcCrypto.mvcCrypto.model.UserAdapter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.Identifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.yaml.snakeyaml.tokens.Token.ID;
 
 import javax.validation.Valid;
 
@@ -40,7 +43,6 @@ public class RegisterController {
 
         User gmail =  us.getOne(uA.getGmail());
         
-
          if(gmail!= null){
             redirect.addFlashAttribute("message", "Gmail already in use");
             return "redirect:/signup";
@@ -51,12 +53,13 @@ public class RegisterController {
                 Auth auth = new Auth(uA.getGmail(), uA.getPassword(),role);
                 aS.save(auth);
 
-                User user = new User(1,uA.getFirstName(),uA.getLastName(),uA.getBirthday(),auth);
-
-               
+                User user = new User();
+                user.setFirst_name(uA.getFirstName());
+                user.setLast_name(uA.getLastName());
+                user.setBirthday(uA.getBirthday());
+                user.setGmail(auth);
+                us.save(user); 
                 
-                
-                us.save(gmail); 
                  redirect.addFlashAttribute("message", "User created Successfully");
                  return "redirect:/login";
          }

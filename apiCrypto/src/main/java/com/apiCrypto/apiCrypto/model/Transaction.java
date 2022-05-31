@@ -18,7 +18,7 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private User iduser;
+    private User id_user;
 
    /* @ManyToOne
     @JoinColumn(name = "id_user_destination")

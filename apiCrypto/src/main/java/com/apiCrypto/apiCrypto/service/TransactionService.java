@@ -5,8 +5,10 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.apiCrypto.apiCrypto.model.Transaction;
+import com.apiCrypto.apiCrypto.model.User;
 import com.apiCrypto.apiCrypto.repository.ITransactionRepository;
 
+import com.apiCrypto.apiCrypto.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,8 @@ public class TransactionService {
 
     @Autowired
     private ITransactionRepository tR;
+    @Autowired
+    private IUserRepository ur;
 
     public List<Transaction> getAll() {
         return tR.findAll();
@@ -37,7 +41,8 @@ public class TransactionService {
     }
 
     public List<Transaction> getByUser(long id, int num, int size) {
-        List<Transaction> movs=tR.findAllByIduser(id, PageRequest.of(num-1, size, Sort.by("date").descending()));
+        User user=ur.getById(id);
+        List<Transaction> movs=tR.findAllByIduser(user, PageRequest.of(num-1, size, Sort.by("date").descending()));
         return movs;
     }
 

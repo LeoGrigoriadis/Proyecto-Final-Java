@@ -3,6 +3,7 @@ package com.apiCrypto.apiCrypto.repository;
 
 import com.apiCrypto.apiCrypto.model.Transaction;
 
+import com.apiCrypto.apiCrypto.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,11 +20,10 @@ import javax.transaction.Transactional;
 @Repository
 public interface ITransactionRepository extends JpaRepository<Transaction, Long> {
 
-
     @Query(value = "Select * from (select * from transaction t order by t.date desc) t where t.id_user = :id", nativeQuery = true)
     public List<Transaction> getByIdUser(@Param("id") long id);
 
-    List<Transaction> findAllByIduser(long iduser, Pageable pageable);
+    List<Transaction> findAllByIduser(User user, Pageable pageable);
 
     List<Transaction> findAll();
 

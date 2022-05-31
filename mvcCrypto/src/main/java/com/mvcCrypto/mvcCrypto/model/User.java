@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotBlank;
 
 @AllArgsConstructor
@@ -18,10 +20,12 @@ public class User {
     @NotBlank
     private String last_name;
     @NotBlank
+    private Date birthday;
+    /*
     private Account_type account_type;
     @NotBlank
     private int account_points;
-
+    */
     @NotBlank
     private Auth gmail;
 

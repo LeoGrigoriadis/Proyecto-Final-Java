@@ -159,7 +159,7 @@ public class MasterController {
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
-
+            User user = us.getOne(us.getGmailActualSesion());
 
             uc.setBalance(user_coin.getBalance());
             uc.setId_user_userCoin(user_coin.getId_user_userCoin());
@@ -169,14 +169,13 @@ public class MasterController {
             tra.setType(false);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
-            User user = us.getOne(us.getGmailActualSesion());
-            //User user = us.getById(1);
             tra.setId_user(user);
             CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
             tra.setId_coin(coin);
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
+
+            ts.depositar(uc);
             ts.save(tra);
-            ts.cobrar(uc);
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
             //       .addFlashAttribute("class", "success");

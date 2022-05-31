@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfDocument;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -63,7 +65,13 @@ public class TransactionPdfReport {
         Document doc = new Document(PageSize.A4);
         PdfWriter.getInstance(doc, hsr.getOutputStream());
         doc.open();
-        Paragraph paragraph = new Paragraph("transaction movement");
+        
+        /*C:\Users\el_so\Documents\GitHub\Proyecto-Final-Java\apiCrypto\src\main\resources\static\img
+        Image imagen = Image.getInstance("C:/Users/el_so/Documents/GitHub/Proyecto-Final-Java/apiCrypto/src/main/resources/static/img/imagePdf.jpg");
+        imagen.getBorderColor();
+        doc.add(imagen);*/
+        
+        Paragraph paragraph = new Paragraph("Transaction movement");
         paragraph.setSpacingAfter(5);
         paragraph.setAlignment(paragraph.ALIGN_CENTER);
         doc.add(paragraph);
@@ -74,5 +82,5 @@ public class TransactionPdfReport {
         doc.close();
     }
 
-    }
+}
 

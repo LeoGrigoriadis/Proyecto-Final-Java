@@ -30,11 +30,12 @@ public class User {
 
     private Date birthday;
 
+    /*
     @ManyToOne
     @JoinColumn(name = "account_type")
     private Account_type account_type;
 
-    private int account_points;
+    private int account_points;*/
 
     //@NotEmpty(message = "name required")
     @OneToOne

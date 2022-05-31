@@ -80,28 +80,7 @@ public class MasterController {
         model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
         return "FormTransactions";
     }
-    /*
-    @PostMapping("/withdraw")
-    public String withdraw(@ModelAttribute("transaction") Transaction tr, RedirectAttributes redirect){
-        try{
-            System.out.println(tr);
-            tr.setType(true);
-            tr.setId_user();
-            tr.setDateTime(new Timestamp(System.currentTimeMillis()));
-            tr.setPrice_in_transaction(ces.getAll().getAsk());
-            System.out.println(tr);
-            ts.save(tr);
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-                    .addFlashAttribute("class", "success");
-            return "redirect:/";
-        }catch (NullPointerException e){
-            e.fillInStackTrace();
-            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-                    .addFlashAttribute("class", "danger");
-            return "redirect:/";
-        }
-    }
-*/
+
     @PostMapping("/withdraw")
     public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
@@ -209,7 +188,7 @@ public class MasterController {
 
 
     @PostMapping("/transfer")
-    public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@PathVariable("idDestino") long idDestino){
+    public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();

@@ -19,7 +19,7 @@ public class CoinExternoRepository {
     public Coin findUsdt() { Coin coin=rt.getForObject("https://criptoya.com/api/bitex/usdt/usd/0.1", Coin.class);
         coin.setName("Tether (USDT)");
         return coin;  }
-    public Coin findXrp() { Coin coin=rt.getForObject("https://criptoya.com/api/bitex/eth/usd/0.1", Coin.class);
+    public Coin findEth() { Coin coin=rt.getForObject("https://criptoya.com/api/bitex/eth/usd/0.1", Coin.class);
         coin.setName("Ethereum (ETH)");
         return coin;  }
     public Coin findUsdc() { Coin coin=rt.getForObject("https://criptoya.com/api/bitex/usdc/usd/0.1", Coin.class);

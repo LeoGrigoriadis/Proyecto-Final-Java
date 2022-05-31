@@ -22,6 +22,9 @@ public class MasterController {
 
     @Autowired
     private CoinExternoService ces;
+
+    @Autowired
+    private CoinExternoRepository ccc;
     @Autowired
     private CoinApiService cas;
     @Autowired
@@ -243,6 +246,98 @@ public class MasterController {
         }
     }
 
+
+    @PostMapping("/trade")
+    public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@PathVariable("idCoinDestino")String idCoinDestino){
+        try{
+            User_Coin uc = new User_Coin();
+            Transaction tra=new Transaction();
+            User_Coin ucDestino = new User_Coin();
+            Transaction traDestino=new Transaction();
+
+            double balance = user_coin.getBalance();
+
+
+            User user = us.getOne(us.getGmailActualSesion());
+            user_coin.getId_coin_userCoin().setId_coin(user_coin.getId_coin_userCoin().getId_coin().toLowerCase());
+
+            CoinAdapter coin= cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
+            CoinAdapter coinDestino = cas.getOne(idCoinDestino);
+
+
+            uc.setBalance(balance);
+            uc.setId_user_userCoin(user);
+            uc.setId_coin_userCoin(coin);
+
+            double cotOrigen=0;
+            double cotDestino=0;
+
+            for(Coin coinc : ces.getAll()){
+                if(coin.getId_coin().equals("btc")){
+                    cotOrigen = ccc.findBtc().getAsk();
+                }else if(coin.getId_coin().equals("eth")){
+                    cotOrigen = ccc.findXrp().getAsk();
+                }else if(coin.getId_coin().equals("usdc")){
+                    cotOrigen = ccc.findUsdc().getAsk();
+                }else if(coin.getId_coin().equals("usdt")){
+                    cotOrigen = ccc.findUsdt().getAsk();
+                }
+            }
+
+            for(Coin coinc : ces.getAll()){
+                if(coinDestino.getId_coin().equals("btc")){
+                    cotDestino = ccc.findBtc().getAsk();
+                }else if(coinDestino.getId_coin().equals("eth")){
+                    cotDestino = ccc.findXrp().getAsk();
+                }else if(coinDestino.getId_coin().equals("usdc")){
+                    cotDestino = ccc.findUsdc().getAsk();
+                }else if(coinDestino.getId_coin().equals("usdt")){
+                    cotDestino = ccc.findUsdt().getAsk();
+                }
+            }
+
+
+            double conversion = (balance*cotOrigen)/cotDestino;
+
+//100bc   -> x
+//       ->y
+            ucDestino.setBalance(conversion);
+            ucDestino.setId_user_userCoin(user);
+            ucDestino.setId_coin_userCoin(coinDestino);
+
+            tra.setType(true);
+            tra.setDate(new Timestamp(System.currentTimeMillis()));
+            tra.setBalance(balance);
+            tra.setId_user(user);
+            tra.setId_coin(coin);
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
+
+            traDestino.setType(false);
+            traDestino.setDate(new Timestamp(System.currentTimeMillis()));
+            traDestino.setBalance(conversion);
+            traDestino.setId_user(user);
+            traDestino.setId_coin(coinDestino);
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase()));
+
+            ts.cobrar(uc);
+            ts.save(tra);
+
+            ts.depositar(ucDestino);
+            ts.save(traDestino);
+
+
+
+
+            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            //       .addFlashAttribute("class", "success");
+            return "redirect:/app-view";
+        }catch (NullPointerException e){
+            e.fillInStackTrace();
+            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            //        .addFlashAttribute("class", "danger");
+            return "redirect:/app-view";
+        }
+    }
 
        /* @GetMapping("/{name}")
         public String findByName (Model model, @PathVariable("name") String name){

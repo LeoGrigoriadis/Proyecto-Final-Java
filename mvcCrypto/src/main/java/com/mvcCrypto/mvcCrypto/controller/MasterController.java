@@ -77,36 +77,34 @@ public class MasterController {
     }
 */
     @PostMapping("/withdraw")
-    public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin){
+    public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
-         User_Coin uc = new User_Coin();
-         Transaction tra=new Transaction();
+            User_Coin uc = new User_Coin();
+            Transaction tra=new Transaction();
 
+            User user = us.getOne(us.getGmailActualSesion());
+            user_coin.getId_coin_userCoin().setId_coin(user_coin.getId_coin_userCoin().getId_coin().toLowerCase());
 
             uc.setBalance(user_coin.getBalance());
-            uc.setId_user_userCoin(user_coin.getId_user_userCoin());
+            uc.setId_user_userCoin(user);
             uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
-
 
             tra.setType(true);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
-            User user =us.getById(user_coin.getId_user_userCoin().getId_user());
-            //User user = us.getById(1);
             tra.setId_user(user);
-            CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
-            tra.setId_coin(coin);
+            tra.setId_coin(cas.getOne(user_coin.getId_coin_userCoin().getId_coin()));
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
             ts.save(tra);
             ts.cobrar(uc);
 
-            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //       .addFlashAttribute("class", "success");
+            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+                   .addFlashAttribute("class", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-            //        .addFlashAttribute("class", "danger");
+            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+                    .addFlashAttribute("class", "danger");
             return "redirect:/app-view";
         }
     }

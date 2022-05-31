@@ -151,14 +151,15 @@ public class MasterController {
             tra.setType(true);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
-            User user =us.getById(user_coin.getId_user_userCoin().getId_user());
+            User user = us.getOne(us.getGmailActualSesion());
+
             //User user = us.getById(1);
             tra.setId_user(user);
             CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
             tra.setId_coin(coin);
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
             ts.save(tra);
-            ts.depositar(uc);
+            ts.cobrarTodo(uc);
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
             //       .addFlashAttribute("class", "success");
@@ -183,17 +184,74 @@ public class MasterController {
             uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
 
 
-            tra.setType(true);
+            tra.setType(false);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
-            User user =us.getById(user_coin.getId_user_userCoin().getId_user());
+            User user = us.getOne(us.getGmailActualSesion());
             //User user = us.getById(1);
             tra.setId_user(user);
             CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
             tra.setId_coin(coin);
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
             ts.save(tra);
-            ts.depositar(uc);
+            ts.cobrar(uc);
+
+            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            //       .addFlashAttribute("class", "success");
+            return "redirect:/app-view";
+        }catch (NullPointerException e){
+            e.fillInStackTrace();
+            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            //        .addFlashAttribute("class", "danger");
+            return "redirect:/app-view";
+        }
+    }
+
+
+    @PostMapping("/transfer")
+    public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@PathVariable("idDestino") long idDestino){
+        try{
+            User_Coin uc = new User_Coin();
+            Transaction tra=new Transaction();
+            User_Coin ucUserDestino = new User_Coin();
+            Transaction traUserDestino=new Transaction();
+            double balance = user_coin.getBalance();
+
+            User user = us.getOne(us.getGmailActualSesion());
+
+           CoinAdapter coin= cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
+
+            uc.setBalance(balance);
+            uc.setId_user_userCoin(user);
+            uc.setId_coin_userCoin(coin);
+
+            User userDestino = us.getById(idDestino);
+
+            ucUserDestino.setBalance(balance);
+            ucUserDestino.setId_user_userCoin(userDestino);
+            ucUserDestino.setId_coin_userCoin(coin);
+
+            tra.setType(true);
+            tra.setDate(new Timestamp(System.currentTimeMillis()));
+            tra.setBalance(balance);
+            tra.setId_user(user);
+            tra.setId_coin(coin);
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
+
+            traUserDestino.setType(false);
+            traUserDestino.setDate(new Timestamp(System.currentTimeMillis()));
+            traUserDestino.setBalance(balance);
+            traUserDestino.setId_user(userDestino);
+            traUserDestino.setId_coin(coin);
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase()));
+
+            ts.cobrar(uc);
+            ts.save(tra);
+
+            ts.depositar(ucUserDestino);
+            ts.save(traUserDestino);
+
+
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
             //       .addFlashAttribute("class", "success");

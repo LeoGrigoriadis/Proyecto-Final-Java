@@ -69,11 +69,11 @@ public class MasterController {
         return "ExternalEntity";
     }
 
-    @GetMapping("/all-transactions/{pagNum}/{pagSize}")
-    public String AllTransactions(Model model,@PathVariable int pagNum, @PathVariable int pagSize){
+    @GetMapping("/all-transactions")
+    public String AllTransactions(Model model){
         User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
         model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
-        model.addAttribute("movs",ts.getAll(user.getId_user(), pagNum, pagSize)); //lista de movimientos de la sesión actual
+        model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de movimientos de la sesión actual
         return "AllTransactions";
     }
 

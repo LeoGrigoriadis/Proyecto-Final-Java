@@ -14,9 +14,9 @@ public class TransactionRepository {
     @Autowired
     private RestTemplate rt;
 
-    public ArrayList<Transaction> findAll(long id, int num, int size){
-        String url = "http://localhost:8090/api/Transaction/{id}/{num}/{size}";
-        ArrayList<Transaction> transaction = rt.getForObject(url, ArrayList.class, id, num, size);
+    public ArrayList<Transaction> findAll(long id){
+        String url = "http://localhost:8090/api/Transaction/{id}";
+        ArrayList<Transaction> transaction = rt.getForObject(url, ArrayList.class, id);
         return transaction;
     }
 

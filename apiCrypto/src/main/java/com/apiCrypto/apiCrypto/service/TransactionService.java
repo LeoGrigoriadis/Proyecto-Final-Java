@@ -40,11 +40,11 @@ public class TransactionService {
         return tR.getByIdUser(id);
     }
 
-    public List<Transaction> getByUser(long id, int num, int size) {
+    /*public List<Transaction> getByUser(long id, int num, int size) {
         User user=ur.getById(id);
         List<Transaction> movs=tR.findAllByIduser(user, PageRequest.of(num-1, size, Sort.by("date").descending()));
         return movs;
-    }
+    }*/
 
     public void delete(long id) {
         tR.deleteById(id);

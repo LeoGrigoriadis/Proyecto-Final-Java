@@ -23,7 +23,7 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
     @Query(value = "Select * from (select * from transaction t order by t.date desc) t where t.id_user = :id", nativeQuery = true)
     public List<Transaction> getByIdUser(@Param("id") long id);
 
-    List<Transaction> findAllByIduser(User user, Pageable pageable);
+   //List<Transaction> findAllByIduser(User user, Pageable pageable);
 
     List<Transaction> findAll();
 

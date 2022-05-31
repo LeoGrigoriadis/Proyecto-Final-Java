@@ -24,7 +24,7 @@
         <label>Contraseña: </label>
         <input type="password" name="password"/>
         <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
-        <a href="#">¿Ya tienes una cuenta? Iniciá sesión</a>
+        <a th:href="@{/login}">¿Ya tienes una cuenta? Iniciá sesión</a>
       </div>
       <button class="button-border button-form-margin" type="submit">Registrarse</button>
     </form>

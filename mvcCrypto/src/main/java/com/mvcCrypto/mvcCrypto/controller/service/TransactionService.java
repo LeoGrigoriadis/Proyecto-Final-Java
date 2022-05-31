@@ -21,8 +21,8 @@ public class TransactionService {
         return tr.getOne(id);
     }
 
-    public ArrayList<Transaction> getAll(long id){
-        return tr.findAll(id);
+    public ArrayList<Transaction> getAll(long id, int num, int size){
+        return tr.findAll(id, num, size);
     }
 
     public  void delete(long id){

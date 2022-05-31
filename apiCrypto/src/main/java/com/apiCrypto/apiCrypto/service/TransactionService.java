@@ -1,15 +1,18 @@
 package com.apiCrypto.apiCrypto.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import com.apiCrypto.apiCrypto.model.Transaction;
-import com.apiCrypto.apiCrypto.model.User_Coin;
+import com.apiCrypto.apiCrypto.model.User;
 import com.apiCrypto.apiCrypto.repository.ITransactionRepository;
 
+import com.apiCrypto.apiCrypto.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +20,8 @@ public class TransactionService {
 
     @Autowired
     private ITransactionRepository tR;
+    @Autowired
+    private IUserRepository ur;
 
     public List<Transaction> getAll() {
         return tR.findAll();
@@ -33,6 +38,12 @@ public class TransactionService {
 
     public List<Transaction> getByUser(long id) {
         return tR.getByIdUser(id);
+    }
+
+    public List<Transaction> getByUser(long id, int num, int size) {
+        User user=ur.getById(id);
+        List<Transaction> movs=tR.findAllByIduser(user, PageRequest.of(num-1, size, Sort.by("date").descending()));
+        return movs;
     }
 
     public void delete(long id) {

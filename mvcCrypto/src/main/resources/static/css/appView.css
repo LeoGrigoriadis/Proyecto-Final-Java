@@ -116,6 +116,10 @@ article{
     overflow: auto;
 }
 
+.table{
+    margin:0px !important;
+}
+
 .invis #table-cell{
     height: calc(100% - 164px);
     text-align:center;

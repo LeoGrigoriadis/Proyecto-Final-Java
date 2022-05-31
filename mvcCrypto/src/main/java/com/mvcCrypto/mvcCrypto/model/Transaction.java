@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
+
 
 @AllArgsConstructor
 @NoArgsConstructor

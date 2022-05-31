@@ -70,5 +70,5 @@ public class TransactionService {
     }
 
 
-
+    public List<Transaction> getLastByUser(long id) { return tR.getLastByUser(id); }
 }

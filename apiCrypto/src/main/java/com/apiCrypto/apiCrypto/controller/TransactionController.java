@@ -24,16 +24,27 @@ public class TransactionController {
 
   @Autowired TransactionService ts;
 
-  @GetMapping("/{id}")
+<<<<<<< Updated upstream
+    @GetMapping("/{id}")
     public ResponseEntity<List<Transaction>> getAll(@PathVariable long id) {
         return ResponseEntity.status(200).body(ts.getByUser(id));
     }
+    @GetMapping("/last/{id}")
+    public ResponseEntity<List<Transaction>> getLast(@PathVariable long id) {
+        return ResponseEntity.status(200).body(ts.getLastByUser(id));
+    }
+=======
+  @GetMapping("/{id}")
+  public ResponseEntity<List<Transaction>> getAll(@PathVariable long id) {
+      return ResponseEntity.status(200).body(ts.getByUser(id));
+  }
+>>>>>>> Stashed changes
 
     @PostMapping("/save")
     public ResponseEntity<Object> save(@RequestBody Transaction u) {
         Transaction flag = ts.save(u);
         if (flag!=null)
-            return ResponseEntity.status(200).body(flag);
+        return ResponseEntity.status(200).body(flag);
         else
             return ResponseEntity.status(400).body("Error.");
     }
@@ -92,15 +103,15 @@ public class TransactionController {
     @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
     public ResponseEntity<Object> CobrarMonto(@PathVariable("balance") double balance, @PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
 
-            try{
-               ts.cobrarMonto(balance,id_coin,id_user);
+        try{
+            ts.cobrarMonto(balance,id_coin,id_user);
 
-            return ResponseEntity.status(200).body(true);
-            }catch(Exception e){
-                return ResponseEntity.status(400).body("Retiro fallido");
-            }
+         return ResponseEntity.status(200).body(true);
+         }catch(Exception e){
+             return ResponseEntity.status(400).body("Retiro fallido");
+         }
 
-    }
+ }
 
     @PutMapping("/cobrarTodo/{id_coin}/{id_user}")
     public ResponseEntity<Object> CobrarTodo(@PathVariable("id_coin") String id_coin, @PathVariable("id_user") long id_user) {
@@ -123,5 +134,5 @@ public class TransactionController {
 		response.setHeader("Content-Disposition","attachment;filename=Transaction-ListPDF.pdf");
 		TransactionPdfReport pdf = new TransactionPdfReport(ts.getByUser(id));
 		pdf.export(response);
-	}
+	} 
 }

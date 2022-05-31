@@ -49,7 +49,7 @@ public class MasterController {
             model.addAttribute("coins",ces.getAll()); //criptos de api externa
             model.addAttribute("transaction", new Transaction()); //objeto para crear nueva transacción
             model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
-            model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de ultimos movimientos de la sesión actual
+            model.addAttribute("movs",ts.getLast(user.getId_user())); //lista de ultimos movimientos de la sesión actual
             model.addAttribute("wallet",ucs.findAllByIdUser(user.getId_user())); //wallet de la sesión actual
             return "AppView";
         } catch (NullPointerException e) {
@@ -57,28 +57,32 @@ public class MasterController {
         }
         return "AppView";
     }
-    /*
-    @PostMapping("/withdraw")
-    public String withdraw(@ModelAttribute("transaction") Transaction tr, RedirectAttributes redirect){
-        try{
-            System.out.println(tr);
-            tr.setType(true);
-            tr.setId_user();
-            tr.setDateTime(new Timestamp(System.currentTimeMillis()));
-            tr.setPrice_in_transaction(ces.getAll().getAsk());
-            System.out.println(tr);
-            ts.save(tr);
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-                    .addFlashAttribute("class", "success");
-            return "redirect:/";
-        }catch (NullPointerException e){
-            e.fillInStackTrace();
-            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-                    .addFlashAttribute("class", "danger");
-            return "redirect:/";
-        }
+
+    @GetMapping("/external-entity")
+    public String ExternalEntity(Model model){
+        User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
+        model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
+        model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
+        return "ExternalEntity";
     }
-*/
+
+    @GetMapping("/all-transactions")
+    public String AllTransactions(Model model){
+        User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
+        model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
+        model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de movimientos de la sesión actual
+        return "AllTransactions";
+    }
+
+    @GetMapping("/form-transactions")
+    public String FormTransactions(Model model){
+        User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
+        model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
+        model.addAttribute("transaction", new Transaction()); //objeto para crear nueva transacción
+        model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
+        return "FormTransactions";
+    }
+
     @PostMapping("/withdraw")
     public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
@@ -112,61 +116,24 @@ public class MasterController {
         }
     }
 
-
-    @PostMapping("/withdrawAll")
-    public  String withdrawAll(@ModelAttribute("user_coin") User_Coin user_coin){
-        try{
-            User_Coin uc = new User_Coin();
-            Transaction tra=new Transaction();
-
-
-            uc.setBalance(user_coin.getBalance());
-            uc.setId_user_userCoin(user_coin.getId_user_userCoin());
-            uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
-
-
-            tra.setType(true);
-            tra.setDate(new Timestamp(System.currentTimeMillis()));
-            tra.setBalance(user_coin.getBalance());
-            User user = us.getOne(us.getGmailActualSesion());
-
-            //User user = us.getById(1);
-            tra.setId_user(user);
-            CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
-            tra.setId_coin(coin);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
-            ts.save(tra);
-            ts.cobrarTodo(uc);
-
-            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //       .addFlashAttribute("class", "success");
-            return "redirect:/app-view";
-        }catch (NullPointerException e){
-            e.fillInStackTrace();
-            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-            //        .addFlashAttribute("class", "danger");
-            return "redirect:/app-view";
-        }
-    }
-
     @PostMapping("/deposit")
     public  String deposit(@ModelAttribute("user_coin") User_Coin user_coin){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
+
             User user = us.getOne(us.getGmailActualSesion());
+            user_coin.getId_coin_userCoin().setId_coin(user_coin.getId_coin_userCoin().getId_coin().toLowerCase());
 
             uc.setBalance(user_coin.getBalance());
-            uc.setId_user_userCoin(user_coin.getId_user_userCoin());
+            uc.setId_user_userCoin(user);
             uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
-
 
             tra.setType(false);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
             tra.setId_user(user);
-            CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
-            tra.setId_coin(coin);
+            tra.setId_coin(cas.getOne(user_coin.getId_coin_userCoin().getId_coin()));
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
 
 
@@ -175,7 +142,7 @@ public class MasterController {
             ts.save(tra);
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //       .addFlashAttribute("class", "success");
+            //        .addFlashAttribute("class", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
@@ -187,7 +154,7 @@ public class MasterController {
 
 
     @PostMapping("/transfer")
-    public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@PathVariable("idDestino") long idDestino){
+    public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -244,7 +211,7 @@ public class MasterController {
 
 
     @PostMapping("/trade")
-    public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@PathVariable("idCoinDestino")String idCoinDestino){
+    public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -272,7 +239,7 @@ public class MasterController {
                 if(coin.getId_coin().equals("btc")){
                     cotOrigen = ccc.findBtc().getAsk();
                 }else if(coin.getId_coin().equals("eth")){
-                    cotOrigen = ccc.findXrp().getAsk();
+                    cotOrigen = ccc.findEth().getAsk();
                 }else if(coin.getId_coin().equals("usdc")){
                     cotOrigen = ccc.findUsdc().getAsk();
                 }else if(coin.getId_coin().equals("usdt")){
@@ -284,7 +251,7 @@ public class MasterController {
                 if(coinDestino.getId_coin().equals("btc")){
                     cotDestino = ccc.findBtc().getAsk();
                 }else if(coinDestino.getId_coin().equals("eth")){
-                    cotDestino = ccc.findXrp().getAsk();
+                    cotDestino = ccc.findEth().getAsk();
                 }else if(coinDestino.getId_coin().equals("usdc")){
                     cotDestino = ccc.findUsdc().getAsk();
                 }else if(coinDestino.getId_coin().equals("usdt")){

@@ -62,7 +62,6 @@ public class MasterController {
     public String ExternalEntity(Model model){
         User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
         model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
-        model.addAttribute("transaction", new Transaction()); //objeto para crear nueva transacción
         model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
         return "ExternalEntity";
     }
@@ -117,68 +116,30 @@ public class MasterController {
         }
     }
 
-
-    @PostMapping("/withdrawAll")
-    public  String withdrawAll(@ModelAttribute("user_coin") User_Coin user_coin){
-        try{
-            User_Coin uc = new User_Coin();
-            Transaction tra=new Transaction();
-
-
-            uc.setBalance(user_coin.getBalance());
-            uc.setId_user_userCoin(user_coin.getId_user_userCoin());
-            uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
-
-
-            tra.setType(true);
-            tra.setDate(new Timestamp(System.currentTimeMillis()));
-            tra.setBalance(user_coin.getBalance());
-            User user = us.getOne(us.getGmailActualSesion());
-
-            //User user = us.getById(1);
-            tra.setId_user(user);
-            CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
-            tra.setId_coin(coin);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
-            ts.save(tra);
-            ts.cobrarTodo(uc);
-
-            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //       .addFlashAttribute("class", "success");
-            return "redirect:/app-view";
-        }catch (NullPointerException e){
-            e.fillInStackTrace();
-            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-            //        .addFlashAttribute("class", "danger");
-            return "redirect:/app-view";
-        }
-    }
-
     @PostMapping("/deposit")
     public  String deposit(@ModelAttribute("user_coin") User_Coin user_coin){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
+
             User user = us.getOne(us.getGmailActualSesion());
+            user_coin.getId_coin_userCoin().setId_coin(user_coin.getId_coin_userCoin().getId_coin().toLowerCase());
 
             uc.setBalance(user_coin.getBalance());
-            uc.setId_user_userCoin(user_coin.getId_user_userCoin());
+            uc.setId_user_userCoin(user);
             uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
-
 
             tra.setType(false);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
             tra.setId_user(user);
-            CoinAdapter coin = cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
-            tra.setId_coin(coin);
+            tra.setId_coin(cas.getOne(user_coin.getId_coin_userCoin().getId_coin()));
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
-
             ts.depositar(uc);
             ts.save(tra);
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //       .addFlashAttribute("class", "success");
+            //        .addFlashAttribute("class", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();

@@ -24,9 +24,9 @@ public class TransactionController {
 
   @Autowired TransactionService ts;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<Transaction>> getAll(@PathVariable long id) {
-        return ResponseEntity.status(200).body(ts.getByUser(id));
+    @GetMapping("/{id}/{num}/{size}")
+    public ResponseEntity<List<Transaction>> getAll(@PathVariable long id, @PathVariable int num, @PathVariable int size) {
+        return ResponseEntity.status(200).body(ts.getByUser(id, num, size));
     }
     @GetMapping("/last/{id}")
     public ResponseEntity<List<Transaction>> getLast(@PathVariable long id) {

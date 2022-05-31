@@ -62,12 +62,11 @@ section a{
        border-radius: 0px;
        margin: 0px;
        width: 100% !important;
+       position: static !important;
+       transform: translate(0%, 0%);
+       z-index: 2;
     }
     .contain{
-        width: 100%;
-        margin: 0px;
-    }
-    footer{
-        position: absolute !important;
+        height:auto !important;
     }
 }

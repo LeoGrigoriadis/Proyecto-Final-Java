@@ -1,12 +1,9 @@
 package com.mvcCrypto.mvcCrypto.controller.repository;
 
-import com.mvcCrypto.mvcCrypto.model.Coin;
 import com.mvcCrypto.mvcCrypto.model.Transaction;
-import com.mvcCrypto.mvcCrypto.model.User;
 import com.mvcCrypto.mvcCrypto.model.User_Coin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -17,12 +14,10 @@ public class TransactionRepository {
     @Autowired
     private RestTemplate rt;
 
-    public ArrayList<Transaction> findAll(long id){
-        String url = "http://localhost:8090/api/Transaction/{id}";
-        ArrayList<Transaction> transaction = new ArrayList<>();
-        return transaction = rt.getForObject(url, ArrayList.class, id);
-
-
+    public ArrayList<Transaction> findAll(long id, int num, int size){
+        String url = "http://localhost:8090/api/Transaction/{id}/{num}/{size}";
+        ArrayList<Transaction> transaction = rt.getForObject(url, ArrayList.class, id, num, size);
+        return transaction;
     }
 
     public Transaction getOne(long id){

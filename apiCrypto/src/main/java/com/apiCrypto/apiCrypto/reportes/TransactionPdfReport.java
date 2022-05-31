@@ -45,7 +45,7 @@ public class TransactionPdfReport {
     {
         for(Transaction t: transactionList)
         {
-        		table.addCell(t.getId_user().getFirst_name());
+        		table.addCell(t.getIduser().getFirst_name());
         		table.addCell(String.valueOf(t.getDate()));
                 if(t.isType() == true){
                     table.addCell("Deposito");

@@ -6,15 +6,12 @@ import com.mvcCrypto.mvcCrypto.controller.service.*;
 
 import com.mvcCrypto.mvcCrypto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("")
@@ -37,8 +34,14 @@ public class MasterController {
     private UserService us;
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login() {
         return "Login";
+    }
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        //model.addAttribute("user",new UserAdapter());  //el usuario en sesión actual llevado a la vista
+        return "Register";
     }
 
     @GetMapping("/app-view")
@@ -66,11 +69,11 @@ public class MasterController {
         return "ExternalEntity";
     }
 
-    @GetMapping("/all-transactions")
-    public String AllTransactions(Model model){
+    @GetMapping("/all-transactions/{pagNum}/{pagSize}")
+    public String AllTransactions(Model model,@PathVariable int pagNum, @PathVariable int pagSize){
         User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
         model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
-        model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de movimientos de la sesión actual
+        model.addAttribute("movs",ts.getAll(user.getId_user(), pagNum, pagSize)); //lista de movimientos de la sesión actual
         return "AllTransactions";
     }
 

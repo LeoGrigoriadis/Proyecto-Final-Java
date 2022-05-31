@@ -248,7 +248,7 @@ public class MasterController {
 
 
     @PostMapping("/trade")
-    public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@PathVariable("idCoinDestino")String idCoinDestino){
+    public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -276,7 +276,7 @@ public class MasterController {
                 if(coin.getId_coin().equals("btc")){
                     cotOrigen = ccc.findBtc().getAsk();
                 }else if(coin.getId_coin().equals("eth")){
-                    cotOrigen = ccc.findXrp().getAsk();
+                    cotOrigen = ccc.findEth().getAsk();
                 }else if(coin.getId_coin().equals("usdc")){
                     cotOrigen = ccc.findUsdc().getAsk();
                 }else if(coin.getId_coin().equals("usdt")){
@@ -288,7 +288,7 @@ public class MasterController {
                 if(coinDestino.getId_coin().equals("btc")){
                     cotDestino = ccc.findBtc().getAsk();
                 }else if(coinDestino.getId_coin().equals("eth")){
-                    cotDestino = ccc.findXrp().getAsk();
+                    cotDestino = ccc.findEth().getAsk();
                 }else if(coinDestino.getId_coin().equals("usdc")){
                     cotDestino = ccc.findUsdc().getAsk();
                 }else if(coinDestino.getId_coin().equals("usdt")){

@@ -48,4 +48,6 @@ public class TransactionService {
     public void depositar(User_Coin uc){
         tr.depositar(uc);
     }
+
+    public ArrayList<Transaction> getLast(long id_user) { return tr.getLast(id_user); }
 }

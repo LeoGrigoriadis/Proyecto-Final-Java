@@ -21,7 +21,7 @@ public class CoinExternoService {
     public ArrayList<Coin> getAll() {
         ArrayList<Coin> coins= new ArrayList<>();
         coins.add(cr.findBtc());
-        coins.add(cr.findXrp());
+        coins.add(cr.findEth());
         coins.add(cr.findUsdt());
         coins.add(cr.findUsdc());
         return coins;

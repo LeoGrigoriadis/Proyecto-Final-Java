@@ -24,9 +24,13 @@ public class TransactionController {
 
   @Autowired TransactionService ts;
 
-  @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<List<Transaction>> getAll(@PathVariable long id) {
         return ResponseEntity.status(200).body(ts.getByUser(id));
+    }
+    @GetMapping("/last/{id}")
+    public ResponseEntity<List<Transaction>> getLast(@PathVariable long id) {
+        return ResponseEntity.status(200).body(ts.getLastByUser(id));
     }
 
     @PostMapping("/save")

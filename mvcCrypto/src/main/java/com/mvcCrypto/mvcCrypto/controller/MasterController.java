@@ -169,6 +169,8 @@ public class MasterController {
             tra.setId_coin(coin);
             tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
 
+
+
             ts.depositar(uc);
             ts.save(tra);
 

@@ -1,5 +1,7 @@
 :root{
     --background: #E6EAF2;
+    --danger: #d45959;
+    --success: #7fE371;
 }
 
 body{
@@ -25,7 +27,23 @@ section{
 }
 
 section h4{
+    padding-left: 18%;
     padding-bottom: 15px;
+    display:inline-block;
+}
+
+section a{
+    float: right;
+}
+
+.dep{
+    color:white;
+    background-color: var(--success);
+}
+
+.ret{
+    color:white;
+    background-color: var(--danger);
 }
 
 @Media(max-width: 1400px){

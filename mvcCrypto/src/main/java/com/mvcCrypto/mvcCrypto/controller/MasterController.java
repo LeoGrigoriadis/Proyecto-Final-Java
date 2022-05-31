@@ -59,8 +59,26 @@ public class MasterController {
     public String ExternalEntity(Model model){
         User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
         model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
-        model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de movimientos de la sesión actual
+        model.addAttribute("transaction", new Transaction()); //objeto para crear nueva transacción
+        model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
         return "ExternalEntity";
+    }
+
+    @GetMapping("/all-transactions")
+    public String AllTransactions(Model model){
+        User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
+        model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
+        model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de movimientos de la sesión actual
+        return "AllTransactions";
+    }
+
+    @GetMapping("/form-transactions")
+    public String FormTransactions(Model model){
+        User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
+        model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
+        model.addAttribute("transaction", new Transaction()); //objeto para crear nueva transacción
+        model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
+        return "FormTransactions";
     }
     /*
     @PostMapping("/withdraw")

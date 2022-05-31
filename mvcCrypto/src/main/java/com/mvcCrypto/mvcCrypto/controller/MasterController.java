@@ -46,13 +46,21 @@ public class MasterController {
             model.addAttribute("coins",ces.getAll()); //criptos de api externa
             model.addAttribute("transaction", new Transaction()); //objeto para crear nueva transacción
             model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
-            model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de ultimos movimientos de la sesión actual
+            model.addAttribute("movs",ts.getLast(user.getId_user())); //lista de ultimos movimientos de la sesión actual
             model.addAttribute("wallet",ucs.findAllByIdUser(user.getId_user())); //wallet de la sesión actual
             return "AppView";
         } catch (NullPointerException e) {
             e.fillInStackTrace();
         }
         return "AppView";
+    }
+
+    @GetMapping("/external-entity")
+    public String ExternalEntity(Model model){
+        User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
+        model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
+        model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de movimientos de la sesión actual
+        return "ExternalEntity";
     }
     /*
     @PostMapping("/withdraw")

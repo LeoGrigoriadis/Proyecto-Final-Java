@@ -1,4 +1,4 @@
-package com.apiCrypto.apiCrypto.reportes;
+package com.mvcCrypto.mvcCrypto.reportes;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -8,16 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.PdfDocument;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import com.apiCrypto.apiCrypto.model.Transaction;
+import com.mvcCrypto.mvcCrypto.model.Transaction;
 
 public class TransactionPdfReport {
     List<Transaction> transactionList;
@@ -50,9 +48,9 @@ public class TransactionPdfReport {
         		table.addCell(t.getId_user().getFirst_name());
         		table.addCell(String.valueOf(t.getDate()));
                 if(t.isType() == true){
-                    table.addCell("Deposito");
-                }else{
                     table.addCell("Extraccion");
+                }else{
+                    table.addCell("Deposito");
                 }
         		table.addCell(String.valueOf(t.getPrice_in_transaction()));
         		table.addCell(t.getId_coin().getName()) ;

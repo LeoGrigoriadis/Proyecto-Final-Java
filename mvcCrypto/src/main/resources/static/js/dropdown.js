@@ -23,3 +23,6 @@ function trans(){
     document. getElementById("clo").style.display="none";
     document. getElementById("us").style.display="block";
   }
+  function close_alert(){
+    document. getElementById("alert").style.display="none";
+  }

@@ -8,6 +8,7 @@
         <script src="js/dropdown.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/navbar.css" media="screen">
         <link rel="stylesheet" type="text/css" href="/css/footer.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/alert.css" media="screen">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -45,6 +46,12 @@
             <a th:href="@{/login}" id="start">Comenzar</a>
         </nav>
     </div>
+
+    <button th:fragment="alert" id="alert" onclick="close_alert()">
+        <div th:classappend="' ' + (${active != null} ? ${active} : info)" th:if="${message != null}"
+             th:text="${message}" class="alert">
+        </div>
+    </button>
 
     <div th:fragment="footer">
         <footer>

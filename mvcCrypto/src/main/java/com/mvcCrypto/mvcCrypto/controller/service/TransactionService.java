@@ -11,11 +11,8 @@ import java.util.ArrayList;
 
 @Service
 public class TransactionService {
-
     @Autowired
     private TransactionRepository tr;
-
-
 
     public Transaction findById (long id){
         return tr.getOne(id);
@@ -50,4 +47,5 @@ public class TransactionService {
     }
 
     public ArrayList<Transaction> getLast(long id_user) { return tr.getLast(id_user); }
+
 }

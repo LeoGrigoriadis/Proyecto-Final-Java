@@ -6,9 +6,9 @@
   <link rel="icon" href="img/logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="js/dropdown.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/navbar.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="css/index.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="css/footer.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="/css/navbar.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="/css/index.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="/css/footer.css" media="screen">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -16,10 +16,28 @@
 <body>
 <div id="nav">
   <nav>
-    <a href="#"><img src="img/logotipo.png"></a>
-    <a href="#" id="start">Comenzar</a>
+    <a href="http://localhost:8000/"><img src="/img/logotipo.png"></a>
+    <a href="http://localhost:8000/login" id="start">Comenzar</a>
   </nav>
 </div>
+
+<div class="contain">
+  <section class="col-sm-4">
+    <div class="content">
+      <h2>Bienvenido a nuestro servicio <b>Crypto Wallet</b></h2>
+      <h4>Obtén acceso a tu billetera virtual desde
+          cualquier lugar.<br> Mira las cotizaciones en tiempo real,
+          realiza transacciones, tradea criptomonedas y retira en
+          en el momento que lo necesites.
+      </h4>
+      <a href="http://localhost:8000/login"> Comenzar </a>
+    </div>
+  </section>
+  <section class="col-sm-8">
+      <img src="/img/img_index.jpg">
+  </section>
+</div>
+
 <footer>
   <p style="margin:2px">©® Equipo Uno</p>
   <p>

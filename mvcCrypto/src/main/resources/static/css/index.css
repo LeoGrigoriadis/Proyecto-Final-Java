@@ -1,4 +1,77 @@
+:root{
+    --font-Shippori: 'Shippori Antique', sans-serif;
+    --principal: #729DF2;
+    --principal-oscuro: #4465A6;
+    --background: #E6EAF2;
+    --font-Montserrat: 'Montserrat', sans-serif;
+}
 
-footer{
-    position: static !important;
+.contain{
+    width: calc(100% - 40px) !important;
+    height: calc(100vh - 120px) !important;
+    margin: 0 auto;
+    font-family: var(--font-Shippori) !important;
+}
+
+section{
+    height: calc(100vh - 120px) !important;
+}
+
+.col-sm-4{
+    display:block !important;
+    text-align: left !important;
+    font-family: var(--font-Montserrat) !important;
+}
+
+h2{
+    margin: 17vh 0 0 0 !important;
+}
+
+h4{
+    margin: 5vh 0 0 0 !important;
+}
+
+.col-sm-4 a{
+    display: inline-block;
+    margin: 5vh 0 0 0 !important;
+    background-color: var(--principal);
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    text-decoration: none !important;
+    font-size: 16px;
+}
+
+.col-sm-4 a:hover{
+    background-color: var(--principal-oscuro);
+    color: white;
+    cursor: pointer;
+}
+
+.content{
+    vertical-align: center;
+    display:inline-block;
+}
+
+.col-sm-8{
+    overflow:hidden;
+    display:block;
+}
+
+.col-sm-8 img{
+    height:100%;
+}
+
+@Media(max-width: 767px){
+    .col-sm-8 img{
+        height:auto;
+        width:100%;
+    }
+    h2{
+        margin: 30px 0 0 0 !important;
+    }
+
+    section{
+        height: auto !important;
+    }
 }

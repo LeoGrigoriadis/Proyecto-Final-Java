@@ -42,6 +42,6 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Long>
     @Query(value="UPDATE user_coin SET user_coin.balance = user_coin.balance - user_coin.balance WHERE  user_coin.id_coin= :id_coin AND user_coin.id_user= :id_user", nativeQuery=true)
     public void CobrarTodo(@Param("id_coin") String id_coin, @Param("id_user") long id_user);
 
-    @Query(value = "Select * from (select * from transaction t order by t.date desc limit 6) t where t.id_user = :id", nativeQuery = true)
+    @Query(value = "Select * from (select * from transaction t order by t.date desc limit 8) t where t.id_user = :id", nativeQuery = true)
     List<Transaction> getLastByUser(@Param("id") long id);
 }

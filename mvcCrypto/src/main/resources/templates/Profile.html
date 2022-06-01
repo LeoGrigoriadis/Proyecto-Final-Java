@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar perfil</title>
+    <link rel="icon" href="img/logo.png">
+    <div th:insert="../static/layout::header"></div>
+    <link rel="stylesheet" type="text/css" href="css/formStyle.css" media="screen">
+</head>
+<body>
+    <div th:insert="../static/layout::navbar"></div>
+    <div class="contain">
+        <section class="col-sm-4">
+            <h4>Editar perfil</h4>
+            <form th:action="@{/update}" th:object="${user}" method="post">
+                <div>
+                    <label>Nombre: </label>
+                    <input type="text" name="first_name" th:value="*{first_name}" th:field="*{first_name}"/><br>
+                    <label>Apellido: </label>
+                    <input type="text" name="last_name" th:value="*{last_name}" th:field="*{last_name}"/><br>
+                    <label>Fecha de Nacimiento: </label>
+                    <input type="date" name="birthday" th:value="*{birthday}" th:field="*{birthday}"/><br>
+                    <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
+                </div>
+                <button class="button-border button-form-margin" type="submit">Editar</button>
+            </form>
+        </section>
+    </div>
+    <div th:insert="../static/layout::footer"></div>
+</body>
+</html>

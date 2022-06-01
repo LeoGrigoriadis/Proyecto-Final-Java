@@ -22,13 +22,13 @@ public class AuthService {
         return au.findAll();
     }
 
-    public boolean save(Auth u) {
+    public Auth save(Auth u) {
         try {
-                au.save(u);
-                return true;
+                Auth auth=au.save(u);
+                return auth;
      
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 

@@ -1,6 +1,7 @@
 package com.apiCrypto.apiCrypto.service;
 
 
+import com.apiCrypto.apiCrypto.model.Transaction;
 import com.apiCrypto.apiCrypto.model.User_Coin;
 import com.apiCrypto.apiCrypto.repository.IUserCoinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,12 @@ public class User_CoinService {
         return ucR.findByUserId(idUser);
     }
 
-    public Boolean save(User_Coin uc) {
-        try{
-            ucR.save(uc);
-            return true;
-        }catch(Exception e){
-            return false;
+    public User_Coin save(User_Coin uc) {
+        try {
+            User_Coin us =ucR.save(uc);
+            return us;
+        } catch (Exception e) {
+            return null;
         }
         
     }

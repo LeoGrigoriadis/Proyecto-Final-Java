@@ -57,9 +57,9 @@
       <article>
         <div class="top-article">
           <h4>Últimos 6 movimientos</h4>
-          <a th:href="@{/all-transactions}">Ver todos</a>
+          <a th:href="@{/get-pdf}">descargar PDF</a>
         </div>
-        <table class ="table table-hover" >
+        <table class ="table table-hover">
           <thead>
           <tr>
             <th class="text-center"> moneda </th>
@@ -110,7 +110,6 @@
           </label>
           <label id="trade">
             <h4>Realizar cambio</h4>
-            <!--th:action="@{/user/trade}" th:object="${trade}" method="post"-->
             <form th:action="@{/trade}" th:object="${user_coin}" method="post">
               <div>
                 <label>Moneda incial: </label>
@@ -127,7 +126,6 @@
           </label>
           <label id="transfer">
             <h4>Realizar transferencia</h4>
-            <!--th:action="@{/user/trade}" th:object="${trade}" method="post"-->
             <form th:action="@{/transfer}" th:object="${user_coin}" method="post">
               <div>
                 <label>Destinatario: </label>
@@ -147,6 +145,7 @@
       </div>
     </section>
   </div>
+<button th:replace="../static/layout::alert"></button>
 <div id="footer" th:insert="../static/layout::footer"></div>
 </body>
 </html>

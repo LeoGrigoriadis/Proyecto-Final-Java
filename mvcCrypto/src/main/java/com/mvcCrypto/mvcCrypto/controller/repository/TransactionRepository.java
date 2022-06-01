@@ -65,9 +65,4 @@ public class TransactionRepository {
         ArrayList<Transaction> transaction = new ArrayList<>();
         return transaction = rt.getForObject(url, ArrayList.class, id_user);
     }
-
-    public void TransactionReport(long id_user){
-        String url = "http://localhost:8090/api/Transaction/TransactionReport/pdf/{id}";
-        rt.put(url,id_user);
-    }
 }

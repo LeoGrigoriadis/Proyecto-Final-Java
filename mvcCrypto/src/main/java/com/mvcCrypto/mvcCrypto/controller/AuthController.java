@@ -1,14 +1,13 @@
 package com.mvcCrypto.mvcCrypto.controller;
 
 import com.mvcCrypto.mvcCrypto.controller.service.AuthService;
+import com.mvcCrypto.mvcCrypto.controller.service.UserCoinService;
 import com.mvcCrypto.mvcCrypto.controller.service.UserService;
-import com.mvcCrypto.mvcCrypto.model.Auth;
-import com.mvcCrypto.mvcCrypto.model.Role;
-import com.mvcCrypto.mvcCrypto.model.User;
-import com.mvcCrypto.mvcCrypto.model.UserAdapter;
+import com.mvcCrypto.mvcCrypto.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +27,10 @@ public class AuthController {
     private UserService us;
 
     @Autowired
-    BCryptPasswordEncoder encoder;
+    private UserCoinService ucs;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @GetMapping("/login")
     public String login() {
@@ -40,7 +42,6 @@ public class AuthController {
         model.addAttribute("user", new UserAdapter());
         return "Register";
     }
-
     
     @PostMapping("/register")
     public String SignUp(@ModelAttribute("user")UserAdapter uA, RedirectAttributes redirect) {
@@ -49,7 +50,7 @@ public class AuthController {
         
          if(gmail!= null){
             redirect.addFlashAttribute("message", "Gmail already in use")
-                    .addFlashAttribute("alert", "danger");
+                    .addFlashAttribute("active", "danger");
             return "redirect:/register";
         }else{
             Role role = new Role();
@@ -65,15 +66,38 @@ public class AuthController {
             user.setGmail(auth);
             us.save(user);
 
+            setUser_Coins(user);
+
             redirect.addFlashAttribute("message", "User created Successfully")
-                    .addFlashAttribute("alert", "success");
+                    .addFlashAttribute("active", "success");
             return "redirect:/login";
          }
 
-
-
-
     }
+    public void setUser_Coins(User user){
+        System.out.println(user);
+        CoinAdapter coin1= new CoinAdapter();
+        coin1.setId_coin("btc");
+        coin1.setName("Bitcoin");
+        CoinAdapter coin2= new CoinAdapter();
+        coin2.setId_coin("eth");
+        coin2.setName("Ethereum");
+        CoinAdapter coin3= new CoinAdapter();
+        coin3.setId_coin("usdt");
+        coin3.setName("Tether");
+        CoinAdapter coin4= new CoinAdapter();
+        coin4.setId_coin("usdc");
+        coin4.setName("USD Coin");
+        System.out.println(coin1);
+
+        System.out.println(new User_Coin(0, coin1, 0,user));
+        ucs.save(new User_Coin(0, coin1, 0,user));
+        ucs.save(new User_Coin(0, coin2, 0,user));
+        ucs.save(new User_Coin(0, coin3, 0,user));
+        ucs.save(new User_Coin(0, coin4, 0,user));
+    }
+
+
 /*
     @Autowired
     UserService uS;

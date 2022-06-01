@@ -24,7 +24,7 @@ html{
 }
 
 body{
-    background-color: white;
+    background-color:var(--background);
 }
 
 section{

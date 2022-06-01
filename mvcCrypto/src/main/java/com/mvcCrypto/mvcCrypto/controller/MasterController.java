@@ -59,14 +59,6 @@ public class MasterController {
         return "ExternalEntity";
     }
 
-    @GetMapping("/all-transactions")
-    public String AllTransactions(Model model){
-        User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
-        model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
-        model.addAttribute("movs",ts.getAll(user.getId_user())); //lista de movimientos de la sesión actual
-        return "AllTransactions";
-    }
-
     @GetMapping("/form-transactions")
     public String FormTransactions(Model model){
         User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
@@ -99,12 +91,12 @@ public class MasterController {
             ts.cobrar(uc);
 
             redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-                   .addFlashAttribute("class", "success");
+                   .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
             redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-                    .addFlashAttribute("class", "danger");
+                    .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
     }
@@ -135,16 +127,15 @@ public class MasterController {
             ts.save(tra);
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //        .addFlashAttribute("class", "success");
+            //        .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
             //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-            //        .addFlashAttribute("class", "danger");
+            //        .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
     }
-
 
     @PostMapping("/transfer")
     public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino){
@@ -192,12 +183,12 @@ public class MasterController {
 
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //       .addFlashAttribute("class", "success");
+            //       .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
             //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-            //        .addFlashAttribute("class", "danger");
+            //        .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
     }
@@ -285,23 +276,13 @@ public class MasterController {
 
 
             //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //       .addFlashAttribute("class", "success");
+            //       .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
             //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-            //        .addFlashAttribute("class", "danger");
+            //        .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
     }
-
-       /* @GetMapping("/{name}")
-        public String findByName (Model model, @PathVariable("name") String name){
-
-            model.addAttribute("coinName", ces.getByName(name));
-
-
-            return "Index";
-        }*/
-
 }

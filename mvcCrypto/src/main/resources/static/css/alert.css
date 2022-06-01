@@ -1,0 +1,28 @@
+:root{
+    --success: #7fE371;
+    --danger: #d45959;
+    --font-Montserrat: 'Montserrat', sans-serif;
+    --background: #E6EAF2;
+}
+
+.alert{
+    margin: 0px !important;
+    font-family: var(--font-Montserrat) !important;
+    display:none;
+    position: absolute;
+    bottom: 75px;
+    left: 15px;
+    width: 100%;
+    max-width: 400px;
+    color: white;
+}
+
+.danger{
+    display: block;
+    background-color: var(--danger);
+}
+
+.success{
+    display: block;
+    background-color: var(--success);
+}

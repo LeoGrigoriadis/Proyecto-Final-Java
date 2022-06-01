@@ -25,12 +25,11 @@ public class User_CoinController {
         return ResponseEntity.status(200).body(service.getAll());
     }
 
-    @PostMapping
-    public ResponseEntity<Object> save(@RequestBody User_Coin u){
-        boolean flag = service.save(u);
-        if(flag ==false) return ResponseEntity.status(400).body("Incomplete data") ;
-        service.save(u);
-        return ResponseEntity.status(201).body("Saved user");
+    @PostMapping("/save")
+    public ResponseEntity<User_Coin> save(@RequestBody User_Coin u){
+        User_Coin flag = service.save(u);
+        if(flag ==null) return ResponseEntity.status(400).body(null);
+        return ResponseEntity.status(201).body(flag);
     }
 /*
     @PostMapping("/save")

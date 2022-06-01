@@ -75,18 +75,18 @@ public class MasterController {
             Transaction tra=new Transaction();
 
             User user = us.getOne(us.getGmailActualSesion());
-            user_coin.getId_coin_userCoin().setId_coin(user_coin.getId_coin_userCoin().getId_coin().toLowerCase());
+            user_coin.getId_coin().setId_coin(user_coin.getId_coin().getId_coin().toLowerCase());
 
             uc.setBalance(user_coin.getBalance());
-            uc.setId_user_userCoin(user);
-            uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
+            uc.setId_user(user);
+            uc.setId_coin(user_coin.getId_coin());
 
             tra.setType(true);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
             tra.setId_user(user);
-            tra.setId_coin(cas.getOne(user_coin.getId_coin_userCoin().getId_coin()));
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
+            tra.setId_coin(cas.getOne(user_coin.getId_coin().getId_coin()));
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
             ts.save(tra);
             ts.cobrar(uc);
 
@@ -102,43 +102,43 @@ public class MasterController {
     }
 
     @PostMapping("/deposit")
-    public  String deposit(@ModelAttribute("user_coin") User_Coin user_coin){
+    public  String deposit(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
 
             User user = us.getOne(us.getGmailActualSesion());
-            user_coin.getId_coin_userCoin().setId_coin(user_coin.getId_coin_userCoin().getId_coin().toLowerCase());
+            user_coin.getId_coin().setId_coin(user_coin.getId_coin().getId_coin().toLowerCase());
 
             uc.setBalance(user_coin.getBalance());
-            uc.setId_user_userCoin(user);
-            uc.setId_coin_userCoin(user_coin.getId_coin_userCoin());
+            uc.setId_user(user);
+            uc.setId_coin(user_coin.getId_coin());
 
             tra.setType(false);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(user_coin.getBalance());
             tra.setId_user(user);
-            tra.setId_coin(cas.getOne(user_coin.getId_coin_userCoin().getId_coin()));
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
+            tra.setId_coin(cas.getOne(user_coin.getId_coin().getId_coin()));
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
 
 
 
             ts.depositar(uc);
             ts.save(tra);
 
-            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //        .addFlashAttribute("active", "success");
+            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+                    .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-            //        .addFlashAttribute("active", "danger");
+            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+                    .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
     }
 
     @PostMapping("/transfer")
-    public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino){
+    public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino,RedirectAttributes redirect){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -148,31 +148,31 @@ public class MasterController {
 
             User user = us.getOne(us.getGmailActualSesion());
 
-           CoinAdapter coin= cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
+           CoinAdapter coin= cas.getOne(user_coin.getId_coin().getId_coin());
 
             uc.setBalance(balance);
-            uc.setId_user_userCoin(user);
-            uc.setId_coin_userCoin(coin);
+            uc.setId_user(user);
+            uc.setId_coin(coin);
 
             User userDestino = us.getById(idDestino);
 
             ucUserDestino.setBalance(balance);
-            ucUserDestino.setId_user_userCoin(userDestino);
-            ucUserDestino.setId_coin_userCoin(coin);
+            ucUserDestino.setId_user(userDestino);
+            ucUserDestino.setId_coin(coin);
 
             tra.setType(true);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(balance);
             tra.setId_user(user);
             tra.setId_coin(coin);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
 
             traUserDestino.setType(false);
             traUserDestino.setDate(new Timestamp(System.currentTimeMillis()));
             traUserDestino.setBalance(balance);
             traUserDestino.setId_user(userDestino);
             traUserDestino.setId_coin(coin);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase()));
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase()));
 
             ts.cobrar(uc);
             ts.save(tra);
@@ -182,20 +182,20 @@ public class MasterController {
 
 
 
-            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //       .addFlashAttribute("active", "success");
+            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+                   .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-            //        .addFlashAttribute("active", "danger");
+            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+                    .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
     }
 
 
     @PostMapping("/trade")
-    public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino){
+    public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino,RedirectAttributes redirect){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -206,15 +206,15 @@ public class MasterController {
 
 
             User user = us.getOne(us.getGmailActualSesion());
-            user_coin.getId_coin_userCoin().setId_coin(user_coin.getId_coin_userCoin().getId_coin().toLowerCase());
+            user_coin.getId_coin().setId_coin(user_coin.getId_coin().getId_coin().toLowerCase());
 
-            CoinAdapter coin= cas.getOne(user_coin.getId_coin_userCoin().getId_coin());
+            CoinAdapter coin= cas.getOne(user_coin.getId_coin().getId_coin());
             CoinAdapter coinDestino = cas.getOne(idCoinDestino);
 
 
             uc.setBalance(balance);
-            uc.setId_user_userCoin(user);
-            uc.setId_coin_userCoin(coin);
+            uc.setId_user(user);
+            uc.setId_coin(coin);
 
             double cotOrigen=0;
             double cotDestino=0;
@@ -249,22 +249,22 @@ public class MasterController {
 //100bc   -> x
 //       ->y
             ucDestino.setBalance(conversion);
-            ucDestino.setId_user_userCoin(user);
-            ucDestino.setId_coin_userCoin(coinDestino);
+            ucDestino.setId_user(user);
+            ucDestino.setId_coin(coinDestino);
 
             tra.setType(true);
             tra.setDate(new Timestamp(System.currentTimeMillis()));
             tra.setBalance(balance);
             tra.setId_user(user);
             tra.setId_coin(coin);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase())); //llamada a api externa
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
 
             traDestino.setType(false);
             traDestino.setDate(new Timestamp(System.currentTimeMillis()));
             traDestino.setBalance(conversion);
             traDestino.setId_user(user);
             traDestino.setId_coin(coinDestino);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin_userCoin().getId_coin().toLowerCase()));
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase()));
 
             ts.cobrar(uc);
             ts.save(tra);
@@ -272,16 +272,13 @@ public class MasterController {
             ts.depositar(ucDestino);
             ts.save(traDestino);
 
-
-
-
-            //redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-            //       .addFlashAttribute("active", "success");
+            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+                  .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            //redirect.addFlashAttribute("message", "Falló el intento de retiro." )
-            //        .addFlashAttribute("active", "danger");
+            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+                    .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
     }

@@ -26,10 +26,12 @@ public class User_CoinController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<User_Coin> save(@RequestBody User_Coin u){
+    public ResponseEntity<Object> save(@RequestBody User_Coin u){
         User_Coin flag = service.save(u);
-        if(flag ==null) return ResponseEntity.status(400).body(null);
-        return ResponseEntity.status(201).body(flag);
+        if (flag!=null)
+            return ResponseEntity.status(201).body(flag);
+        else
+            return ResponseEntity.status(400).body(null);
     }
 /*
     @PostMapping("/save")

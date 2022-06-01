@@ -44,19 +44,19 @@ public class TransactionRepository {
 
     public void cobrar(User_Coin es) {
        // @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
-        String url = "http://localhost:8090/api/Transaction/cobrarMonto/"+es.getBalance()+"/"+es.getId_coin_userCoin().getId_coin()+"/"+es.getId_user_userCoin().getId_user();
+        String url = "http://localhost:8090/api/Transaction/cobrarMonto/"+es.getBalance()+"/"+es.getId_coin().getId_coin()+"/"+es.getId_user().getId_user();
         rt.put(url, es, User_Coin.class);
     }
 
     public void depositar(User_Coin es) {
         //@PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
-        String url = "http://localhost:8090/api/Transaction/depositar/"+es.getBalance()+"/"+es.getId_coin_userCoin().getId_coin()+"/"+es.getId_user_userCoin().getId_user();
+        String url = "http://localhost:8090/api/Transaction/depositar/"+es.getBalance()+"/"+es.getId_coin().getId_coin()+"/"+es.getId_user().getId_user();
         rt.put(url, es, User_Coin.class);
     }
 
     public void cobraTodo(User_Coin es) {
         //  @PutMapping("/cobrarTodo/{id_coin}/{id_user}")
-        String url = "http://localhost:8090/api/Transaction/cobrarTodo/"+es.getId_coin_userCoin().getId_coin()+"/"+es.getId_user_userCoin().getId_user();
+        String url = "http://localhost:8090/api/Transaction/cobrarTodo/"+es.getId_coin().getId_coin()+"/"+es.getId_user().getId_user();
         rt.put(url, es, User_Coin.class);
     }
 

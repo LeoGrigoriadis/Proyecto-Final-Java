@@ -34,7 +34,7 @@
             <form th:action="@{/withdraw}" th:object="${user_coin}" method="post">
                 <div>
                     <label>Moneda: </label>
-                    <input type="text" name="id_coin" list="coins" th:field="*{id_coin_userCoin.id_coin}"/><br>
+                    <input type="text" name="id_coin" list="coins" th:field="*{id_coin.id_coin}"/><br>
                     <datalist id="coins">
                         <option value="BTC">Bitcoin</option>
                         <option value="ETH">Ethereum</option>

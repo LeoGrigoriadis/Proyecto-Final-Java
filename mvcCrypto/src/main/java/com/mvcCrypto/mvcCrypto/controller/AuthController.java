@@ -66,95 +66,22 @@ public class AuthController {
             user.setGmail(auth);
             us.save(user);
 
-            setUser_Coins(user);
+            CoinAdapter coin1= new CoinAdapter("btc", "Bitcoin");
+            CoinAdapter coin2= new CoinAdapter("eth", "Ethereum");
+            CoinAdapter coin3= new CoinAdapter("usdt", "Tether");
+            CoinAdapter coin4= new CoinAdapter("usdc", "USD Coin");
+            User_Coin u=new User_Coin(0, coin1, 0,us.getOne(uA.getGmail()));
+            ucs.save(u);
+            u.setId_coin(coin2);
+            ucs.save(u);
+            u.setId_coin(coin3);
+            ucs.save(u);
+            u.setId_coin(coin4);
+            ucs.save(u);
 
             redirect.addFlashAttribute("message", "User created Successfully")
                     .addFlashAttribute("active", "success");
             return "redirect:/login";
          }
-
     }
-    public void setUser_Coins(User user){
-        System.out.println(user);
-        CoinAdapter coin1= new CoinAdapter();
-        coin1.setId_coin("btc");
-        coin1.setName("Bitcoin");
-        CoinAdapter coin2= new CoinAdapter();
-        coin2.setId_coin("eth");
-        coin2.setName("Ethereum");
-        CoinAdapter coin3= new CoinAdapter();
-        coin3.setId_coin("usdt");
-        coin3.setName("Tether");
-        CoinAdapter coin4= new CoinAdapter();
-        coin4.setId_coin("usdc");
-        coin4.setName("USD Coin");
-        System.out.println(coin1);
-
-        System.out.println(new User_Coin(0, coin1, 0,user));
-        ucs.save(new User_Coin(0, coin1, 0,user));
-        ucs.save(new User_Coin(0, coin2, 0,user));
-        ucs.save(new User_Coin(0, coin3, 0,user));
-        ucs.save(new User_Coin(0, coin4, 0,user));
-    }
-
-
-/*
-    @Autowired
-    UserService uS;
-    @GetMapping()
-    public String login(Model model)
-    {
-        User user = new User();
-        model.addAttribute("user", user);
-
-        return ("UserTemplates/Login");
-    }
-    @PostMapping("/login")
-    public String loginVer(@ModelAttribute("user") @Valid User user)
-    {
-        User u = uS.getByEmail(user.toString());
-        if(u != null) {
-
-            if (!user.getPassword().equals(u.getPassword()))
-            {
-                return "redirect:/";
-            }
-            else
-            {
-                if (!u.isAdmin()) {
-                    return "redirect:/vehicles/userIndex";
-                } else {
-                    return "redirect:/vehicles";
-                }
-
-            }
-
-
-        }
-        return "redirect:/";
-    }
-    @GetMapping("/signUp")
-    public String signUp(Model model)
-    {
-        User user = new User();
-       // user.setAdmin(false);
-        model.addAttribute("user", user);
-
-        return ("UserTemplates/signUp");
-    }
-    @PostMapping("/save")
-    public String save(@ModelAttribute("user") @Valid User user)
-    {
-        User u = uS.getByEmail(user.toString());
-        if(u == null) {
-            uS.save(user);
-            return "redirect:/";
-        }
-        else {
-            return "redirect:/signUp";
-        }
-
-    }
-      */
-
 }

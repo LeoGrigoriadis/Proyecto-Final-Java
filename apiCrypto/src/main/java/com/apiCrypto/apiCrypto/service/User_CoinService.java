@@ -34,8 +34,8 @@ public class User_CoinService {
 
     public User_Coin save(User_Coin uc) {
         try {
-            User_Coin us =ucR.save(uc);
-            return us;
+            User_Coin tt =ucR.save(uc);
+            return tt;
         } catch (Exception e) {
             return null;
         }

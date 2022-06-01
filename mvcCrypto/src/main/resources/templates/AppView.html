@@ -92,7 +92,7 @@
             <form th:action="@{/withdraw}" th:object="${user_coin}" method="post">
               <div>
                 <label>Moneda: </label>
-                <input type="text" name="id_coin" list="coins" th:field="*{id_coin_userCoin.id_coin}"/><br>
+                <input type="text" name="id_coin" list="coins" th:field="*{id_coin.id_coin}"/><br>
                 <datalist id="coins">
                   <option value="BTC">Bitcoin</option>
                   <option value="ETH">Ethereum</option>
@@ -113,7 +113,7 @@
             <form th:action="@{/trade}" th:object="${user_coin}" method="post">
               <div>
                 <label>Moneda incial: </label>
-                <input type="text" name="id_coin" list="coins" th:field="*{id_coin_userCoin.id_coin}"/><br>
+                <input type="text" name="id_coin" list="coins" th:field="*{id_coin.id_coin}"/><br>
                 <label>Monto: </label>
                 <input type="number" step="0.0001" name="balance" th:field="*{balance}"/>
                 <label>Moneda destino: </label>
@@ -131,7 +131,7 @@
                 <label>Destinatario: </label>
                 <input type="number" th:name="idDestino"/><br>
                 <label>Moneda: </label>
-                <input type="text" name="id_coin" list="coins" th:field="*{id_coin_userCoin.id_coin}"/><br>
+                <input type="text" name="id_coin" list="coins" th:field="*{id_coin.id_coin}"/><br>
                 <label>Monto: </label>
                 <input type="number" step="0.0001" name="balance" th:field="*{balance}"/>
                 <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->

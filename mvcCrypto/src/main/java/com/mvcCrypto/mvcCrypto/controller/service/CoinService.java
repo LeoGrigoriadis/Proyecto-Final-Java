@@ -25,7 +25,6 @@ public class CoinService {
         return coins;
     }
 
-
    /* public Coin getByName(String name)
     {
         return cr.getByName(name);

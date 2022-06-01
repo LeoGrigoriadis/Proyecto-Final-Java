@@ -102,10 +102,31 @@ h4{
 article{
     overflow: auto;
     background-color: white;
-    height:50%;
     padding: 30px 25px;
     margin-bottom: 15px;
     border-radius: 10px;
+}
+
+#article-top{
+    height: 40%;
+}
+
+#article-bottom{
+    position: relative;
+    height: 60%;
+}
+
+#article-bottom .a-decoration{
+    display:inline-block;
+    text-decoration:underline;
+    color: var(--principal-oscuro);
+    background-color:white;
+    padding-top:15px;
+    float: right;
+}
+
+#article-bottom .a-decoration:hover{
+    color: var(--principal);
 }
 
 .content{
@@ -113,11 +134,11 @@ article{
     height: 100%;
     border-radius: 10px;
     padding: 30px 25px;
-    overflow: auto;
 }
 
 .table{
     margin:0px !important;
+    overflow:auto !important;
 }
 
 .invis #table-cell{

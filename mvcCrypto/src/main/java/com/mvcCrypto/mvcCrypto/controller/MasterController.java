@@ -33,16 +33,6 @@ public class MasterController {
     @Autowired
     private UserService us;
 
-    @GetMapping("/login")
-    public String login() {
-        return "Login";
-    }
-
-    @GetMapping("/register")
-    public String register(Model model) {
-        //model.addAttribute("user",new UserAdapter());  //el usuario en sesión actual llevado a la vista
-        return "Register";
-    }
 
     @GetMapping("/app-view")
     public String getAll(Model model) {

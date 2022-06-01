@@ -24,7 +24,7 @@ html{
 }
 
 body{
-    background-color: white;
+    background-color:var(--background);
 }
 
 section{
@@ -114,6 +114,10 @@ article{
     border-radius: 10px;
     padding: 30px 25px;
     overflow: auto;
+}
+
+.table{
+    margin:0px !important;
 }
 
 .invis #table-cell{

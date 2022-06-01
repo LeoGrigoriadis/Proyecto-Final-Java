@@ -19,12 +19,13 @@
                 <label>Contraseña: </label>
                 <input type="password" name="password"/>
                 <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
-                <a href="#">¿No tienes cuenta? Regístrate</a>
+                <a th:href="@{/register}">¿No tienes cuenta? Regístrate</a>
             </div>
             <button class="button-border button-form-margin" type="submit">Iniciar Sesión</button>
         </form>
     </section>
 </div>
+<button th:replace="../static/layout::alert"></button>
 <div th:insert="../static/layout::footer"></div>
 </body>
 </html>

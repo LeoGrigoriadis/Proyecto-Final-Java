@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.apiCrypto.apiCrypto.model.Transaction;
 import com.apiCrypto.apiCrypto.model.User;
+import com.apiCrypto.apiCrypto.repository.IUserCoinRepository;
 import com.apiCrypto.apiCrypto.repository.IUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,13 @@ public class UserService {
         return uR.findAll();
     }
 
-    public boolean save(User u) {
-    
-        uR.save(u); 
-
-        if(u==null){
-            return false;
+    public User save(User u) {
+        try {
+            User user =uR.save(u);
+            return user;
+        } catch (Exception e) {
+            return null;
         }
-        return true;    
     }
 
 
@@ -41,8 +42,8 @@ public class UserService {
         return false;
     }
 
-    public User getUser(long id) {
-        return uR.getById(id);
+    public Optional<User> getUser(long id) {
+        return uR.findById(id);
     }
 
     @Transactional

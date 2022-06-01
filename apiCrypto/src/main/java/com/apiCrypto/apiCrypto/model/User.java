@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.*;
 
@@ -30,11 +30,12 @@ public class User {
 
     private Date birthday;
 
+    /*
     @ManyToOne
     @JoinColumn(name = "account_type")
     private Account_type account_type;
 
-    private int account_points;
+    private int account_points;*/
 
     //@NotEmpty(message = "name required")
     @OneToOne

@@ -26,12 +26,12 @@ public class AuthController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Object> save(@RequestBody @Valid Auth u) {
-        boolean flag = as.save(u);
-        if (flag)
-            return ResponseEntity.status(200).body("Success.");
+    public ResponseEntity<Auth> save(@RequestBody @Valid Auth u) {
+        Auth flag = as.save(u);
+        if (flag!=null)
+            return ResponseEntity.status(200).body(flag);
         else
-            return ResponseEntity.status(400).body("Error.");
+            return ResponseEntity.status(400).body(null);
     }
 
 

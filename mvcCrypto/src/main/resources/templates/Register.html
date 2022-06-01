@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>Iniciar Sesión</title>
+  <title>Registrarse</title>
   <link rel="icon" href="img/logo.png">
   <div th:insert="../static/layout::header"></div>
   <link rel="stylesheet" type="text/css" href="css/formStyle.css" media="screen">
@@ -11,20 +11,20 @@
 <div class="contain">
   <section class="col-sm-4">
     <h4>Registrarse</h4>
-    <form>
+    <form th:action="@{/register}" th:object="${user}" method="post">
       <div>
         <label>Correo electrónico: </label>
-        <input type="email" name="gmail"/><br>
+        <input type="email" th:field="*{gmail}"/><br>
         <label>Nombre: </label>
-        <input type="text" name="name"/><br>
+        <input type="text" th:field="*{firstName}"/><br>
         <label>Apellido: </label>
-        <input type="text" name="lastname"/><br>
+        <input type="text" th:field="*{lastName}"/><br>
         <label>Fecha de Nacimiento: </label>
-        <input type="date" name="date"/><br>
+        <input type="date" th:field="*{birthday}"/><br>
         <label>Contraseña: </label>
-        <input type="password" name="password"/>
+        <input type="password" th:field="*{password}"/>
         <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
-        <a href="#">¿Ya tienes una cuenta? Iniciá sesión</a>
+        <a th:href="@{/login}">¿Ya tienes una cuenta? Iniciá sesión</a>
       </div>
       <button class="button-border button-form-margin" type="submit">Registrarse</button>
     </form>

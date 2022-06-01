@@ -30,8 +30,8 @@ public class UserCoinService {
      ur.delete(id);
     }
 
-    public void save(User_Coin user){
-        ur.save(user);
+    public void save(User_Coin uc){
+        ur.save(uc);
     }
 
 /*

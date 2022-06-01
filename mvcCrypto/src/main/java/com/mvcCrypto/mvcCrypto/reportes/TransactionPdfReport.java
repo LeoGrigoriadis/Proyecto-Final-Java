@@ -1,4 +1,4 @@
-package com.apiCrypto.apiCrypto.reportes;
+package com.mvcCrypto.mvcCrypto.reportes;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-import com.apiCrypto.apiCrypto.model.Transaction;
+import com.mvcCrypto.mvcCrypto.model.Transaction;
 
 public class TransactionPdfReport {
     List<Transaction> transactionList;
@@ -48,9 +48,9 @@ public class TransactionPdfReport {
         		table.addCell(t.getId_user().getFirst_name());
         		table.addCell(String.valueOf(t.getDate()));
                 if(t.isType() == true){
-                    table.addCell("Deposito");
-                }else{
                     table.addCell("Extraccion");
+                }else{
+                    table.addCell("Deposito");
                 }
         		table.addCell(String.valueOf(t.getPrice_in_transaction()));
         		table.addCell(t.getId_coin().getName()) ;
@@ -63,7 +63,13 @@ public class TransactionPdfReport {
         Document doc = new Document(PageSize.A4);
         PdfWriter.getInstance(doc, hsr.getOutputStream());
         doc.open();
-        Paragraph paragraph = new Paragraph("transaction movement");
+        
+        /*C:\Users\el_so\Documents\GitHub\Proyecto-Final-Java\apiCrypto\src\main\resources\static\img
+        Image imagen = Image.getInstance("C:/Users/el_so/Documents/GitHub/Proyecto-Final-Java/apiCrypto/src/main/resources/static/img/imagePdf.jpg");
+        imagen.getBorderColor();
+        doc.add(imagen);*/
+        
+        Paragraph paragraph = new Paragraph("Transaction movement");
         paragraph.setSpacingAfter(5);
         paragraph.setAlignment(paragraph.ALIGN_CENTER);
         doc.add(paragraph);
@@ -74,5 +80,5 @@ public class TransactionPdfReport {
         doc.close();
     }
 
-    }
+}
 

@@ -1,12 +1,9 @@
 package com.mvcCrypto.mvcCrypto.controller.repository;
 
-import com.mvcCrypto.mvcCrypto.model.Coin;
 import com.mvcCrypto.mvcCrypto.model.Transaction;
-import com.mvcCrypto.mvcCrypto.model.User;
 import com.mvcCrypto.mvcCrypto.model.User_Coin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -19,10 +16,8 @@ public class TransactionRepository {
 
     public ArrayList<Transaction> findAll(long id){
         String url = "http://localhost:8090/api/Transaction/{id}";
-        ArrayList<Transaction> transaction = new ArrayList<>();
-        return transaction = rt.getForObject(url, ArrayList.class, id);
-
-
+        ArrayList<Transaction> transaction = rt.getForObject(url, ArrayList.class, id);
+        return transaction;
     }
 
     public Transaction getOne(long id){
@@ -47,9 +42,27 @@ public class TransactionRepository {
         rt.put(url, es, Transaction.class);
     }
 
-    public void depositar(User_Coin es) {
+    public void cobrar(User_Coin es) {
        // @PutMapping("/cobrarMonto/{balance}/{id_coin}/{id_user}")
-        String url = "http://localhost:8090/api/cobrarMonto/{var1}/{var2}/{var3}";
-        rt.put(url, es, User_Coin.class,es.getBalance(),es.getId_coin_userCoin().getId_coin(),es.getId_user_userCoin().getId_user());
+        String url = "http://localhost:8090/api/Transaction/cobrarMonto/"+es.getBalance()+"/"+es.getId_coin().getId_coin()+"/"+es.getId_user().getId_user();
+        rt.put(url, es, User_Coin.class);
+    }
+
+    public void depositar(User_Coin es) {
+        //@PutMapping("/depositar/{balance}/{id_coin}/{id_user}")
+        String url = "http://localhost:8090/api/Transaction/depositar/"+es.getBalance()+"/"+es.getId_coin().getId_coin()+"/"+es.getId_user().getId_user();
+        rt.put(url, es, User_Coin.class);
+    }
+
+    public void cobraTodo(User_Coin es) {
+        //  @PutMapping("/cobrarTodo/{id_coin}/{id_user}")
+        String url = "http://localhost:8090/api/Transaction/cobrarTodo/"+es.getId_coin().getId_coin()+"/"+es.getId_user().getId_user();
+        rt.put(url, es, User_Coin.class);
+    }
+
+    public ArrayList<Transaction> getLast(long id_user) {
+        String url = "http://localhost:8090/api/Transaction/last/{id}";
+        ArrayList<Transaction> transaction = new ArrayList<>();
+        return transaction = rt.getForObject(url, ArrayList.class, id_user);
     }
 }

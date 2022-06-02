@@ -13,12 +13,10 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class Auth {
 
-    @Email
-    @NotEmpty(message = "El email es necesario.")
     private String gmail;
-    @NotEmpty(message = "El password es necesario.")
+
     private String password;
-    @NotBlank
+
     private Role id_role;
 }
 

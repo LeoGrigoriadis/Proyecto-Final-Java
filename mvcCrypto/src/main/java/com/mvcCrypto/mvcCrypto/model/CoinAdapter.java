@@ -11,9 +11,9 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @Data
 public class CoinAdapter {
-    @NotEmpty(message = "Seleccione la moneda")
+    //@NotEmpty(message = "Seleccione la moneda")
     private String id_coin;
-    @NotEmpty(message = "El nombre es necesario.")
+    //@NotEmpty(message = "El nombre es necesario.")
     private String name;
 
 

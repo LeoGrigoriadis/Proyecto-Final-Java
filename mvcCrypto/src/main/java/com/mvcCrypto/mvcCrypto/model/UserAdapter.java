@@ -13,16 +13,18 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class UserAdapter {
 
-
-        @NotEmpty(message = "El email es necesario.")
+        //@NotEmpty(message = "El email es necesario.")
         private String gmail;
-        @NotEmpty(message = "La fecha de nacimiento es necesario.")
+        //@NotEmpty(message = "La fecha de nacimiento es necesario.")
         private Date birthday;
-        @NotEmpty(message = "El nombre es necesario.")
+        //@NotEmpty(message = "El nombre es necesario.")
         private String firstName;
-        @NotEmpty(message = "El apellido es necesario.")
+        //@NotEmpty(message = "El apellido es necesario.")
         private String lastName;
-        @NotEmpty(message = "El password es necesario.")
+        //@NotEmpty(message = "El password es necesario.")
         private String password;
 
+        public UserAdapter(String value){
+                this.birthday= Date.valueOf(value);
+        }
 }

@@ -14,6 +14,6 @@ import javax.validation.constraints.NotEmpty;
 public class Role {
 
     private long id_role;
-    @NotEmpty(message = "El nombre es necesario.")
+    //@NotEmpty(message = "El nombre es necesario.")
     private String name;
 }

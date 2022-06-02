@@ -7,11 +7,8 @@ import com.mvcCrypto.mvcCrypto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
 import java.sql.Timestamp;
 
 @Controller
@@ -42,7 +39,7 @@ public class MasterController {
             model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
             model.addAttribute("coins",ces.getAll()); //criptos de api externa
             model.addAttribute("transaction", new Transaction()); //objeto para crear nueva transacción
-            model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
+            model.addAttribute("user_coin", new User_CoinAdapter()); //objeto para crear nueva transacción
             model.addAttribute("movs",ts.getLast(user.getId_user())); //lista de ultimos movimientos de la sesión actual
             model.addAttribute("wallet",ucs.findAllByIdUser(user.getId_user())); //wallet de la sesión actual
             return "AppView";
@@ -65,15 +62,12 @@ public class MasterController {
         User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
         model.addAttribute("user",user);  //el usuario en sesión actual llevado a la vista
         model.addAttribute("transaction", new Transaction()); //objeto para crear nueva transacción
-        model.addAttribute("user_coin", new User_Coin()); //objeto para crear nueva transacción
+        model.addAttribute("user_coin", new User_CoinAdapter()); //objeto para crear nueva transacción
         return "FormTransactions";
     }
 
     @PostMapping("/withdraw")
-    public  String withdraw(@Valid @ModelAttribute("user_coin") User_Coin user_coin, RedirectAttributes redirect, BindingResult bindingResult){
-        if (bindingResult.hasErrors()) {
-            return "AppView";
-        }
+    public  String withdraw( @ModelAttribute("user_coin") User_CoinAdapter user_coin, RedirectAttributes redirect){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -110,11 +104,8 @@ public class MasterController {
     }
 
     @PostMapping("/deposit")
-    public  String deposit(@Valid @ModelAttribute("user_coin") User_Coin user_coin, RedirectAttributes redirect, BindingResult bindingResult){
+    public  String deposit(@ModelAttribute("user_coin") User_CoinAdapter user_coin, RedirectAttributes redirect){
         try{
-            if (bindingResult.hasErrors()) {
-                return "ExternalEntity";
-            }
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
 
@@ -154,11 +145,8 @@ public class MasterController {
     }
 
     @PostMapping("/transfer")
-    public  String transfer(@Valid @ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino, RedirectAttributes redirect, BindingResult bindingResult){
+    public  String transfer(@ModelAttribute("user_coin") User_CoinAdapter user_coin, RedirectAttributes redirect){
         try{
-            if (bindingResult.hasErrors()) {
-                return "AppView";
-            }
             User_Coin ucInicial = new User_Coin();
             Transaction traInicial=new Transaction();
             User_Coin ucDestino = new User_Coin();
@@ -166,7 +154,7 @@ public class MasterController {
             double balance = user_coin.getBalance();
 
             User user = us.getOne(us.getGmailActualSesion()); //actual user
-            User userDestino = us.getById(idDestino);
+            User userDestino = us.getById(user_coin.getId_destino());
 
            CoinAdapter coin= cas.getOne(user_coin.getId_coin().getId_coin());
 
@@ -213,13 +201,9 @@ public class MasterController {
         }
     }
 
-
     @PostMapping("/trade")
-    public  String trade(@Valid @ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino, RedirectAttributes redirect, BindingResult bindingResult){
+    public  String trade( @ModelAttribute("user_coin") User_CoinAdapter user_coin, RedirectAttributes redirect){
         try{
-            if (bindingResult.hasErrors()) {
-                return "AppView";
-            }
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
             User_Coin ucDestino = new User_Coin();
@@ -232,7 +216,7 @@ public class MasterController {
             user_coin.getId_coin().setId_coin(user_coin.getId_coin().getId_coin().toLowerCase());
 
             CoinAdapter coin= cas.getOne(user_coin.getId_coin().getId_coin());
-            CoinAdapter coinDestino = cas.getOne(idCoinDestino);
+            CoinAdapter coinDestino = cas.getOne(user_coin.getId_coin_destino());
 
 
             uc.setBalance(balance);

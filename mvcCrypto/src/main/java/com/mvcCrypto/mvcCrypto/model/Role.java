@@ -11,7 +11,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @Data
 public class Role {
+
     private long id_role;
-    @NotBlank
+    @NotEmpty(message = "El nombre es necesario.")
     private String name;
 }

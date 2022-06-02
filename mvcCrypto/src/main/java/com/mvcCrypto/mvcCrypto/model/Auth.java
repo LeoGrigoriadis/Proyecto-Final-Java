@@ -13,8 +13,9 @@ import javax.validation.constraints.NotBlank;
 public class Auth {
 
     @Email
+    @NotEmpty(message = "El email es necesario.")
     private String gmail;
-    @NotBlank
+    @NotEmpty(message = "El password es necesario.")
     private String password;
     @NotBlank
     private Role id_role;

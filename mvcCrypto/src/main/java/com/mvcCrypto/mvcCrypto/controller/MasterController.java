@@ -69,6 +69,12 @@ public class MasterController {
     }
 
     @PostMapping("/withdraw")
+
+    public String withdraw(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/app-view";
+        }
+
     public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
             User_Coin uc = new User_Coin();
@@ -106,6 +112,12 @@ public class MasterController {
     }
 
     @PostMapping("/deposit")
+
+    public String deposit(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/app-view";
+        }
+
     public  String deposit(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
             User_Coin uc = new User_Coin();
@@ -147,6 +159,11 @@ public class MasterController {
     }
 
     @PostMapping("/transfer")
+    public String transfer(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,@ModelAttribute @Valid ("idDestino") long idDestino, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/app-view";
+        }
+
     public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino,RedirectAttributes redirect){
         try{
             User_Coin ucInicial = new User_Coin();
@@ -205,6 +222,11 @@ public class MasterController {
 
 
     @PostMapping("/trade")
+    public String trade(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,@ModelAttribute @Valid ("idCoinDestino")String idCoinDestino, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/app-view";
+        }
+
     public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino,RedirectAttributes redirect){
         try{
             User_Coin uc = new User_Coin();

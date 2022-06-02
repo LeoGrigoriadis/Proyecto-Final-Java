@@ -11,7 +11,7 @@ footer{
     padding: 10px;
     bottom:0px;
     width: 100vw;
-    vertical-align: middle;
+        vertical-align: middle;
     background-color: var(--footer);
 }
 

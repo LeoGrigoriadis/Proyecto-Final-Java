@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 public class Coin{
-    @NotBlank
+    @NotEmpty(message = "El nombre es necesario.")
     private String name;
     @NotBlank
     private float ask;

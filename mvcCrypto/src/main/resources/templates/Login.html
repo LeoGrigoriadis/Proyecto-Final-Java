@@ -16,9 +16,10 @@
             <div>
                 <label>Correo electrónico: </label>
                 <input type="email" name="username"/><br>
+                <small class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
                 <label>Contraseña: </label>
                 <input type="password" name="password"/>
-                <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
+                <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
                 <a th:href="@{/register}">¿No tienes cuenta? Regístrate</a>
             </div>
             <button class="button-border button-form-margin" type="submit">Iniciar Sesión</button>

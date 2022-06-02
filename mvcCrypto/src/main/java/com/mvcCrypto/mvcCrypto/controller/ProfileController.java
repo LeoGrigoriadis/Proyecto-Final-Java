@@ -23,11 +23,17 @@ public class ProfileController {
     }
     @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") User user, RedirectAttributes redirect){
-        user.setId_user(us.getOne(us.getGmailActualSesion()).getId_user());
-        user.setGmail(us.getOne(us.getGmailActualSesion()).getGmail());
-        us.update(user);
-        redirect.addFlashAttribute("message", "Datos de perfil editados correctamente." )
-                .addFlashAttribute("active", "success");
-        return "redirect:/app-view";
+        try {
+            user.setId_user(us.getOne(us.getGmailActualSesion()).getId_user());
+            user.setGmail(us.getOne(us.getGmailActualSesion()).getGmail());
+            us.update(user);
+            redirect.addFlashAttribute("message", "Datos de perfil editados correctamente.")
+                    .addFlashAttribute("active", "success");
+            return "redirect:/app-view";
+        }catch (Exception e){
+            redirect.addFlashAttribute("message", "Fallo al intentar editar los datos.")
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/update";
+        }
     }
 }

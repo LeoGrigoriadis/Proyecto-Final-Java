@@ -98,6 +98,10 @@ public class MasterController {
             redirect.addFlashAttribute("message", "Falló el intento de retiro." )
                     .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
+        }catch (Exception e){
+            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
         }
     }
 
@@ -126,12 +130,17 @@ public class MasterController {
             ts.depositar(uc);
             ts.save(tra);
 
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            redirect.addFlashAttribute("message", "Deposito realizado correctamente." )
                     .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            redirect.addFlashAttribute("message", "Falló el intento de deposito." )
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }
+        catch (Exception e){
+            redirect.addFlashAttribute("message", "Falló el intento de deposito." )
                     .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
@@ -182,12 +191,16 @@ public class MasterController {
 
 
 
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            redirect.addFlashAttribute("message", "Transferencia realizada correctamente." )
                    .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            redirect.addFlashAttribute("message", "Falló el intento de transferencia." )
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }catch (Exception e){
+            redirect.addFlashAttribute("message", "Falló el intento de transferencia." )
                     .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
@@ -272,12 +285,17 @@ public class MasterController {
             ts.depositar(ucDestino);
             ts.save(traDestino);
 
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            redirect.addFlashAttribute("message", "Trade realizado correctamente." )
                   .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            redirect.addFlashAttribute("message", "Falló el intento de tradeo." )
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }
+        catch (Exception e){
+            redirect.addFlashAttribute("message", "Falló el intento de tradeo." )
                     .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }

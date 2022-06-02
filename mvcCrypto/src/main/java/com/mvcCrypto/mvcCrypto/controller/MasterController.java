@@ -1,6 +1,5 @@
 package com.mvcCrypto.mvcCrypto.controller;
 
-
 import com.mvcCrypto.mvcCrypto.controller.repository.CoinExternoRepository;
 import com.mvcCrypto.mvcCrypto.controller.service.*;
 
@@ -8,9 +7,11 @@ import com.mvcCrypto.mvcCrypto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.sql.Timestamp;
 
 @Controller
@@ -69,13 +70,10 @@ public class MasterController {
     }
 
     @PostMapping("/withdraw")
-
-    public String withdraw(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,BindingResult bindingResult) {
+    public  String withdraw(@Valid @ModelAttribute("user_coin") User_Coin user_coin, RedirectAttributes redirect, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            return "redirect:/app-view";
+            return "AppView";
         }
-
-    public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -112,14 +110,11 @@ public class MasterController {
     }
 
     @PostMapping("/deposit")
-
-    public String deposit(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/app-view";
-        }
-
-    public  String deposit(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
+    public  String deposit(@Valid @ModelAttribute("user_coin") User_Coin user_coin, RedirectAttributes redirect, BindingResult bindingResult){
         try{
+            if (bindingResult.hasErrors()) {
+                return "ExternalEntity";
+            }
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
 
@@ -159,13 +154,11 @@ public class MasterController {
     }
 
     @PostMapping("/transfer")
-    public String transfer(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,@ModelAttribute @Valid ("idDestino") long idDestino, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/app-view";
-        }
-
-    public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino,RedirectAttributes redirect){
+    public  String transfer(@Valid @ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino, RedirectAttributes redirect, BindingResult bindingResult){
         try{
+            if (bindingResult.hasErrors()) {
+                return "AppView";
+            }
             User_Coin ucInicial = new User_Coin();
             Transaction traInicial=new Transaction();
             User_Coin ucDestino = new User_Coin();
@@ -222,13 +215,11 @@ public class MasterController {
 
 
     @PostMapping("/trade")
-    public String trade(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,@ModelAttribute @Valid ("idCoinDestino")String idCoinDestino, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/app-view";
-        }
-
-    public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino,RedirectAttributes redirect){
+    public  String trade(@Valid @ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino, RedirectAttributes redirect, BindingResult bindingResult){
         try{
+            if (bindingResult.hasErrors()) {
+                return "AppView";
+            }
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
             User_Coin ucDestino = new User_Coin();

@@ -15,15 +15,16 @@ import java.time.LocalDateTime;
 public class Trade {
     @NotBlank
     private User id_user_trade;
+
     private long id_trade;
     @NotBlank
     private CoinAdapter id_initial_coin;
-    @NotBlank
+    @NotEmpty(message = "La fecha es necesaria.")
     private LocalDateTime date;
     @NotBlank
     @Positive(message = "the balance has to be positive")
     private double balance;
-    @NotBlank
+    @NotEmpty(message = "El precio es necesario.")
     private double price_initial_coin;
 
 }

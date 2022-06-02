@@ -26,7 +26,7 @@ public class ReportController {
     public void reportTransactionPDFbyUser(HttpServletResponse response) throws DocumentException, IOException {
         User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition","transactions.pdf");
+        response.setHeader("Content-Disposition","attachment; filename=transactions.pdf");
         TransactionPdfReport pdf = new TransactionPdfReport(ts.getAll(user.getId_user()));
         pdf.export(response);
     }

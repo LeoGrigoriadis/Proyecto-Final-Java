@@ -1,6 +1,5 @@
 package com.mvcCrypto.mvcCrypto.controller;
 
-
 import com.mvcCrypto.mvcCrypto.controller.repository.CoinExternoRepository;
 import com.mvcCrypto.mvcCrypto.controller.service.*;
 
@@ -8,9 +7,11 @@ import com.mvcCrypto.mvcCrypto.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.sql.Timestamp;
 
 @Controller
@@ -69,13 +70,10 @@ public class MasterController {
     }
 
     @PostMapping("/withdraw")
-
-    public String withdraw(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,BindingResult bindingResult) {
+    public  String withdraw(@Valid @ModelAttribute("user_coin") User_Coin user_coin, RedirectAttributes redirect, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            return "redirect:/app-view";
+            return "AppView";
         }
-
-    public  String withdraw(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -104,18 +102,19 @@ public class MasterController {
             redirect.addFlashAttribute("message", "Falló el intento de retiro." )
                     .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
+        }catch (Exception e){
+            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
         }
     }
 
     @PostMapping("/deposit")
-
-    public String deposit(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/app-view";
-        }
-
-    public  String deposit(@ModelAttribute("user_coin") User_Coin user_coin,RedirectAttributes redirect){
+    public  String deposit(@Valid @ModelAttribute("user_coin") User_Coin user_coin, RedirectAttributes redirect, BindingResult bindingResult){
         try{
+            if (bindingResult.hasErrors()) {
+                return "ExternalEntity";
+            }
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
 
@@ -138,73 +137,77 @@ public class MasterController {
             ts.depositar(uc);
             ts.save(tra);
 
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            redirect.addFlashAttribute("message", "Deposito realizado correctamente." )
                     .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            redirect.addFlashAttribute("message", "Falló el intento de deposito." )
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }
+        catch (Exception e){
+            redirect.addFlashAttribute("message", "Falló el intento de deposito." )
                     .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
     }
 
     @PostMapping("/transfer")
-    public String transfer(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,@ModelAttribute @Valid ("idDestino") long idDestino, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/app-view";
-        }
-
-    public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino,RedirectAttributes redirect){
+    public  String transfer(@Valid @ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino, RedirectAttributes redirect, BindingResult bindingResult){
         try{
-            User_Coin uc = new User_Coin();
-            Transaction tra=new Transaction();
-            User_Coin ucUserDestino = new User_Coin();
+            if (bindingResult.hasErrors()) {
+                return "AppView";
+            }
+            User_Coin ucInicial = new User_Coin();
+            Transaction traInicial=new Transaction();
+            User_Coin ucDestino = new User_Coin();
             Transaction traUserDestino=new Transaction();
             double balance = user_coin.getBalance();
 
-            User user = us.getOne(us.getGmailActualSesion());
+            User user = us.getOne(us.getGmailActualSesion()); //actual user
+            User userDestino = us.getById(idDestino);
 
            CoinAdapter coin= cas.getOne(user_coin.getId_coin().getId_coin());
 
-            uc.setBalance(balance);
-            uc.setId_user(user);
-            uc.setId_coin(coin);
+            ucInicial.setBalance(balance);
+            ucInicial.setId_user(user);
+            ucInicial.setId_coin(coin);
 
-            User userDestino = us.getById(idDestino);
+            ucDestino.setBalance(balance);
+            ucDestino.setId_user(userDestino);
+            ucDestino.setId_coin(coin);
 
-            ucUserDestino.setBalance(balance);
-            ucUserDestino.setId_user(userDestino);
-            ucUserDestino.setId_coin(coin);
-
-            tra.setType(true);
-            tra.setDate(new Timestamp(System.currentTimeMillis()));
-            tra.setBalance(balance);
-            tra.setId_user(user);
-            tra.setId_coin(coin);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
+            traInicial.setType(true);
+            traInicial.setDate(new Timestamp(System.currentTimeMillis()));
+            traInicial.setBalance(balance);
+            traInicial.setId_user(user);
+            traInicial.setId_coin(coin);
+            traInicial.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
 
             traUserDestino.setType(false);
             traUserDestino.setDate(new Timestamp(System.currentTimeMillis()));
             traUserDestino.setBalance(balance);
             traUserDestino.setId_user(userDestino);
             traUserDestino.setId_coin(coin);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase()));
+            traUserDestino.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase()));
 
-            ts.cobrar(uc);
-            ts.save(tra);
+            ts.cobrar(ucInicial);
+            ts.save(traInicial);
 
-            ts.depositar(ucUserDestino);
+            ts.depositar(ucDestino);
             ts.save(traUserDestino);
 
-
-
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            redirect.addFlashAttribute("message", "Transferencia realizada correctamente." )
                    .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            redirect.addFlashAttribute("message", "Falló el intento de transferencia." )
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }catch (Exception e){
+            redirect.addFlashAttribute("message", "Falló el intento de transferencia." )
                     .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }
@@ -212,13 +215,11 @@ public class MasterController {
 
 
     @PostMapping("/trade")
-    public String trade(@ModelAttribute @Valid ("user_coin") User_Coin user_coin,@ModelAttribute @Valid ("idCoinDestino")String idCoinDestino, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/app-view";
-        }
-
-    public  String trade(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino,RedirectAttributes redirect){
+    public  String trade(@Valid @ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idCoinDestino")String idCoinDestino, RedirectAttributes redirect, BindingResult bindingResult){
         try{
+            if (bindingResult.hasErrors()) {
+                return "AppView";
+            }
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
             User_Coin ucDestino = new User_Coin();
@@ -294,12 +295,17 @@ public class MasterController {
             ts.depositar(ucDestino);
             ts.save(traDestino);
 
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+            redirect.addFlashAttribute("message", "Trade realizado correctamente." )
                   .addFlashAttribute("active", "success");
             return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
-            redirect.addFlashAttribute("message", "Falló el intento de retiro." )
+            redirect.addFlashAttribute("message", "Falló el intento de tradeo." )
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }
+        catch (Exception e){
+            redirect.addFlashAttribute("message", "Falló el intento de tradeo." )
                     .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
         }

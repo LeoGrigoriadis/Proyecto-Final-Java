@@ -14,15 +14,15 @@ import javax.validation.constraints.NotEmpty;
 public class UserAdapter {
 
 
-        @NotEmpty
+        @NotEmpty(message = "El email es necesario.")
         private String gmail;
-        @NotEmpty
+        @NotEmpty(message = "La fecha de nacimiento es necesario.")
         private Date birthday;
-        @NotEmpty
+        @NotEmpty(message = "El nombre es necesario.")
         private String firstName;
-        @NotEmpty
+        @NotEmpty(message = "El apellido es necesario.")
         private String lastName;
-        @NotEmpty
+        @NotEmpty(message = "El password es necesario.")
         private String password;
 
 }

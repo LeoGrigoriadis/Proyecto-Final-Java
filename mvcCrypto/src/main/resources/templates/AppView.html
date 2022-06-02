@@ -36,7 +36,7 @@
     </section>
 
     <section class="col-sm-6 articles">
-      <article>
+      <article id="article-top">
         <h4>Mi Cartera</h4>
         <table class ="table table-hover" >
           <thead>
@@ -54,17 +54,15 @@
           </tbody>
         </table>
       </article>
-      <article>
+      <article id="article-bottom">
         <div class="top-article">
-          <h4>Últimos 6 movimientos</h4>
-          <a th:href="@{/get-pdf}">descargar PDF</a>
+          <h4>Últimos 8 movimientos</h4>
         </div>
         <table class ="table table-hover">
           <thead>
           <tr>
             <th class="text-center"> moneda </th>
             <th class="text-center"> monto </th>
-
           </tr>
           </thead>
           <tbody style="text-align:center">
@@ -75,6 +73,7 @@
           </tr>
           </tbody>
         </table>
+          <a class="a-decoration" th:href="@{/get-pdf}">descargar todas las transacciones (PDF)</a>
       </article>
     </section>
     <section class="col-sm-3 invis">

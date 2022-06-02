@@ -14,19 +14,20 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 public class Transaction {
+
     private long id_transaction;
     @NotBlank
     private User id_user;
     @NotBlank
     private CoinAdapter id_coin;
-    @NotBlank
+    @NotEmpty(message = "El precio es necesario.")
     private double price_in_transaction;
-    @NotBlank
+    @NotEmpty(message = "La fecha es necesaria.")
     private Timestamp date;
     @NotBlank
     @Positive(message = "the balance has to be positive")
     private double balance;
-    @NotBlank
+    @NotEmpty(message = "El tipo es necesario.")
     private boolean type;
 }
 

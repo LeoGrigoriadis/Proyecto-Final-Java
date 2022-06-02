@@ -14,18 +14,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class Trade {
-    @NotBlank
+    //@NotBlank
     private User id_user_trade;
 
     private long id_trade;
-    @NotBlank
+    //@NotBlank
     private CoinAdapter id_initial_coin;
-    @NotEmpty(message = "La fecha es necesaria.")
+    //@NotEmpty(message = "La fecha es necesaria.")
     private LocalDateTime date;
-    @NotBlank
-    @Positive(message = "the balance has to be positive")
+    //@NotBlank
+    //@Positive(message = "the balance has to be positive")
     private double balance;
-    @NotEmpty(message = "El precio es necesario.")
+    //@NotEmpty(message = "El precio es necesario.")
     private double price_initial_coin;
 
 }

@@ -12,8 +12,6 @@ import javax.validation.constraints.NotBlank;
 public class Account_type {
 
     private long id_account_type;
-    @NotBlank
     private  String overdrawn_turn_name;
-    @NotBlank
     private int overdrawn_turn_value;
 }

@@ -6,18 +6,15 @@ import com.mvcCrypto.mvcCrypto.controller.service.UserService;
 import com.mvcCrypto.mvcCrypto.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping
@@ -42,20 +39,17 @@ public class AuthController {
 
     @GetMapping("/register")
     public String signUpget(Model model) {
-        model.addAttribute("user", new UserAdapter());
+        model.addAttribute("user", new UserAdapter("1999-12-28"));
         return "Register";
     }
     
     @PostMapping("/register")
-    public String SignUp(@Valid @ModelAttribute("user")UserAdapter uA, RedirectAttributes redirect, BindingResult bindingResult) {
-        try {
-            if (bindingResult.hasErrors()) {
-                return "Register";
-            }
-            User gmail = us.getOne(uA.getGmail());
+    public String SignUp( @ModelAttribute("user")UserAdapter uA, RedirectAttributes redirect) throws IllegalArgumentException, BindException {
 
+        try {
+            User gmail = us.getOne(uA.getGmail());
             if (gmail != null) {
-                redirect.addFlashAttribute("message", "Gmail already in use")
+                redirect.addFlashAttribute("message", "El gmail ya se encuentra en uso.")
                         .addFlashAttribute("active", "danger");
                 return "redirect:/register";
             } else {
@@ -84,12 +78,12 @@ public class AuthController {
                 ucs.save(u);
                 u.setId_coin(coin4);
                 ucs.save(u);
-                redirect.addFlashAttribute("message", "User created Successfully")
+                redirect.addFlashAttribute("message", "User creado correctamente.")
                         .addFlashAttribute("active", "success");
                 return "redirect:/login";
             }
-        }catch (Exception e){
-            redirect.addFlashAttribute("message", "User creation error")
+        } catch (Exception e){
+            redirect.addFlashAttribute("message", "Fallo al intentar crear el usuario.")
                     .addFlashAttribute("active", "danger");
             return "redirect:/register";
         }

@@ -13,17 +13,18 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 public class Coin{
-    @NotEmpty(message = "El nombre es necesario.")
+
+    //@NotEmpty(message = "El nombre es necesario.")
     private String name;
-    @NotBlank
+    //@NotBlank
     private float ask;
-    @NotBlank
+    //@NotBlank
     private float totalAsk;
-    @NotBlank
+    //@NotBlank
     private float bid;
-    @NotBlank
+    //@NotBlank
     private float totalBid;
-    @NotBlank
+    //@NotBlank
     private Timestamp time;
 
   }

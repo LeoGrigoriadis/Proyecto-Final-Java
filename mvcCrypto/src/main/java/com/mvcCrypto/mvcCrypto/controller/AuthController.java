@@ -44,6 +44,12 @@ public class AuthController {
     }
     
     @PostMapping("/register")
+
+    public String register(@ModelAttribute @Valid ("user")UserAdapter uA, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/register";
+        }
+
     public String SignUp(@ModelAttribute("user")UserAdapter uA, RedirectAttributes redirect) {
 
         User gmail =  us.getOne(uA.getGmail());

@@ -149,47 +149,44 @@ public class MasterController {
     @PostMapping("/transfer")
     public  String transfer(@ModelAttribute("user_coin") User_Coin user_coin,@ModelAttribute("idDestino") long idDestino,RedirectAttributes redirect){
         try{
-            User_Coin uc = new User_Coin();
-            Transaction tra=new Transaction();
-            User_Coin ucUserDestino = new User_Coin();
+            User_Coin ucInicial = new User_Coin();
+            Transaction traInicial=new Transaction();
+            User_Coin ucDestino = new User_Coin();
             Transaction traUserDestino=new Transaction();
             double balance = user_coin.getBalance();
 
-            User user = us.getOne(us.getGmailActualSesion());
+            User user = us.getOne(us.getGmailActualSesion()); //actual user
+            User userDestino = us.getById(idDestino);
 
            CoinAdapter coin= cas.getOne(user_coin.getId_coin().getId_coin());
 
-            uc.setBalance(balance);
-            uc.setId_user(user);
-            uc.setId_coin(coin);
+            ucInicial.setBalance(balance);
+            ucInicial.setId_user(user);
+            ucInicial.setId_coin(coin);
 
-            User userDestino = us.getById(idDestino);
+            ucDestino.setBalance(balance);
+            ucDestino.setId_user(userDestino);
+            ucDestino.setId_coin(coin);
 
-            ucUserDestino.setBalance(balance);
-            ucUserDestino.setId_user(userDestino);
-            ucUserDestino.setId_coin(coin);
-
-            tra.setType(true);
-            tra.setDate(new Timestamp(System.currentTimeMillis()));
-            tra.setBalance(balance);
-            tra.setId_user(user);
-            tra.setId_coin(coin);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
+            traInicial.setType(true);
+            traInicial.setDate(new Timestamp(System.currentTimeMillis()));
+            traInicial.setBalance(balance);
+            traInicial.setId_user(user);
+            traInicial.setId_coin(coin);
+            traInicial.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
 
             traUserDestino.setType(false);
             traUserDestino.setDate(new Timestamp(System.currentTimeMillis()));
             traUserDestino.setBalance(balance);
             traUserDestino.setId_user(userDestino);
             traUserDestino.setId_coin(coin);
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase()));
+            traUserDestino.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase()));
 
-            ts.cobrar(uc);
-            ts.save(tra);
+            ts.cobrar(ucInicial);
+            ts.save(traInicial);
 
-            ts.depositar(ucUserDestino);
+            ts.depositar(ucDestino);
             ts.save(traUserDestino);
-
-
 
             redirect.addFlashAttribute("message", "Transferencia realizada correctamente." )
                    .addFlashAttribute("active", "success");

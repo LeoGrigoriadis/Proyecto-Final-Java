@@ -15,15 +15,19 @@
       <div>
         <label>Correo electrónico: </label>
         <input type="email" th:field="*{gmail}"/><br>
+        <small class="text-danger" th:if="${#fields.hasErrors('gmail')}" th:errors="*{gmail}"></small>
         <label>Nombre: </label>
         <input type="text" th:field="*{firstName}"/><br>
+        <small class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
         <label>Apellido: </label>
         <input type="text" th:field="*{lastName}"/><br>
+        <small class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
         <label>Fecha de Nacimiento: </label>
         <input type="date" th:field="*{birthday}"/><br>
+        <small class="text-danger" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></small>
         <label>Contraseña: </label>
         <input type="password" th:field="*{password}"/>
-        <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
+        <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
         <a th:href="@{/login}">¿Ya tienes una cuenta? Iniciá sesión</a>
       </div>
       <button class="button-border button-form-margin" type="submit">Registrarse</button>

@@ -15,18 +15,18 @@ public class User {
 
 
     private long id_user;
-    @NotBlank
+    @NotEmpty(message = "El nombre es necesario.")
     private String first_name;
-    @NotBlank
+    @NotEmpty(message = "El apellido es necesario.")
     private String last_name;
-    @NotBlank
+    @NotEmpty(message = "La fecha de nacimiento es necesario.")
     private Date birthday;
     /*
     private Account_type account_type;
     @NotBlank
     private int account_points;
     */
-    @NotBlank
+    @NotEmpty(message = "El email es necesario.")
     private Auth gmail;
 
 }

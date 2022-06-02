@@ -44,7 +44,7 @@ public class AuthController {
     }
     
     @PostMapping("/register")
-    public String SignUp( @ModelAttribute("user")UserAdapter uA, RedirectAttributes redirect) throws IllegalArgumentException, BindException {
+    public String SignUp( @ModelAttribute("user")UserAdapter uA, RedirectAttributes redirect) throws IllegalArgumentException {
 
         try {
             User gmail = us.getOne(uA.getGmail());

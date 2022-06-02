@@ -5,6 +5,7 @@
   <link rel="icon" href="img/logo.png">
   <div th:insert="../static/layout::header"></div>
   <link rel="stylesheet" type="text/css" href="css/formStyle.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="css/form-necesario.css" media="screen">
 </head>
 <body>
 <div th:insert="../static/layout::navbar-anonymous"></div>
@@ -13,15 +14,15 @@
     <h4>Registrarse</h4>
     <form th:action="@{/register}" th:object="${user}" method="post">
       <div>
-        <label>Correo electrónico: </label>
+        <label>Correo electrónico: <p class="form-necesario">* inserte su gmail con el formato correcto (email@gmail.com) </p></label>
         <input type="email" th:field="*{gmail}"/><br>
-        <label>Nombre: </label>
+        <label>Nombre: <p class="form-necesario">* Inserte su nombre </p></label>
         <input type="text" th:field="*{firstName}"/><br>
-        <label>Apellido: </label>
+        <label>Apellido: <p class="form-necesario">* Inserte su apellido </p></label>
         <input type="text" th:field="*{lastName}"/><br>
-        <label>Fecha de Nacimiento: </label>
+        <label>Fecha de Nacimiento: <p class="form-necesario">* Inserte su fecha de nacimiento </p></label>
         <input type="date" th:field="*{birthday}" /><br>
-        <label>Contraseña: </label>
+        <label>Contraseña: <p class="form-necesario">* Su contraseña debe contener 8 caracteres o más </p></label>
         <input type="password" th:field="*{password}"/>
         <a th:href="@{/login}">¿Ya tienes una cuenta? Iniciá sesión</a>
       </div>

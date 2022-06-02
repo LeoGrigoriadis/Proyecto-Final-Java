@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.apiCrypto.apiCrypto.model.Account_type;
 import com.apiCrypto.apiCrypto.model.Auth;
 import com.apiCrypto.apiCrypto.model.Role;
 import com.apiCrypto.apiCrypto.model.User;

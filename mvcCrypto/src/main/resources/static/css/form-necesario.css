@@ -1,0 +1,8 @@
+:root{
+  --danger: #d45959;
+}
+
+.form-necesario{
+    font-size: 0.7em;
+    color: var(--danger);
+}

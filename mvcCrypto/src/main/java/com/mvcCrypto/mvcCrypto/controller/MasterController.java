@@ -17,20 +17,16 @@ public class MasterController {
 
     @Autowired
     private CoinExternoService ces;
-
     @Autowired
     private CoinExternoRepository ccc;
     @Autowired
     private CoinApiService cas;
     @Autowired
     private TransactionService ts;
-
     @Autowired
     private UserCoinService ucs;
-
     @Autowired
     private UserService us;
-
 
     @GetMapping("/app-view")
     public String getAll(Model model) {
@@ -316,11 +312,8 @@ public class MasterController {
                 }
             }
 
-
             double conversion = (balance*cotOrigen)/cotDestino;
 
-//100bc   -> x
-//       ->y
             ucDestino.setBalance(conversion);
             ucDestino.setId_user(user);
             ucDestino.setId_coin(coinDestino);

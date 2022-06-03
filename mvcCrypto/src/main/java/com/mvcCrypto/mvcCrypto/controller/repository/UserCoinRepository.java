@@ -40,4 +40,10 @@ public class UserCoinRepository{
         String url = "http://localhost:8090/api/UserCoin/save";
         rt.postForObject(url, es, User_Coin.class);
     }
+
+    public User_Coin findByIdUserAndIdCoin(long idu, String idc) {
+        String url = "http://localhost:8090/api/UserCoin/{idu}/{idc}";
+        User_Coin usercoin= rt.getForObject(url, User_Coin.class, idu, idc);
+        return usercoin;
+    }
 }

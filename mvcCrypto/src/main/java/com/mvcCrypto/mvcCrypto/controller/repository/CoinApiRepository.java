@@ -16,15 +16,12 @@ public class CoinApiRepository {
 
     public ArrayList<CoinAdapter> findAll() {
         String url = "http://localhost:8090/api/Coin";
-
-        ArrayList<CoinAdapter> coins = new ArrayList<>();
-        coins = rt.getForObject(url, ArrayList.class);
+        ArrayList<CoinAdapter> coins =  rt.getForObject(url, ArrayList.class);
         return coins;
     }
 
     public CoinAdapter getOne(String id){
         String url = "http://localhost:8090/api/Coin/"+id;
-
         CoinAdapter user;
         user = rt.getForObject(url, CoinAdapter.class);
         return user;

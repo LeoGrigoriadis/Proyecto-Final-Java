@@ -17,20 +17,16 @@ public class MasterController {
 
     @Autowired
     private CoinExternoService ces;
-
     @Autowired
     private CoinExternoRepository ccc;
     @Autowired
     private CoinApiService cas;
     @Autowired
     private TransactionService ts;
-
     @Autowired
     private UserCoinService ucs;
-
     @Autowired
     private UserService us;
-
 
     @GetMapping("/app-view")
     public String getAll(Model model) {
@@ -66,31 +62,54 @@ public class MasterController {
         return "FormTransactions";
     }
 
+    @GetMapping("/all-transactions")
+    public String AllTransactions(Model model){
+        User user=us.getOne(us.getGmailActualSesion()); //el usuario en sesión actual
+        model.addAttribute("movs", ts.getAll(user.getId_user()));
+        return "AllTransactions";
+    }
+
     @PostMapping("/withdraw")
     public  String withdraw( @ModelAttribute("user_coin") User_CoinAdapter user_coin, RedirectAttributes redirect){
-        try{
-            User_Coin uc = new User_Coin();
-            Transaction tra=new Transaction();
-
-            User user = us.getOne(us.getGmailActualSesion());
-            user_coin.getId_coin().setId_coin(user_coin.getId_coin().getId_coin().toLowerCase());
-
-            uc.setBalance(user_coin.getBalance());
-            uc.setId_user(user);
-            uc.setId_coin(user_coin.getId_coin());
-
-            tra.setType(true);
-            tra.setDate(new Timestamp(System.currentTimeMillis()));
-            tra.setBalance(user_coin.getBalance());
-            tra.setId_user(user);
-            tra.setId_coin(cas.getOne(user_coin.getId_coin().getId_coin()));
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
-            ts.save(tra);
-            ts.cobrar(uc);
-
-            redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
-                   .addFlashAttribute("active", "success");
+        if(((!user_coin.getId_coin().getId_coin().equals("BTC"))
+                &&(!user_coin.getId_coin().getId_coin().equals("ETH"))
+                &&(!user_coin.getId_coin().getId_coin().equals("USDT"))
+                &&(!user_coin.getId_coin().getId_coin().equals("USDC")))
+                ||user_coin.getBalance()<=0) {
+            redirect.addFlashAttribute("message", "Es necesario cumplir con las condiciones dadas.")
+                    .addFlashAttribute("active", "danger");
             return "redirect:/app-view";
+        }
+        User user = us.getOne(us.getGmailActualSesion());
+        user_coin.getId_coin().setId_coin(user_coin.getId_coin().getId_coin().toLowerCase());
+
+        User_Coin coin=ucs.findById(user.getId_user(), user_coin.getId_coin().getId_coin());
+        if(user_coin.getBalance()>coin.getBalance()){
+            redirect.addFlashAttribute("message", "No puedes retirar este monto.")
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }
+        try{
+        User_Coin uc = new User_Coin();
+        Transaction tra=new Transaction();
+
+        uc.setBalance(user_coin.getBalance());
+        uc.setId_user(user);
+        uc.setId_coin(user_coin.getId_coin());
+
+        tra.setType(true);
+        tra.setDate(new Timestamp(System.currentTimeMillis()));
+        tra.setBalance(user_coin.getBalance());
+        tra.setId_user(user);
+        tra.setId_coin(cas.getOne(user_coin.getId_coin().getId_coin()));
+        tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin())); //llamada a api externa
+        tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin())); //llamada a api externa
+        ts.save(tra);
+        ts.cobrar(uc);
+
+        redirect.addFlashAttribute("message", "Retiro realizado correctamente." )
+               .addFlashAttribute("active", "success");
+        return "redirect:/app-view";
         }catch (NullPointerException e){
             e.fillInStackTrace();
             redirect.addFlashAttribute("message", "Falló el intento de retiro." )
@@ -105,6 +124,15 @@ public class MasterController {
 
     @PostMapping("/deposit")
     public  String deposit(@ModelAttribute("user_coin") User_CoinAdapter user_coin, RedirectAttributes redirect){
+        if(((!user_coin.getId_coin().getId_coin().equals("BTC"))
+                &&(!user_coin.getId_coin().getId_coin().equals("ETH"))
+                &&(!user_coin.getId_coin().getId_coin().equals("USDT"))
+                &&(!user_coin.getId_coin().getId_coin().equals("USDC")))
+                ||user_coin.getBalance()<=0){
+            redirect.addFlashAttribute("message", "Es necesario cumplir con las condiciones dadas.")
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/external-entity";
+        }
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -121,8 +149,7 @@ public class MasterController {
             tra.setBalance(user_coin.getBalance());
             tra.setId_user(user);
             tra.setId_coin(cas.getOne(user_coin.getId_coin().getId_coin()));
-            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin().toLowerCase())); //llamada a api externa
-
+            tra.setPrice_in_transaction(ces.getOne(user_coin.getId_coin().getId_coin())); //llamada a api externa
 
 
             ts.depositar(uc);
@@ -146,6 +173,25 @@ public class MasterController {
 
     @PostMapping("/transfer")
     public  String transfer(@ModelAttribute("user_coin") User_CoinAdapter user_coin, RedirectAttributes redirect){
+        if(((!user_coin.getId_coin().getId_coin().equals("BTC"))
+                &&(!user_coin.getId_coin().getId_coin().equals("ETH"))
+                &&(!user_coin.getId_coin().getId_coin().equals("USDT"))
+                &&(!user_coin.getId_coin().getId_coin().equals("USDC")))
+                ||user_coin.getBalance()<=0
+                ||user_coin.getId_destino()<=0) {
+            redirect.addFlashAttribute("message", "Es necesario cumplir con las condiciones dadas.")
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }
+        User user = us.getOne(us.getGmailActualSesion());
+        user_coin.getId_coin().setId_coin(user_coin.getId_coin().getId_coin().toLowerCase());
+
+        User_Coin coinConfirm=ucs.findById(user.getId_user(), user_coin.getId_coin().getId_coin());
+        if(user_coin.getBalance()>coinConfirm.getBalance()){
+            redirect.addFlashAttribute("message", "No puedes transferir este monto.")
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }
         try{
             User_Coin ucInicial = new User_Coin();
             Transaction traInicial=new Transaction();
@@ -153,7 +199,6 @@ public class MasterController {
             Transaction traUserDestino=new Transaction();
             double balance = user_coin.getBalance();
 
-            User user = us.getOne(us.getGmailActualSesion()); //actual user
             User userDestino = us.getById(user_coin.getId_destino());
 
            CoinAdapter coin= cas.getOne(user_coin.getId_coin().getId_coin());
@@ -203,6 +248,28 @@ public class MasterController {
 
     @PostMapping("/trade")
     public  String trade( @ModelAttribute("user_coin") User_CoinAdapter user_coin, RedirectAttributes redirect){
+        if(((!user_coin.getId_coin().getId_coin().equals("BTC"))
+                &&(!user_coin.getId_coin().getId_coin().equals("ETH"))
+                &&(!user_coin.getId_coin().getId_coin().equals("USDT"))
+                &&(!user_coin.getId_coin().getId_coin().equals("USDC")))
+                ||((!user_coin.getId_coin_destino().equals("BTC"))
+                &&(!user_coin.getId_coin_destino().equals("ETH"))
+                &&(!user_coin.getId_coin_destino().equals("USDT"))
+                &&(!user_coin.getId_coin_destino().equals("USDC")))
+                ||user_coin.getBalance()<=0) {
+            redirect.addFlashAttribute("message", "Es necesario cumplir con las condiciones dadas.")
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }
+        User user = us.getOne(us.getGmailActualSesion());
+        user_coin.getId_coin().setId_coin(user_coin.getId_coin().getId_coin().toLowerCase());
+
+        User_Coin coinConfirm=ucs.findById(user.getId_user(), user_coin.getId_coin().getId_coin());
+        if(user_coin.getBalance()>coinConfirm.getBalance()){
+            redirect.addFlashAttribute("message", "No puedes tradear este monto.")
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/app-view";
+        }
         try{
             User_Coin uc = new User_Coin();
             Transaction tra=new Transaction();
@@ -211,13 +278,8 @@ public class MasterController {
 
             double balance = user_coin.getBalance();
 
-
-            User user = us.getOne(us.getGmailActualSesion());
-            user_coin.getId_coin().setId_coin(user_coin.getId_coin().getId_coin().toLowerCase());
-
             CoinAdapter coin= cas.getOne(user_coin.getId_coin().getId_coin());
             CoinAdapter coinDestino = cas.getOne(user_coin.getId_coin_destino());
-
 
             uc.setBalance(balance);
             uc.setId_user(user);
@@ -250,11 +312,8 @@ public class MasterController {
                 }
             }
 
-
             double conversion = (balance*cotOrigen)/cotDestino;
 
-//100bc   -> x
-//       ->y
             ucDestino.setBalance(conversion);
             ucDestino.setId_user(user);
             ucDestino.setId_coin(coinDestino);

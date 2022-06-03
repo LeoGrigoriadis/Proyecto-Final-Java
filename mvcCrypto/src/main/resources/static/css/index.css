@@ -18,6 +18,7 @@ section{
 }
 
 .col-sm-4{
+    padding: 0 0 0 20px;
     display:block !important;
     text-align: left !important;
     font-family: var(--font-Montserrat) !important;
@@ -27,7 +28,12 @@ h2{
     margin: 17vh 0 0 0 !important;
 }
 
+h2 b{
+    color: var(--principal);
+}
+
 h4{
+    font-size: 20px !important;
     margin: 5vh 0 0 0 !important;
 }
 

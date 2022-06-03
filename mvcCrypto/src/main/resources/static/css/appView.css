@@ -118,11 +118,9 @@ article{
 
 #article-bottom .a-decoration{
     display:inline-block;
-    text-decoration:underline;
-    color: var(--principal-oscuro);
-    background-color:white;
-    padding-top:15px;
-    float: right;
+    float:right;
+    font-size: 0.8em;
+    text-decoration:none;
 }
 
 #article-bottom .a-decoration:hover{

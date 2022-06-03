@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>App view</title>
+  <title>Panel Principal</title>
   <link rel="icon" href="img/logo.png">
   <div th:insert="../static/layout::header"></div>
   <link rel="stylesheet" type="text/css" href="css/appView.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="css/form-necesario.css" media="screen">
 </head>
 <body>
 <div id="nav" th:insert="../static/layout::navbar"></div>
@@ -56,7 +57,7 @@
       </article>
       <article id="article-bottom">
         <div class="top-article">
-          <h4>Últimos 8 movimientos</h4>
+          <h4>Últimos movimientos <a class="a-decoration" th:href="@{/all-transactions}">Ver todos</a></h4>
         </div>
         <table class ="table table-hover">
           <thead>
@@ -73,7 +74,6 @@
           </tr>
           </tbody>
         </table>
-          <a class="a-decoration" th:href="@{/get-pdf}">descargar todas las transacciones (PDF)</a>
       </article>
     </section>
     <section class="col-sm-3 invis">
@@ -87,12 +87,10 @@
           <label id="trans">
 
             <h4>Realizar un retiro</h4>
-            <!---->
             <form th:action="@{/withdraw}" th:object="${user_coin}" method="post">
               <div>
-                <label>Moneda: </label>
+                <label>Moneda: <p class="form-necesario">* Seleccione una de las siguientes opciones </p></label>
                 <input type="text" name="id_coin" list="coins" th:field="*{id_coin.id_coin}"/><br>
-                <small class="text-danger" th:if="${#fields.hasErrors('id_coin.id_coin')}" th:errors="*{id_coin.id_coin}"></small>
                 <datalist id="coins">
                   <option value="BTC">Bitcoin</option>
                   <option value="ETH">Ethereum</option>
@@ -101,9 +99,8 @@
                 </datalist>
 
 
-                <label>Monto: </label>
+                <label>Monto: <p class="form-necesario">* Mayor a 0 </p></label>
                 <input type="number" step="0.0001" name="balance" th:field="*{balance}"/>
-                <small class="text-danger" th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"></small>
               </div>
               <button class="button-border button-form-margin" type="submit">Retirar</button>
             </form>
@@ -112,15 +109,12 @@
             <h4>Realizar cambio</h4>
             <form th:action="@{/trade}" th:object="${user_coin}" method="post">
               <div>
-                <label>Moneda incial: </label>
+                <label>Moneda incial: <p class="form-necesario">* Seleccione una de las siguientes opciones </p></label>
                 <input type="text" name="id_coin" list="coins" th:field="*{id_coin.id_coin}"/><br>
-                <small class="text-danger" th:if="${#fields.hasErrors('id_coin.id_coin')}" th:errors="*{id_coin.id_coin}"></small>
-                <label>Monto: </label>
+                <label>Monto: <p class="form-necesario">* Mayor a 0 </p></label>
                 <input type="number" step="0.0001" name="balance" th:field="*{balance}"/>
-                <small class="text-danger" th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"></small>
-                <label>Moneda destino: </label>
+                <label>Moneda destino: <p class="form-necesario">* Seleccione una de las siguientes opciones </p></label>
                 <input type="text" list="coins" name="id_coin_destino" th:field="*{id_coin_destino}"/><br>
-                <small class="text-danger" th:if="${#fields.hasErrors('id_coin_destino')}" th:errors="*{id_coin_destino}"></small>
               </div>
               <button class="button-border button-form-margin" type="submit">Tradear</button>
             </form>
@@ -130,15 +124,12 @@
             <h4>Realizar transferencia</h4>
             <form th:action="@{/transfer}" th:object="${user_coin}" method="post">
               <div>
-                <label>Destinatario: </label>
+                <label>Destinatario: <p class="form-necesario">* Inserte el ID del usuario destinatario </p></label>
                 <input type="number" name="id_destino" th:field="*{id_destino}"/><br>
-                <small class="text-danger" th:if="${#fields.hasErrors('id_destino')}" th:errors="*{id_destino}"></small>
-                <label>Moneda: </label>
+                <label>Moneda: <p class="form-necesario">* Seleccione una de las siguientes opciones </p></label>
                 <input type="text" name="id_coin" list="coins" th:field="*{id_coin.id_coin}"/><br>
-                <small class="text-danger" th:if="${#fields.hasErrors('id_coin.id_coin')}" th:errors="*{id_coin.id_coin}"></small>
-                <label>Monto: </label>
+                <label>Monto: <p class="form-necesario">* Mayor a 0 </p></label>
                 <input type="number" step="0.0001" name="balance" th:field="*{balance}"/>
-                <small class="text-danger" th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"></small>
               </div>
               <button class="button-border button-form-margin" type="submit">Transferir</button>
             </form>

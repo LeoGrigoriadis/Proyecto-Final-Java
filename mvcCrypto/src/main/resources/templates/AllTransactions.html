@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Todas tus transacciones</title>
+    <link rel="icon" href="img/logo.png">
+    <div th:insert="../static/layout::header"></div>
+    <link rel="stylesheet" type="text/css" href="css/allTransactions.css" media="screen">
+</head>
+<body>
+    <div id="nav" th:insert="../static/layout::navbar"></div>
+    <div class="contain">
+    <section class="col-sm-3"></section>
+    <section class="col-sm-6">
+        <table class ="table table-hover">
+            <thead>
+            <tr>
+                <th class="text-center"> fecha y hora </th>
+                <th class="text-center"> moneda </th>
+                <th class="text-center"> precio en transacción </th>
+                <th class="text-center"> monto </th>
+                <th class="text-center"> tipo de transacción </th>
+            </tr>
+            </thead>
+            <tbody style="text-align:center">
+            <tr th:each="mov: ${movs}">
+                <td th:text = ${mov.date}></td>
+                <td th:text = ${mov.id_coin.name}></td>
+                <td th:text = ${mov.price_in_transaction}></td>
+                <td class="dep" th:if = "${mov.type==false}" th:text ="'+'+ ${mov.balance}"></td>
+                <td class="ret" th:if= "${mov.type==true}" th:text ="'-'+ ${mov.balance}"></td>
+                <td th:if= "${mov.type==true}" th:text ="Retiro"></td>
+                <td th:if= "${mov.type==false}" th:text ="Deposito"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    </div>
+    <div class="col-sm-12">
+        <footer th:replace="../static/layout::footer"></footer>
+    </div>
+
+</body>
+</html>

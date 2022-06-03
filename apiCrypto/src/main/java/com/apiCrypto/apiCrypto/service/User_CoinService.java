@@ -27,6 +27,10 @@ public class User_CoinService {
         return ucR.getById(id);
     }
 
+    public User_Coin getOne(Long idu, String idc){
+        return ucR.getByIdUserAndIdCoin(idu, idc);
+    }
+
     public ArrayList<User_Coin> getAllByIdUser(Long idUser) {
 
         return ucR.findByUserId(idUser);

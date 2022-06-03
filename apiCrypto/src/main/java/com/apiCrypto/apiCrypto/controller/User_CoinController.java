@@ -60,6 +60,12 @@ public class User_CoinController {
         return ResponseEntity.status(200).body(coin);
     }
 
+    @GetMapping("/{idu}/{idc}")
+    public ResponseEntity<User_Coin> getUserCoin(@PathVariable("idu") Long idu, @PathVariable("idc") String idc){
+        User_Coin coin = service.getOne(idu, idc);
+        return ResponseEntity.status(200).body(coin);
+    }
+
     @GetMapping("/idUser/{id}")
     public ResponseEntity<Object> getAllByIdUser(@PathVariable("id") long id){
         ArrayList<User_Coin> coin = service.getAllByIdUser(id);

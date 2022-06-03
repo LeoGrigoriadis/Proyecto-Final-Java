@@ -21,12 +21,12 @@
                     <input type="text" name="last_name" th:value="*{last_name}" th:field="*{last_name}"/><br>
                     <label>Fecha de Nacimiento: <p class="form-necesario">* No deje este campo vacío </p></label>
                     <input type="date" name="birthday" th:value="*{birthday}" th:field="*{birthday}"/><br>
-                    <!--<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
                 </div>
                 <button class="button-border button-form-margin" type="submit">Editar</button>
             </form>
         </section>
     </div>
+    <div th:insert="../static/layout::alert"></div>
     <div th:insert="../static/layout::footer"></div>
 </body>
 </html>

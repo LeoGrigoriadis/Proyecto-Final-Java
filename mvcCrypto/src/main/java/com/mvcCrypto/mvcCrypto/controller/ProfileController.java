@@ -24,10 +24,12 @@ public class ProfileController {
     }
     @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") User user, RedirectAttributes redirect, BindingResult bindingResult){
+        if(user.getFirst_name()==""||user.getLast_name()==""||user.getBirthday()==null){
+            redirect.addFlashAttribute("message", "Todos los datos son requeridos para editar.")
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/profile";
+        }
         try {
-            if (bindingResult.hasErrors()) {
-                return "Profile";
-            }
             user.setId_user(us.getOne(us.getGmailActualSesion()).getId_user());
             user.setGmail(us.getOne(us.getGmailActualSesion()).getGmail());
             us.update(user);
@@ -37,7 +39,7 @@ public class ProfileController {
         }catch (Exception e){
             redirect.addFlashAttribute("message", "Fallo al intentar editar los datos.")
                     .addFlashAttribute("active", "danger");
-            return "redirect:/update";
+            return "redirect:/profile";
         }
     }
 }

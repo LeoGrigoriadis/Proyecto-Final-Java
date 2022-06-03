@@ -10,9 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.apiCrypto.apiCrypto.model.*;
-import com.apiCrypto.apiCrypto.repository.ITradeRepository;
 import com.apiCrypto.apiCrypto.repository.IUserCoinRepository;
-import com.apiCrypto.apiCrypto.service.TradeService;
 import com.apiCrypto.apiCrypto.service.User_CoinService;
 
 import org.junit.jupiter.api.Test;

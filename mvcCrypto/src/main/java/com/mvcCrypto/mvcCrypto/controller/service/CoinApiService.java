@@ -17,7 +17,7 @@ public class CoinApiService {
 
     public ArrayList<CoinAdapter> getAll()
     {
-        return (ArrayList<CoinAdapter>) cr.findAll();
+        return cr.findAll();
     }
 
 

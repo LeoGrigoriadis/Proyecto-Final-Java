@@ -45,7 +45,11 @@ public class AuthController {
     
     @PostMapping("/register")
     public String SignUp( @ModelAttribute("user")UserAdapter uA, RedirectAttributes redirect) throws IllegalArgumentException {
-
+        if((!uA.getGmail().contains("@")||(!uA.getGmail().contains(".com")))||uA.getFirstName()==null||uA.getLastName()==null||uA.getPassword().length()<8||uA.getBirthday()==null){
+            redirect.addFlashAttribute("message", "El registro no cumple con las condiciones dadas.")
+                    .addFlashAttribute("active", "danger");
+            return "redirect:/register";
+        }
         try {
             User gmail = us.getOne(uA.getGmail());
             if (gmail != null) {

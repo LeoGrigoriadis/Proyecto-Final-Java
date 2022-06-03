@@ -1,0 +1,68 @@
+:root{
+    --font-Montserrat: 'Montserrat', sans-serif;
+    --principal: #729DF2;
+    --background: #E6EAF2;
+    --success: #7fE371;
+    --danger: #d45959;
+}
+
+html{
+    background-color: var(--background);
+    font-family: var(--font-Montserrat) !important;
+}
+
+body{
+    height: 100%;
+}
+
+.contain{
+    display:block;
+  --font-Shippori: 'Shippori Antique', sans-serif;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    height: auto;
+    font-family: var(--font-Shippori) !important;
+}
+
+.col-sm-6{
+    margin: 20px;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.dep{
+    color:white;
+    background-color: var(--success);
+}
+
+.ret{
+    color:white;
+    background-color: var(--danger);
+}
+
+.col-sm-12{
+    padding: 0;
+}
+
+footer{
+    position: static !important;
+}
+
+@Media(max-width: 1200px){
+    .col-sm-3{
+        width: 10%;
+    }
+    .col-sm-6{
+        width: 80%;
+    }
+}
+
+@Media(max-width: 767px){
+    .col-sm-3{
+        display: none;
+    }
+    .col-sm-6{
+        width: 100%;
+        margin: inherit 0px;
+    }
+}

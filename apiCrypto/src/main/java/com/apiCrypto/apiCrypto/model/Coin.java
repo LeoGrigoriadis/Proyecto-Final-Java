@@ -16,6 +16,5 @@ public class Coin {
 
     @Id
     private String id_coin;
-
     private String name;
 }

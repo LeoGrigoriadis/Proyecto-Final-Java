@@ -18,8 +18,8 @@ public class UserCoinService {
 
     public ArrayList<User_Coin> findAllByIdUser(long id){ return ur.findAllByIdUser(id); }
 
-    public User_Coin findById (long id){
-        return ur.findById(id);
+    public User_Coin findById (long idu, String idc){
+        return ur.findByIdUserAndIdCoin(idu, idc);
     }
 
     public ArrayList<User_Coin> getAll(long id_user){

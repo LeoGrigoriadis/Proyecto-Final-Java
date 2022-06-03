@@ -13,12 +13,8 @@ import javax.validation.constraints.Positive;
 public class User_Coin {
     
     private long id_account;
-    //@NotBlank
     private CoinAdapter id_coin;
-    //@NotBlank
-    //@Positive(message = "the balance has to be positive")
     private double balance;
-    //@NotBlank
     private User id_user;
 }
 

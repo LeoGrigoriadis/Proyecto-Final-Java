@@ -11,8 +11,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.apiCrypto.apiCrypto.model.*;
-import com.apiCrypto.apiCrypto.repository.ITradeRepository;
-import com.apiCrypto.apiCrypto.service.TradeService;
 
 
 import org.junit.jupiter.api.Test;

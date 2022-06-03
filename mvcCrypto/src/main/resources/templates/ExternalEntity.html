@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>External Entity</title>
+  <title>Entidad Externa - Simulación</title>
   <link rel="icon" href="img/logo.png">
   <div th:insert="../static/layout::header"></div>
   <link rel="stylesheet" type="text/css" href="css/formStyle.css" media="screen">
@@ -17,7 +17,6 @@
       <div>
         <label>Moneda: <p class="form-necesario">* Seleccione una de las siguientes opciones </p></label>
         <input type="text" name="id_coin" list="coins" th:field="*{id_coin.id_coin}"/><br>
-        <small class="text-danger" th:if="${#fields.hasErrors('id_coin.id_coin')}" th:errors="*{id_coin.id_coin}"></small>
         <datalist id="coins">
           <option value="BTC">Bitcoin</option>
           <option value="ETH">Ethereum</option>
@@ -26,12 +25,12 @@
         </datalist>
         <label>Monto: <p class="form-necesario">* Mayor a 0 </p></label>
         <input type="number" step="0.0001" name="balance" th:field="*{balance}"/>
-        <small class="text-danger" th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"></small>
       </div>
       <button class="button-border button-form-margin" type="submit">Depositar</button>
     </form>
   </section>
 </div>
+<div th:insert="../static/layout::alert"></div>
 <div th:insert="../static/layout::footer"></div>
 </body>
 </html>

@@ -14,7 +14,7 @@
     <h4>Registrarse</h4>
     <form th:action="@{/register}" th:object="${user}" method="post">
       <div>
-        <label>Correo electrónico: <p class="form-necesario">* inserte su gmail con el formato correcto (email@gmail.com) </p></label>
+        <label>Correo electrónico: <p class="form-necesario">* inserte su gmail con el formato correcto (ejemplo@ejemplo.com) </p></label>
         <input type="email" th:field="*{gmail}"/><br>
         <label>Nombre: <p class="form-necesario">* Inserte su nombre </p></label>
         <input type="text" th:field="*{firstName}"/><br>
